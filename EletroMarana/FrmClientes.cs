@@ -193,5 +193,10 @@ namespace _EletroMarana
         {
             Close();
         }
+
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }

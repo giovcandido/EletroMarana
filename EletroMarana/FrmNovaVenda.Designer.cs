@@ -56,12 +56,12 @@ namespace _EletroMarana
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnAtualizarVenda = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dgvVendas = new System.Windows.Forms.DataGridView();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnExcluirVenda = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -108,12 +108,11 @@ namespace _EletroMarana
             // mtbDataHora
             // 
             this.mtbDataHora.Location = new System.Drawing.Point(92, 61);
-            this.mtbDataHora.Mask = "00/00/0000 90:00";
+            this.mtbDataHora.Mask = "00/00/0000 00:00";
             this.mtbDataHora.Name = "mtbDataHora";
             this.mtbDataHora.ReadOnly = true;
             this.mtbDataHora.Size = new System.Drawing.Size(126, 20);
             this.mtbDataHora.TabIndex = 87;
-            this.mtbDataHora.ValidatingType = typeof(System.DateTime);
             // 
             // label1
             // 
@@ -339,6 +338,13 @@ namespace _EletroMarana
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Consultar Vendas";
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(6, 193);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 145;
+            // 
             // dgvVendas
             // 
             this.dgvVendas.AllowUserToAddRows = false;
@@ -385,13 +391,6 @@ namespace _EletroMarana
             this.btnExcluirVenda.Text = "Excluir Venda";
             this.btnExcluirVenda.UseVisualStyleBackColor = true;
             this.btnExcluirVenda.Click += new System.EventHandler(this.btnExcluirVenda_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(6, 193);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 145;
             // 
             // FrmNovaVenda
             // 

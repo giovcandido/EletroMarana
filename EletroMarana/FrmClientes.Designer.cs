@@ -73,6 +73,11 @@
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.txtComplemento = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.mtbCPF = new System.Windows.Forms.MaskedTextBox();
+            this.mtbCEP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRG = new System.Windows.Forms.MaskedTextBox();
+            this.mtbCelular = new System.Windows.Forms.MaskedTextBox();
+            this.mtbFone = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -445,11 +450,57 @@
             this.label16.TabIndex = 108;
             this.label16.Text = "Complemento";
             // 
+            // mtbCPF
+            // 
+            this.mtbCPF.Location = new System.Drawing.Point(90, 88);
+            this.mtbCPF.Mask = "000.000.000-00";
+            this.mtbCPF.Name = "mtbCPF";
+            this.mtbCPF.Size = new System.Drawing.Size(139, 20);
+            this.mtbCPF.TabIndex = 109;
+            this.mtbCPF.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
+            // 
+            // mtbCEP
+            // 
+            this.mtbCEP.Location = new System.Drawing.Point(90, 114);
+            this.mtbCEP.Mask = "00000-000";
+            this.mtbCEP.Name = "mtbCEP";
+            this.mtbCEP.Size = new System.Drawing.Size(113, 20);
+            this.mtbCEP.TabIndex = 110;
+            // 
+            // mtbRG
+            // 
+            this.mtbRG.Location = new System.Drawing.Point(383, 89);
+            this.mtbRG.Mask = "00.000.000-0";
+            this.mtbRG.Name = "mtbRG";
+            this.mtbRG.Size = new System.Drawing.Size(139, 20);
+            this.mtbRG.TabIndex = 111;
+            // 
+            // mtbCelular
+            // 
+            this.mtbCelular.Location = new System.Drawing.Point(383, 219);
+            this.mtbCelular.Mask = "(00) 00000-0000";
+            this.mtbCelular.Name = "mtbCelular";
+            this.mtbCelular.Size = new System.Drawing.Size(139, 20);
+            this.mtbCelular.TabIndex = 112;
+            // 
+            // mtbFone
+            // 
+            this.mtbFone.Location = new System.Drawing.Point(90, 218);
+            this.mtbFone.Mask = "(00)0000-0000";
+            this.mtbFone.Name = "mtbFone";
+            this.mtbFone.Size = new System.Drawing.Size(139, 20);
+            this.mtbFone.TabIndex = 113;
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 548);
+            this.Controls.Add(this.mtbFone);
+            this.Controls.Add(this.mtbCelular);
+            this.Controls.Add(this.mtbRG);
+            this.Controls.Add(this.mtbCEP);
+            this.Controls.Add(this.mtbCPF);
             this.Controls.Add(this.txtComplemento);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -548,5 +599,10 @@
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.MaskedTextBox mtbCPF;
+        private System.Windows.Forms.MaskedTextBox mtbCEP;
+        private System.Windows.Forms.MaskedTextBox mtbRG;
+        private System.Windows.Forms.MaskedTextBox mtbCelular;
+        private System.Windows.Forms.MaskedTextBox mtbFone;
     }
 }

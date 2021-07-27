@@ -65,6 +65,7 @@
             this.txtPrazoGarantia = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.mtbCodigoBarras = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
@@ -379,11 +380,20 @@
             this.label11.TabIndex = 153;
             this.label11.Text = "meses";
             // 
+            // mtbCodigoBarras
+            // 
+            this.mtbCodigoBarras.Location = new System.Drawing.Point(109, 58);
+            this.mtbCodigoBarras.Mask = "0.000000.000000";
+            this.mtbCodigoBarras.Name = "mtbCodigoBarras";
+            this.mtbCodigoBarras.Size = new System.Drawing.Size(432, 20);
+            this.mtbCodigoBarras.TabIndex = 154;
+            // 
             // FrmProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 466);
+            this.Controls.Add(this.mtbCodigoBarras);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtPrazoGarantia);
@@ -466,5 +476,6 @@
         private System.Windows.Forms.TextBox txtPrazoGarantia;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.MaskedTextBox mtbCodigoBarras;
     }
 }

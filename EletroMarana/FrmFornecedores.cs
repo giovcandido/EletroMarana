@@ -179,5 +179,10 @@ namespace _EletroMarana
         {
             Close();
         }
+
+        private void txtFantasia_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
