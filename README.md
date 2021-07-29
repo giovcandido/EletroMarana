@@ -15,8 +15,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="/Images/Logo.png" alt="Logo" height="50">
-
+  <a href="https://github.com/giovcandido/EletroMarana">
+    <img src="/Images/Logo.png" alt="Logo" height="50">
+  </a>
+  
   <!-- <h3 align="center">EletroMarana</h3> -->
 
   <p align="center">
