@@ -15,9 +15,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="/Images/Logo.png" alt="Logo" width="150" height="150">
+  <img src="/Images/Logo.png" alt="Logo" height="50">
 
-  <h3 align="center">EletroMarana</h3>
+  <!-- <h3 align="center">EletroMarana</h3> -->
 
   <p align="center">
    A Management System for EletroMarana Store
