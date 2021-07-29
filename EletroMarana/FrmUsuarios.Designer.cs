@@ -48,13 +48,15 @@
             this.chkAdm = new System.Windows.Forms.CheckBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(261, 116);
+            this.btnCancelar.Location = new System.Drawing.Point(261, 145);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 7;
@@ -64,7 +66,7 @@
             // 
             // btnAtualizar
             // 
-            this.btnAtualizar.Location = new System.Drawing.Point(180, 116);
+            this.btnAtualizar.Location = new System.Drawing.Point(180, 145);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 23);
             this.btnAtualizar.TabIndex = 6;
@@ -74,7 +76,7 @@
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(342, 116);
+            this.btnExcluir.Location = new System.Drawing.Point(342, 145);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
             this.btnExcluir.TabIndex = 8;
@@ -84,7 +86,7 @@
             // 
             // btnIncluir
             // 
-            this.btnIncluir.Location = new System.Drawing.Point(99, 116);
+            this.btnIncluir.Location = new System.Drawing.Point(99, 145);
             this.btnIncluir.Name = "btnIncluir";
             this.btnIncluir.Size = new System.Drawing.Size(75, 23);
             this.btnIncluir.TabIndex = 5;
@@ -94,7 +96,7 @@
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(423, 116);
+            this.btnFechar.Location = new System.Drawing.Point(423, 145);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
             this.btnFechar.TabIndex = 9;
@@ -105,7 +107,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 64);
+            this.label4.Location = new System.Drawing.Point(10, 90);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 19;
@@ -131,7 +133,7 @@
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(66, 61);
+            this.txtSenha.Location = new System.Drawing.Point(66, 87);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(158, 20);
@@ -159,7 +161,7 @@
             this.groupBox1.Controls.Add(this.btnPesquisar);
             this.groupBox1.Controls.Add(this.txtPesquisa);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 162);
+            this.groupBox1.Location = new System.Drawing.Point(13, 194);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(485, 202);
             this.groupBox1.TabIndex = 12;
@@ -206,7 +208,7 @@
             // chkAdm
             // 
             this.chkAdm.AutoSize = true;
-            this.chkAdm.Location = new System.Drawing.Point(261, 64);
+            this.chkAdm.Location = new System.Drawing.Point(261, 90);
             this.chkAdm.Name = "chkAdm";
             this.chkAdm.Size = new System.Drawing.Size(89, 17);
             this.chkAdm.TabIndex = 4;
@@ -223,21 +225,40 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Login";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(66, 61);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(158, 20);
+            this.textBox1.TabIndex = 21;
+            // 
             // FrmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 373);
+            this.ClientSize = new System.Drawing.Size(509, 404);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.chkAdm);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.btnExcluir);
-            this.Controls.Add(this.btnIncluir);
-            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnIncluir);
+            this.Controls.Add(this.txtSenha);
+            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.groupBox1);
@@ -276,5 +297,7 @@
         private System.Windows.Forms.CheckBox chkAdm;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
