@@ -113,7 +113,7 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the ![Documentation][documentation_local]_
+_For more examples, please refer to the <a href="/Docs/documentation.pdf">Documentation</strong></a>._
 
 
 
@@ -148,9 +148,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-[Davi Neves](https://github.com/davimedio01)
-[Giovani Candido](https://github.com/giovcandido)
-[Luis Morelli](https://github.com/Xilsu)
+[Davi Neves](https://github.com/davimedio01) <br>
+[Giovani Candido](https://github.com/giovcandido) <br>
+[Luis Morelli](https://github.com/Xilsu) <br>
 Luiz Sementille
 
 <b> Project Link: [https://github.com/giovcandido/EletroMarana](https://github.com/giovcandido/EletroMarana) </b>
