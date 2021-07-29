@@ -15,14 +15,14 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="Images/Logo.png" alt="Logo" width="150" height="150">
+  <img src="/Images/Logo.png" alt="Logo" width="150" height="150">
 
   <h3 align="center">EletroMarana</h3>
 
   <p align="center">
    A Management System for EletroMarana Store
     <br />
-    <a href="https://github.com/giovcandido/EletroMarana"><strong>Explore the docs »</strong></a>
+    <a href="/Docs/documentation.pdf"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <!-- <a href="https://github.com/giovcandido/EletroMarana">View Demo</a> -->
@@ -54,7 +54,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <!-- <li><a href="#contributing">Contributing</a></li> -->
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -119,11 +119,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/giovcandido/EletroMarana/issues) for a list of proposed features (and known issues).
 
 
 
 <!-- CONTRIBUTING -->
+<!--
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -133,7 +134,7 @@ Contributions are what make the open source community such an amazing place to b
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
+-->
 
 
 <!-- LICENSE -->
@@ -146,9 +147,12 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+[Davi Neves](https://github.com/davimedio01)
+[Giovani Candido](https://github.com/giovcandido)
+[Luis Morelli](https://github.com/Xilsu)
+Luiz Sementille
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+<b> Project Link: [https://github.com/giovcandido/EletroMarana](https://github.com/giovcandido/EletroMarana) </b>
 
 
 
