@@ -272,7 +272,7 @@ namespace _EletroMarana
                                        and senha = ?senha 
                                        and adm = true", Conexao);
 
-            // definindo parâmetro da intrução
+            // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?login", login);
             Comando.Parameters.AddWithValue("?senha", senha);
 
@@ -332,6 +332,25 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static bool TemEstado(string nome) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from estados 
+                                       where nome = ?nome", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?nome", nome);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
+
         public static DataTable ConsultaCidades(String cidade) {
             // instrução sql
             Comando = new MySqlCommand(@"select cid.id 'Código', 
@@ -354,6 +373,27 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static bool TemCidade(string nome, int idEstado) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id  
+                                       from cidades 
+                                       where nome = ?nome
+                                       and id_estado = ?id_estado", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?nome", nome);
+            Comando.Parameters.AddWithValue("?id_estado", idEstado);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
+
         public static DataTable ConsultaCategorias(String categoria) {
             // instrução sql
             Comando = new MySqlCommand(@"select id 'Código', 
@@ -362,7 +402,7 @@ namespace _EletroMarana
                                        where descricao like ?categoria 
                                        order by descricao", Conexao);
 
-            // definindo parâmetro da intrução
+            // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?categoria", "%" + categoria + "%");
 
             // adaptador recebe consulta
@@ -372,6 +412,25 @@ namespace _EletroMarana
             Adaptador.Fill(datTabela = new DataTable());
 
             return datTabela;
+        }
+
+        public static bool TemCategoria(string descricao) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id 
+                                       from categorias 
+                                       where descricao = ?descricao", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?descricao", descricao);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
         }
 
         public static DataTable ConsultaUsuarios(String usuario) {
@@ -385,7 +444,7 @@ namespace _EletroMarana
                                        where nome like ?usuario
                                        order by nome", Conexao);
 
-            // definindo parâmetro da intrução
+            // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?usuario", "%" + usuario + "%");
 
             // adaptador recebe consulta
@@ -396,26 +455,6 @@ namespace _EletroMarana
 
             return datTabela;
         }
-
-        public static bool TemVendasUsuario(int idUsuario)
-        {
-            // instrução sql
-            Comando = new MySqlCommand(@"select id
-                                       from venda_cab
-                                       where id_usuario = ?id_usuario", Conexao);
-
-            // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?id_usuario", idUsuario);
-
-            // adaptador recebe consulta
-            Adaptador = new MySqlDataAdapter(Comando);
-
-            // datTabela recebe dados do adaptador
-            Adaptador.Fill(datTabela = new DataTable());
-
-            return datTabela.Rows.Count > 0;
-        }
-
 
         public static DataTable ConsultaFornecedores(String fornecedor) {
             // instrução sql
@@ -449,6 +488,25 @@ namespace _EletroMarana
             Adaptador.Fill(datTabela = new DataTable());
 
             return datTabela;
+        }
+
+        public static bool TemFornecedor(string cnpj)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from fornecedores
+                                       where cnpj = ?cnpj", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?cnpj", cnpj);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
         }
 
         public static DataTable ConsultaClientes(String cliente) {
@@ -486,6 +544,25 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static bool TemCliente(string cpf) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from clientes
+                                       where cpf = ?cpf", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?cpf", cpf);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
+
         public static DataTable ConsultaTiposPGTO(String tipoPGTO)
         {
             // instrução sql
@@ -508,7 +585,27 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaProdutos(String produto) {
+        public static bool TemTipoPGTO(string descricao) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id 
+                                       from tipos_pgto 
+                                       where descricao = ?descricao", Conexao);
+
+            // definindo parâmetro da intrução
+            Comando.Parameters.AddWithValue("?descricao", descricao);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
+
+        public static DataTable ConsultaProdutos(String produto) 
+        {
             // instrução sql
             Comando = new MySqlCommand(@"select prod.id 'Código', 
                                        prod.fora_linha 'Fora de Linha', 
@@ -538,6 +635,25 @@ namespace _EletroMarana
             Adaptador.Fill(datTabela = new DataTable());
 
             return datTabela;
+        }
+
+        public static bool TemProduto(string codigoBarra) 
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from produtos
+                                       where codigoBarra = ?codigoBarra", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?codigoBarra", codigoBarra);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
         }
 
         public static DataTable ConsultaVendaCAB(String nomeCliente)
