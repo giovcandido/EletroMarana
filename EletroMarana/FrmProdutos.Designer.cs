@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProdutos));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvProdutos = new System.Windows.Forms.DataGridView();
             this.btnPesquisar = new System.Windows.Forms.Button();
@@ -360,11 +359,11 @@
             this.label11.TabIndex = 153;
             this.label11.Text = "meses";
             // 
-            // mtbCodigoBarras
+            // mtbCodigoBarra
             // 
             this.mtbCodigoBarra.Location = new System.Drawing.Point(109, 58);
             this.mtbCodigoBarra.Mask = "0.000000.000000";
-            this.mtbCodigoBarra.Name = "mtbCodigoBarras";
+            this.mtbCodigoBarra.Name = "mtbCodigoBarra";
             this.mtbCodigoBarra.Size = new System.Drawing.Size(432, 20);
             this.mtbCodigoBarra.TabIndex = 154;
             // 
