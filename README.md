@@ -75,9 +75,13 @@
     </a>
     <br/>
 </p>
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+EletroMarana Store, located in Bauru-SP, is a highlight in sales of high quality home appliances and is already part of the heart of families in Bauru. However, the store needs a system capable of automating its activities due to the difficulties of the administration manual, which has arisen with its strong growth.
+That system is present in this repository! It has several functions such as: <br/>
+
+* Registration and Consultation of Customers, Suppliers, Products and Sales;
+* User Management, separating those who are System Administrators;
+* Automatic generation of requests for supply of missing products;
+* among several other functions...
 
 
 ### Built With
