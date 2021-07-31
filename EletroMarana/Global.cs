@@ -197,8 +197,8 @@ namespace _EletroMarana
                                   declare fora_linha_flag boolean;
                                   set chegou_flag := (select chegou from Abastecimento
                                   where id_produto = new.id);
-                                  set fora_linha_flag := (select fora_linha from Produto
-                                  where id_produto = new.id);
+                                  set fora_linha_flag := (select fora_linha from Produtos
+                                  where id = new.id);
                                   if ((new.estoque <= new.estoque_minimo)  
                                   and (chegou_flag is null or chegou_flag = true)
                                   and (fora_linha_flag = false)) then
@@ -223,17 +223,17 @@ namespace _EletroMarana
 
         public static void CriaUsuarioPadrao()
         {
-            if (RetornaNumeroUsuariosAdm() == 0)
+            if (!TemAdm())
             {
                 ExecutaComandoSimples(@"insert into usuarios(nome, login, senha, adm, ativo) 
                                       values('administrador', 'admin', 'admin', true, true)");
             }
         }
 
-        public static int RetornaNumeroUsuariosAdm()
+        public static bool TemAdm()
         {
             // instrução sql
-            Comando = new MySqlCommand("select id from usuarios where adm = 1", Conexao);
+            Comando = new MySqlCommand("select id from usuarios where adm = 1 and ativo = 1", Conexao);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -241,7 +241,21 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count;
+            return datTabela.Rows.Count > 0;
+        }
+
+        public static bool TemUnicoAdm()
+        {
+            // instrução sql
+            Comando = new MySqlCommand("select id from usuarios where adm = 1 and ativo = 1", Conexao);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
         }
 
         public static Tuple<int, int> VerificaUsuario(String login, String senha)
@@ -363,10 +377,10 @@ namespace _EletroMarana
                                        nome 'Nome', 
                                        login 'Login',
                                        senha 'Senha', 
-                                       adm 'Administrador' 
+                                       adm 'Administrador',
+                                       ativo 'Ativo'
                                        from usuarios 
                                        where nome like ?usuario
-                                       and ativo = true 
                                        order by nome", Conexao);
 
             // definindo parâmetro da intrução
@@ -380,6 +394,26 @@ namespace _EletroMarana
 
             return datTabela;
         }
+
+        public static bool TemVendasUsuario(int idUsuario)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from venda_cab
+                                       where id_usuario = ?id_usuario", Conexao);
+
+            // definindo parâmetro da intrução
+            Comando.Parameters.AddWithValue("?id_usuario", idUsuario);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count > 0;
+        }
+
 
         public static DataTable ConsultaFornecedores(String fornecedor) {
             // instrução sql
