@@ -75,8 +75,12 @@
     </a>
     <br/>
 </p>
-EletroMarana Store, located in Bauru-SP, is a highlight in sales of high quality home appliances and is already part of the heart of families in Bauru. However, the store needs a system capable of automating its activities due to the difficulties of the administration manual, which has arisen with its strong growth.
-That system is present in this repository! It has several functions such as: <br/>
+EletroMarana Store, located in Bauru-SP, is a highlight in sales of high quality home appliances and is already part of the heart of families in Bauru. However, the store needs a system capable of automating its activities due to the difficulties of the administration manual, which has arisen with its strong growth... and this system is present in this repository!
+<br/>
+<br/>
+It has several functions such as:
+<br/>
+<br/>
 
 * Registration and Consultation of Customers, Suppliers, Products and Sales;
 * User Management, separating those who are System Administrators;
