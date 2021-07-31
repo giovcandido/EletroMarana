@@ -92,7 +92,8 @@ It has several functions such as:
 
 * [Microsoft Visual Studio 2019: Forms for Desktop](https://visualstudio.microsoft.com/pt-br/)
 * [MySQL Community Server and Workbench](https://dev.mysql.com/downloads/)
-* A Giovani and Candido skills.
+* A Giovani and Candido skills
+* Extreme fury of members
 
 
 <!-- INSTALLATION -->
