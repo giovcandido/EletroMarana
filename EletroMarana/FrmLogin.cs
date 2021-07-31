@@ -69,12 +69,7 @@ namespace _EletroMarana
 
         private void BtnFechar_Click(object sender, EventArgs e)
         {
-            DialogResult resp = MessageBox.Show("Você deseja mesmo sair?", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Question); ;
-            
-            if(resp == DialogResult.Yes)
-            {
-                Close();
-            }
+            Close();
         }
     }
 }

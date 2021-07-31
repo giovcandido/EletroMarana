@@ -16,8 +16,8 @@ namespace _EletroMarana
 
             if (Global.usuarioLogado.Item2 != 1)
             {
-                UsuariosToolStripMenuItem.Available = false;
-                abastecimentoToolStripMenuItem.Available = false;
+                itemUsuarios.Available = false;
+                menuAbastecimentos.Available = false;
             }
         }
 
@@ -83,13 +83,29 @@ namespace _EletroMarana
 
         private void LogoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmLogin.Show();
-            this.Dispose();
+            DialogResult resp = MessageBox.Show("Você deseja mesmo sair?", "Sair", MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (resp == DialogResult.Yes)
+            {
+                FrmLogin.Show();
+                this.Dispose();
+            }
         }
 
-        private void FrmMenu_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FrmLogin.Close();
+            DialogResult resp = MessageBox.Show("Deseja realmente fechar a aplicação?", "Fechar", MessageBoxButtons.YesNo, 
+                                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (resp == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                FrmLogin.Close();
+            }
         }
     }
 }
