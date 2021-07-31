@@ -169,10 +169,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            if (MessageBox.Show("Deseja realmente excluir o produto " + txtNome.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            if (MessageBox.Show("Deseja realmente excluir o produto " + txtNome.Text + "? O produto será removido " +
+                                "automaticamente das vendas e das solicitações de abastecimento em que " +
+                                "ele aparece.", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
+                                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-
                 Global.Conexao.Open();
 
                 Global.Comando = new MySqlCommand("delete from produtos where id = ?id", Global.Conexao);

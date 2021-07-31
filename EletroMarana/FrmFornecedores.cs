@@ -157,8 +157,10 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            if (MessageBox.Show("Deseja realmente excluir o fornecedor " + txtFantasia.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+            if (MessageBox.Show("Deseja realmente excluir o fornecedor " + txtFantasia.Text + "? Os produtos fornecidos " +
+                                "por ele e as solicitações de abastecimento serão automaticamente excluídas.", "Exclusão", 
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
 
                 Global.Conexao.Open();
 
