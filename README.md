@@ -93,7 +93,7 @@ It has several functions such as:
 * [Microsoft Visual Studio 2019: Forms for Desktop](https://visualstudio.microsoft.com/pt-br/)
 * [MySQL Community Server, Workbench and Connector/NET](https://dev.mysql.com/downloads/)
 * A Giovani and Candido skills
-* Extreme anger of members
+* Extreme metal music and anger processing from the participants
 
 
 <!-- INSTALLATION -->
