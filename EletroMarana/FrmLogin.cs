@@ -18,42 +18,62 @@ namespace _EletroMarana
 
         private void BtnLogar_Click(object sender, EventArgs e)
         {
-            String usuario = txtLogin.Text;
+            String login = txtLogin.Text;
             String senha = txtSenha.Text;
 
-            if (usuario == "" || senha == "")
+            if (login == "" || senha == "")
             {
                 MessageBox.Show("Nenhum dos campos podem ser vazios, por favor preencha-os corretamente!", "Campos vazios", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-                
-            Tuple<int, int> usuarioEncontrado = Global.VerificaUsuario(usuario, senha);
+
+            if (!AutentificaUsuario(login, senha))
+            {
+                MessageBox.Show("Usuário ou senha inválidos!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            Hide();
+
+            LimpaCampos();
+
+            AbreMenuPrincipal();
+        }
+
+        private bool AutentificaUsuario(string login, string senha) {
+            Tuple<int, int> usuarioEncontrado = Global.VerificaUsuario(login, senha);
 
             if (usuarioEncontrado.Item1 == -1)
             {
-                MessageBox.Show("Usuário ou senha inválidos!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;     
             }
-            else
-            {
-                Global.usuarioLogado = usuarioEncontrado;
 
-                Visible = false;
+            Global.usuarioLogado = usuarioEncontrado;
 
-                txtLogin.Clear();
-                txtSenha.Clear();
+            return true;
+        }
 
-                FrmMenu form = new FrmMenu(this);
-                form.Show();
-            }
+        private void LimpaCampos()
+        {
+            txtLogin.Clear();
+            txtSenha.Clear();
+
+            txtLogin.Select();
+        }
+
+        private void AbreMenuPrincipal()
+        {
+            FrmMenu Menu = new FrmMenu(this);
+            Menu.Show();
         }
 
         private void BtnFechar_Click(object sender, EventArgs e)
         {
-            DialogResult op = MessageBox.Show("Você deseja mesmo sair?", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Question); ;
+            DialogResult resp = MessageBox.Show("Você deseja mesmo sair?", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Question); ;
             
-            if(op == DialogResult.Yes)
+            if(resp == DialogResult.Yes)
             {
-                this.Close();
+                Close();
             }
         }
     }

@@ -6,7 +6,7 @@ namespace _EletroMarana
 {
     public partial class FrmMenu : Form
     {
-        Form FrmLogin;
+        private readonly Form FrmLogin;
 
         public FrmMenu(Form frmLogin)
         {
@@ -69,11 +69,6 @@ namespace _EletroMarana
             form.ShowDialog();
         }
 
-        private void FrmMenu_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FrmLogin.Close();
-        }
-
         private void NovaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmNovaVenda form = new FrmNovaVenda();
@@ -86,10 +81,15 @@ namespace _EletroMarana
             form.ShowDialog();
         }
 
-        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LogoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmLogin.Visible = true;
-            Close();
+            FrmLogin.Show();
+            this.Dispose();
+        }
+
+        private void FrmMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FrmLogin.Close();
         }
     }
 }
