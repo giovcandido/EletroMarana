@@ -29,7 +29,7 @@ namespace _EletroMarana
             // cria as tabelas
             CriaTabelas();
 
-            // cria os triggers
+            // cria os triggers 
             CriaTriggers();
 
             // cria usuario admin
@@ -699,6 +699,34 @@ namespace _EletroMarana
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?id_venda", idVenda);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela;
+        }
+
+        public static DataTable ConsultaAbastecimentos(string produto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select abas.id 'Código',
+                                       abas.data_hora 'Data e Hora',
+                                       forn.fantasia 'Fornecedor',
+                                       prod.descricao 'Produto',
+                                       prod.valor_custo 'Valor Custo',
+                                       abas.qtd 'Quantidade',
+                                       abas.total 'Total',
+                                       abas.chegou 'Chegou'
+                                       left join produtos prod on prod.id = abas.id_produto 
+                                       left join fornecedores forn on forn.id = abas.id_fornecedor 
+                                       where prod.descricao = ?produto 
+                                       order by data_hora desc", Conexao);
+
+            // definindo parâmetro da intrução
+            Comando.Parameters.AddWithValue("?produto", "%" + produto + "%");
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
