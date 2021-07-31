@@ -12,6 +12,17 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
+        private void FrmFornecedores_Load(object sender, EventArgs e)
+        {
+            dgvFornecedores.DataSource = Global.ConsultaFornecedores("");
+
+            cboCidade.DataSource = Global.ConsultaCidades("");
+            cboCidade.DisplayMember = "Nome";
+            cboCidade.ValueMember = "Código";
+
+            LimpaCampos();
+        }
+
         private void LimpaCampos()
         {
             txtID.Clear();
@@ -33,19 +44,8 @@ namespace _EletroMarana
             cboCidade.ResetText();
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmFornecedores_Load(object sender, EventArgs e)
-        {
-            dgvFornecedores.DataSource = Global.ConsultaFornecedores("");
 
             txtRazaoSocial.Select();
-
-            cboCidade.DataSource = Global.ConsultaCidades("");
-            cboCidade.DisplayMember = "Nome";
-            cboCidade.ValueMember = "Código";
-
-            LimpaCampos();
         }
 
         private void BtnPesquisar_Click(object sender, EventArgs e)

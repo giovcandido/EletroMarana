@@ -12,6 +12,15 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
+        private void FrmUsuarios_Load(object sender, EventArgs e)
+        {
+            dgvUsuarios.DataSource = Global.ConsultaUsuarios("");
+
+            dgvUsuarios.Columns[3].Visible = false;
+
+            LimpaCampos();
+        }
+
         private void LimpaCampos()
         {
             txtID.Clear();
@@ -22,13 +31,8 @@ namespace _EletroMarana
             chkAdm.Checked = false;
 
             txtPesquisa.Clear();
-        }
 
-        private void FrmUsuarios_Load(object sender, EventArgs e)
-        {
-            dgvUsuarios.DataSource = Global.ConsultaUsuarios("");
-
-            dgvUsuarios.Columns[3].Visible = false;
+            txtNome.Select();
         }
 
         private void BtnPesquisar_Click(object sender, EventArgs e)

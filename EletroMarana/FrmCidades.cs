@@ -12,6 +12,17 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
+        private void FrmCidades_Load(object sender, EventArgs e)
+        {
+            dgvCidades.DataSource = Global.ConsultaCidades("");
+
+            cboEstado.DataSource = Global.ConsultaEstados("");
+            cboEstado.DisplayMember = "Nome";
+            cboEstado.ValueMember = "Código";
+
+            LimpaCampos();
+        }
+
         private void LimpaCampos()
         {
             txtID.Clear();
@@ -21,19 +32,8 @@ namespace _EletroMarana
             cboEstado.ResetText();
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmCidades_Load(object sender, EventArgs e)
-        {
-            dgvCidades.DataSource = Global.ConsultaCidades("");
 
             txtNome.Select();
-
-            cboEstado.DataSource = Global.ConsultaEstados("");
-            cboEstado.DisplayMember = "Nome";
-            cboEstado.ValueMember = "Código";
-
-            LimpaCampos();
         }
 
         private void BtnPesquisar_Click(object sender, EventArgs e)

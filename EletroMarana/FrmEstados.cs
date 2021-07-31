@@ -12,19 +12,19 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
+        private void FrmEstados_Load(object sender, System.EventArgs e)
+        {
+            dgvEstados.DataSource = Global.ConsultaEstados("");
+
+            LimpaCampos();
+        }
+
         private void LimpaCampos()
         {
             txtID.Clear();
             txtNome.Clear();
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmEstados_Load(object sender, System.EventArgs e)
-        {
-            dgvEstados.DataSource = Global.ConsultaEstados("");
-
-            LimpaCampos();
 
             txtNome.Select();
         }

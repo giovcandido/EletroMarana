@@ -12,18 +12,19 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
-        private void LimpaCampos() {
-            txtID.Clear();
-            txtNome.Clear();
-
-            txtPesquisa.Clear();
-        }
-
         private void FrmCategorias_Load(object sender, EventArgs e)
         {
             dgvCategorias.DataSource = Global.ConsultaCategorias("");
 
             LimpaCampos();
+        }
+
+        private void LimpaCampos()
+        {
+            txtID.Clear();
+            txtNome.Clear();
+
+            txtPesquisa.Clear();
 
             txtNome.Select();
         }

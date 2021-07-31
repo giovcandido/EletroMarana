@@ -12,7 +12,19 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
-        private void LimpaCampos() {
+        private void FrmClientes_Load(object sender, EventArgs e)
+        {
+            dgvClientes.DataSource = Global.ConsultaClientes("");
+
+            cboCidade.DataSource = Global.ConsultaCidades("");
+            cboCidade.DisplayMember = "Nome";
+            cboCidade.ValueMember = "Código";
+
+            LimpaCampos();
+        }
+
+        private void LimpaCampos()
+        {
             txtID.Clear();
             txtNome.Clear();
             mtbNascimento.Clear();
@@ -34,19 +46,8 @@ namespace _EletroMarana
             picFoto.ImageLocation = "";
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmClientes_Load(object sender, EventArgs e)
-        {
-            dgvClientes.DataSource = Global.ConsultaClientes("");
 
             txtNome.Select();
-
-            cboCidade.DataSource = Global.ConsultaCidades("");
-            cboCidade.DisplayMember = "Nome";
-            cboCidade.ValueMember = "Código";
-
-            LimpaCampos();
         }
 
         private void BtnPesquisar_Click(object sender, EventArgs e)

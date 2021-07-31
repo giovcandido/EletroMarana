@@ -12,7 +12,25 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
-        private void LimpaCampos() 
+        private void FrmProdutos_Load(object sender, EventArgs e)
+        {
+            dgvProdutos.DataSource = Global.ConsultaProdutos("");
+
+            dgvProdutos.Columns[3].Width = 120;
+            dgvProdutos.Columns[9].Width = 120;
+
+            cboCategoria.DataSource = Global.ConsultaCategorias("");
+            cboCategoria.DisplayMember = "Nome";
+            cboCategoria.ValueMember = "Código";
+
+            cboFornecedor.DataSource = Global.ConsultaFornecedores("");
+            cboFornecedor.DisplayMember = "Fantasia";
+            cboFornecedor.ValueMember = "Código";
+
+            LimpaCampos();
+        }
+
+        private void LimpaCampos()
         {
             txtID.Clear();
             txtNome.Clear();
@@ -34,26 +52,8 @@ namespace _EletroMarana
             chkForaLinha.Checked = false;
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmProdutos_Load(object sender, EventArgs e)
-        {
-            dgvProdutos.DataSource = Global.ConsultaProdutos("");
-
-            dgvProdutos.Columns[3].Width = 120;
-            dgvProdutos.Columns[9].Width = 120;
 
             txtNome.Select();
-
-            cboCategoria.DataSource = Global.ConsultaCategorias("");
-            cboCategoria.DisplayMember = "Nome";
-            cboCategoria.ValueMember = "Código";
-
-            cboFornecedor.DataSource = Global.ConsultaFornecedores("");
-            cboFornecedor.DisplayMember = "Fantasia";
-            cboFornecedor.ValueMember = "Código";
-
-            LimpaCampos();
         }
 
         private void BtnPesquisar_Click(object sender, EventArgs e)

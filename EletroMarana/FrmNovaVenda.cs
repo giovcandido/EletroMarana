@@ -17,36 +17,6 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
-        private void LimpaCamposProduto()
-        {
-            cboProduto.SelectedItem = null;
-            cboProduto.ResetText();
-
-            txtValorUnitario.Clear();
-            txtQuantidade.Clear();
-        }
-
-        private void LimpaCampos()
-        {
-            txtID.Clear();
-
-            cboCliente.SelectedItem = null;
-            cboCliente.ResetText();
-
-            mtbDataHora.Text = DateTime.Now.ToString();
-
-            valorTotal = 0;
-            txtValorTotal.Clear();
-
-            LimpaCamposProduto();
-
-            cboTipoPGTO.SelectedItem = null;
-            cboTipoPGTO.ResetText();
-
-            dgvProdutos.DataSource = null;
-            dgvProdutos.Rows.Clear();
-        }
-
         private void FrmNovaVenda_Load(object sender, EventArgs e)
         {
             cboCliente.DataSource = Global.ConsultaClientes("");
@@ -74,6 +44,40 @@ namespace _EletroMarana
             LimpaCampos();
 
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
+        private void LimpaCampos()
+        {
+            txtID.Clear();
+
+            cboCliente.SelectedItem = null;
+            cboCliente.ResetText();
+
+            mtbDataHora.Text = DateTime.Now.ToString();
+
+            valorTotal = 0;
+            txtValorTotal.Clear();
+
+            LimpaCamposProduto();
+
+            cboTipoPGTO.SelectedItem = null;
+            cboTipoPGTO.ResetText();
+
+            dgvProdutos.DataSource = null;
+            dgvProdutos.Rows.Clear();
+
+            cboCliente.Select();
+        }
+
+        private void LimpaCamposProduto()
+        {
+            cboProduto.SelectedItem = null;
+            cboProduto.ResetText();
+
+            txtValorUnitario.Clear();
+            txtQuantidade.Clear();
+
+            cboProduto.Select();
         }
 
         private void CboProduto_SelectedIndexChanged(object sender, EventArgs e)

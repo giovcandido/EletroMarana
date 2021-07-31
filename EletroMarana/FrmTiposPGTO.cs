@@ -12,6 +12,13 @@ namespace _EletroMarana
             InitializeComponent();
         }
 
+        private void FrmTiposPGTO_Load(object sender, EventArgs e)
+        {
+            dgvTiposPGTO.DataSource = Global.ConsultaTiposPGTO("");
+
+            LimpaCampos();
+        }
+
         private void LimpaCampos()
         {
             txtID.Clear();
@@ -20,13 +27,6 @@ namespace _EletroMarana
             chkBaixaAutomatica.Checked = false;
 
             txtPesquisa.Clear();
-        }
-
-        private void FrmTiposPGTO_Load(object sender, EventArgs e)
-        {
-            dgvTiposPGTO.DataSource = Global.ConsultaTiposPGTO("");
-
-            LimpaCampos();
 
             txtNome.Select();
         }
