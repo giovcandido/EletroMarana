@@ -10,7 +10,7 @@ namespace _EletroMarana
 
         public FrmMenu(Form frmLogin)
         {
-            this.FrmLogin = frmLogin;
+            FrmLogin = frmLogin;
 
             InitializeComponent();
 
@@ -35,7 +35,7 @@ namespace _EletroMarana
 
         private void UsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmUsuarios form = new FrmUsuarios();
+            FrmUsuarios form = new FrmUsuarios(this);
             form.ShowDialog();
         }
 
@@ -88,9 +88,14 @@ namespace _EletroMarana
 
             if (resp == DialogResult.Yes)
             {
-                FrmLogin.Show();
-                this.Dispose();
+                Logout();
             }
+        }
+
+        public void Logout()
+        {
+            FrmLogin.Show();
+            Dispose();
         }
 
         private void FrmMenu_FormClosing(object sender, FormClosingEventArgs e)
