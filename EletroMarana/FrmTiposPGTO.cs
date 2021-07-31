@@ -116,9 +116,9 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            // confirma exclusão
-            if (MessageBox.Show("Deseja realmente excluir o tipo de pagamento " + txtNome.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja realmente excluir o tipo de pagamento " + txtNome.Text + "? As vendas realizadas " +
+                                "com este tipo serão excluídas automaticamente.", "Exclusão", MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
                 // abre a conexão

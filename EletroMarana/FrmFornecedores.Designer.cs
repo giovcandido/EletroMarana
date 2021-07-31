@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFornecedores));
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
@@ -402,7 +401,7 @@
             // mtbCelular
             // 
             this.mtbCelular.Location = new System.Drawing.Point(383, 218);
-            this.mtbCelular.Mask = "(00) 00000-0000";
+            this.mtbCelular.Mask = "(000)00000-0000";
             this.mtbCelular.Name = "mtbCelular";
             this.mtbCelular.Size = new System.Drawing.Size(139, 20);
             this.mtbCelular.TabIndex = 13;
@@ -410,7 +409,7 @@
             // mtbFone
             // 
             this.mtbFone.Location = new System.Drawing.Point(90, 218);
-            this.mtbFone.Mask = "(00) 0000-0000";
+            this.mtbFone.Mask = "(000)0000-0000";
             this.mtbFone.Name = "mtbFone";
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
             this.mtbFone.TabIndex = 12;
@@ -418,7 +417,7 @@
             // mtbIE
             // 
             this.mtbIE.Location = new System.Drawing.Point(358, 192);
-            this.mtbIE.Mask = "00.000000-0";
+            this.mtbIE.Mask = "000.000.000.000";
             this.mtbIE.Name = "mtbIE";
             this.mtbIE.Size = new System.Drawing.Size(164, 20);
             this.mtbIE.TabIndex = 11;

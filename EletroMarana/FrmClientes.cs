@@ -171,9 +171,10 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            if (MessageBox.Show("Deseja realmente excluir o cliente " + txtNome.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-
+            if (MessageBox.Show("Deseja realmente excluir o cliente " + txtNome.Text + "? Como consequência, as " +
+                                "vendas feitas a ele serão automaticamente excluídas.", "Exclusão", MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
                 Global.Conexao.Open();
 
                 Global.Comando = new MySqlCommand("delete from clientes where id = ?id", Global.Conexao);

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClientes));
             this.label2 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.mtbNascimento = new System.Windows.Forms.MaskedTextBox();
@@ -425,7 +424,7 @@
             // mtbCelular
             // 
             this.mtbCelular.Location = new System.Drawing.Point(383, 219);
-            this.mtbCelular.Mask = "(00) 00000-0000";
+            this.mtbCelular.Mask = "(000)00000-0000";
             this.mtbCelular.Name = "mtbCelular";
             this.mtbCelular.Size = new System.Drawing.Size(139, 20);
             this.mtbCelular.TabIndex = 112;
@@ -433,7 +432,7 @@
             // mtbFone
             // 
             this.mtbFone.Location = new System.Drawing.Point(90, 218);
-            this.mtbFone.Mask = "(00)0000-0000";
+            this.mtbFone.Mask = "(000)0000-0000";
             this.mtbFone.Name = "mtbFone";
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
             this.mtbFone.TabIndex = 113;
