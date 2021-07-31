@@ -51,6 +51,15 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string nome = txtNome.Text;
+
+            if (Global.TemEstado(nome))
+            {
+                MessageBox.Show("Não é possível inserir o estado, pois ele já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
@@ -58,7 +67,7 @@ namespace _EletroMarana
             Global.Comando = new MySqlCommand("insert into estados(nome) values(?nome)", Global.Conexao);
 
             // criando o parâmetro
-            Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
+            Global.Comando.Parameters.AddWithValue("?nome", nome);
 
             // executando o comando
             Global.Comando.ExecuteNonQuery();
@@ -77,6 +86,15 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string nome = txtNome.Text;
+
+            if (Global.TemEstado(nome))
+            {
+                MessageBox.Show("Não é possível atualizar o estado, pois ele seria idêntico a outro.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
@@ -84,7 +102,7 @@ namespace _EletroMarana
             Global.Comando = new MySqlCommand("update estados set nome = ?nome where id = ?id", Global.Conexao);
 
             // criando os parâmetros
-            Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
+            Global.Comando.Parameters.AddWithValue("?nome", nome);
             Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
 
             // executa comando

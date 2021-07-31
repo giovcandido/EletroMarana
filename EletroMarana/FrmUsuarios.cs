@@ -62,13 +62,22 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string login = txtLogin.Text;
+
+            if (Global.TemUsuario(login))
+            {
+                MessageBox.Show("Não é possível incluir o usuário, pois o login escolhido já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
             Global.Comando = new MySqlCommand(@"insert into usuarios(nome, login, senha, adm) 
                                               values(?nome, ?login, ?senha, ?adm)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?login", txtLogin.Text);
+            Global.Comando.Parameters.AddWithValue("?login", login);
             Global.Comando.Parameters.AddWithValue("?senha", txtSenha.Text);
             Global.Comando.Parameters.AddWithValue("?adm", Convert.ToBoolean(chkAdm.Checked));
 
@@ -85,6 +94,15 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string login = txtLogin.Text;
+
+            if (Global.TemUsuario(login))
+            {
+                MessageBox.Show("Não é possível atualiz o usuário, pois o login escolhido já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int idUsuario = Convert.ToInt16(txtID.Text);
 
             if (Global.TemUnicoAdm() == idUsuario)
@@ -97,10 +115,10 @@ namespace _EletroMarana
                 Global.Conexao.Open();
 
                 Global.Comando = new MySqlCommand(@"update usuarios set nome = ?nome, login = ?login, 
-                                              senha = ?senha, adm = ?adm where id = ?id", Global.Conexao);
+                                                  senha = ?senha, adm = ?adm where id = ?id", Global.Conexao);
 
                 Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-                Global.Comando.Parameters.AddWithValue("?login", txtLogin.Text);
+                Global.Comando.Parameters.AddWithValue("?login", login);
                 Global.Comando.Parameters.AddWithValue("?senha", txtSenha.Text);
                 Global.Comando.Parameters.AddWithValue("?adm", Convert.ToBoolean(chkAdm.Checked));
                 Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));

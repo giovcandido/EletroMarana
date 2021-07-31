@@ -51,14 +51,24 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string descricao = txtNome.Text;
+
+            if (Global.TemCategoria(descricao))
+            {
+                MessageBox.Show("Não é possível incluir a categoria, pois ela já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando insert
-            Global.Comando = new MySqlCommand("insert into categorias(descricao) values(?descricao)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into categorias(descricao) 
+                                              values(?descricao)", Global.Conexao);
 
             // criando o parâmetro
-            Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
+            Global.Comando.Parameters.AddWithValue("?descricao", descricao);
 
             // executando o comando
             Global.Comando.ExecuteNonQuery();
@@ -77,14 +87,24 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string descricao = txtNome.Text;
+
+            if (Global.TemCategoria(descricao))
+            {
+                MessageBox.Show("Não é possível atualizar a categoria, pois ela seria idêntica a outra.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando update
-            Global.Comando = new MySqlCommand("update categorias set descricao = ?descricao where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update categorias set descricao = ?descricao 
+                                              where id = ?id", Global.Conexao);
 
             // criando os parâmetros
-            Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
+            Global.Comando.Parameters.AddWithValue("?descricao", descricao);
             Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
 
             // executa comando

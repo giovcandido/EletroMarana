@@ -456,6 +456,25 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static bool TemUsuario(String login)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id 
+                                       from usuarios 
+                                       where login = ?login", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?login", login);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
+
         public static DataTable ConsultaFornecedores(String fornecedor) {
             // instrução sql
             Comando = new MySqlCommand(@"select forn.id 'Código', 

@@ -97,15 +97,24 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string codigoBarra = mtbCodigoBarra.Text;
+
+            if (Global.TemProduto(codigoBarra))
+            {
+                MessageBox.Show("Não é possível inserir o produto, pois o código de barra já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("insert into produtos(descricao, codigo_barra, id_categoria, id_fornecedor, prazo_garantia, " +
-                                              "estoque, estoque_minimo, valor_venda, valor_custo, foto, fora_linha) " +
-                                              "values(?descricao, ?codigo_barra, ?id_categoria, ?id_fornecedor, ?prazo_garantia, ?estoque, " +
-                                              "?estoque_minimo, ?valor_venda, ?valor_custo, ?foto, ?fora_linha)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into produtos(descricao, codigo_barra, id_categoria, id_fornecedor, prazo_garantia, 
+                                              estoque, estoque_minimo, valor_venda, valor_custo, foto, fora_linha) values(?descricao, ?codigo_barra, 
+                                              ?id_categoria, ?id_fornecedor, ?prazo_garantia, ?estoque, ?estoque_minimo, ?valor_venda, ?valor_custo, 
+                                              ?foto, ?fora_linha)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?codigo_barra", mtbCodigoBarra.Text);
+            Global.Comando.Parameters.AddWithValue("?codigo_barra", codigoBarra);
             Global.Comando.Parameters.AddWithValue("?id_categoria", cboCategoria.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?id_fornecedor", cboFornecedor.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?prazo_garantia", txtPrazoGarantia.Text);
@@ -129,15 +138,24 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string codigoBarra = mtbCodigoBarra.Text;
+
+            if (Global.TemProduto(codigoBarra))
+            {
+                MessageBox.Show("Não é possível atualizar o produto, pois o código de barra colide com o de outro.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("update produtos set descricao = ?descricao, codigo_barra = ?codigo_barra, " +
-                                              "id_categoria = ?id_categoria, id_fornecedor = ?id_fornecedor, prazo_garantia = ?prazo_garantia, " +
-                                              "estoque = ?estoque, estoque_minimo = ?estoque_minimo, valor_venda = ?valor_venda, valor_custo = ?valor_custo, " +
-                                              "foto = ?foto, fora_linha = ?fora_linha where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update produtos set descricao = ?descricao, codigo_barra = ?codigo_barra, 
+                                              id_categoria = ?id_categoria, id_fornecedor = ?id_fornecedor, prazo_garantia = ?prazo_garantia, 
+                                              estoque = ?estoque, estoque_minimo = ?estoque_minimo, valor_venda = ?valor_venda, valor_custo = ?valor_custo, 
+                                              foto = ?foto, fora_linha = ?fora_linha where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?codigo_barra", mtbCodigoBarra.Text);
+            Global.Comando.Parameters.AddWithValue("?codigo_barra", codigoBarra);
             Global.Comando.Parameters.AddWithValue("?id_categoria", cboCategoria.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?id_fornecedor", cboFornecedor.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?prazo_garantia", txtPrazoGarantia.Text);

@@ -69,7 +69,7 @@
             this.mtbRG = new System.Windows.Forms.MaskedTextBox();
             this.mtbCelular = new System.Windows.Forms.MaskedTextBox();
             this.mtbFone = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRenda = new System.Windows.Forms.MaskedTextBox();
+            this.txtRenda = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -430,21 +430,19 @@
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
             this.mtbFone.TabIndex = 113;
             // 
-            // mtbRenda
+            // txtRenda
             // 
-            this.mtbRenda.Location = new System.Drawing.Point(383, 63);
-            this.mtbRenda.Mask = "$ ";
-            this.mtbRenda.Name = "mtbRenda";
-            this.mtbRenda.Size = new System.Drawing.Size(139, 20);
-            this.mtbRenda.TabIndex = 114;
-            this.mtbRenda.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
+            this.txtRenda.Location = new System.Drawing.Point(383, 63);
+            this.txtRenda.Name = "txtRenda";
+            this.txtRenda.Size = new System.Drawing.Size(139, 20);
+            this.txtRenda.TabIndex = 115;
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 548);
-            this.Controls.Add(this.mtbRenda);
+            this.Controls.Add(this.txtRenda);
             this.Controls.Add(this.mtbFone);
             this.Controls.Add(this.mtbCelular);
             this.Controls.Add(this.mtbRG);
@@ -541,6 +539,6 @@
         private System.Windows.Forms.MaskedTextBox mtbRG;
         private System.Windows.Forms.MaskedTextBox mtbCelular;
         private System.Windows.Forms.MaskedTextBox mtbFone;
-        private System.Windows.Forms.MaskedTextBox mtbRenda;
+        private System.Windows.Forms.TextBox txtRenda;
     }
 }

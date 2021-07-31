@@ -81,11 +81,20 @@ namespace _EletroMarana
         {
             if (txtRazaoSocial.Text == "") return;
 
+            string cnpj = mtbCNPJ.Text;
+
+            if (Global.TemFornecedor(cnpj))
+            {
+                MessageBox.Show("Não é possível inserir o fornecedor, pois o CNPJ já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("insert into fornecedores(razao_social, fantasia, cep, rua, numero, complemento, bairro, id_cidade, cnpj, ie, fone, " +
-                                              "celular, representante, email) values(?razao_social, ?fantasia, ?cep, ?rua, ?numero, ?complemento, ?bairro, ?id_cidade, " +
-                                              "?cnpj, ?ie, ?fone, ?celular, ?representante, ?email)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into fornecedores(razao_social, fantasia, cep, rua, numero, complemento, bairro, id_cidade, cnpj, ie, fone, 
+                                              celular, representante, email) values(?razao_social, ?fantasia, ?cep, ?rua, ?numero, ?complemento, ?bairro, ?id_cidade,
+                                              ?cnpj, ?ie, ?fone, ?celular, ?representante, ?email)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?razao_social", txtRazaoSocial.Text);
             Global.Comando.Parameters.AddWithValue("?fantasia", txtFantasia.Text);
@@ -95,7 +104,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?complemento", txtComplemento.Text);
             Global.Comando.Parameters.AddWithValue("?bairro", txtBairro.Text);
             Global.Comando.Parameters.AddWithValue("?id_cidade", cboCidade.SelectedValue);
-            Global.Comando.Parameters.AddWithValue("?cnpj", mtbCNPJ.Text);
+            Global.Comando.Parameters.AddWithValue("?cnpj", cnpj);
             Global.Comando.Parameters.AddWithValue("?ie", mtbIE.Text);
             Global.Comando.Parameters.AddWithValue("?fone", mtbFone.Text);
             Global.Comando.Parameters.AddWithValue("?celular", mtbCelular.Text);
@@ -115,11 +124,20 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string cnpj = mtbCNPJ.Text;
+
+            if (Global.TemFornecedor(cnpj))
+            {
+                MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("update fornecedores set razao_social = ?razao_social, fantasia = ?fantasia, cep = ?cep, rua = ?rua, " + 
-                                              "numero = ?numero, complemento = ?complemento, bairro = ?bairro, id_cidade = ?id_cidade, cnpj = ?cnpj, " +
-                                              "ie = ?ie, fone = ?fone, celular = ?celular, representante = ?representante, email = ?email where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update fornecedores set razao_social = ?razao_social, fantasia = ?fantasia, cep = ?cep, rua = ?rua, 
+                                              numero = ?numero, complemento = ?complemento, bairro = ?bairro, id_cidade = ?id_cidade, cnpj = ?cnpj, 
+                                              ie = ?ie, fone = ?fone, celular = ?celular, representante = ?representante, email = ?email where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?razao_social", txtRazaoSocial.Text);
             Global.Comando.Parameters.AddWithValue("?fantasia", txtFantasia.Text);
@@ -129,7 +147,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?complemento", txtComplemento.Text);
             Global.Comando.Parameters.AddWithValue("?bairro", txtBairro.Text);
             Global.Comando.Parameters.AddWithValue("?id_cidade", cboCidade.SelectedValue);
-            Global.Comando.Parameters.AddWithValue("?cnpj", mtbCNPJ.Text);
+            Global.Comando.Parameters.AddWithValue("?cnpj", cnpj);
             Global.Comando.Parameters.AddWithValue("?ie", mtbIE.Text);
             Global.Comando.Parameters.AddWithValue("?fone", mtbFone.Text);
             Global.Comando.Parameters.AddWithValue("?celular", mtbCelular.Text);

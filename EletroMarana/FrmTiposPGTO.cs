@@ -54,11 +54,21 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string descricao = txtNome.Text;
+
+            if (Global.TemTipoPGTO(descricao))
+            {
+                MessageBox.Show("Não é possível incluir o tipo de pagamento, pois ele já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando insert
-            Global.Comando = new MySqlCommand("insert into tipos_pgto(descricao, baixa_aut) values(?descricao, ?baixa_aut)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into tipos_pgto(descricao, baixa_aut) 
+                                              values(?descricao, ?baixa_aut)", Global.Conexao);
 
             // criando o parâmetro
             Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
@@ -81,11 +91,21 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string descricao = txtNome.Text;
+
+            if (Global.TemTipoPGTO(descricao))
+            {
+                MessageBox.Show("Não é possível atualizar o tipo de pagamento, pois ele já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando update
-            Global.Comando = new MySqlCommand("update tipos_pgto set descricao = ?descricao, baixa_aut = ?baixa_aut where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update tipos_pgto set descricao = ?descricao, baixa_aut = ?baixa_aut 
+                                              where id = ?id", Global.Conexao);
 
             // criando os parâmetros
             Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);

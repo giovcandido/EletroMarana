@@ -59,15 +59,26 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string nome = txtNome.Text;
+            int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
+
+            if (Global.TemCidade(nome, idEstado))
+            {
+                MessageBox.Show("Não é possível incluir a cidade, pois ela já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando insert
-            Global.Comando = new MySqlCommand("insert into cidades(nome, id_estado) values(?nome, ?id_estado)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into cidades(nome, id_estado) 
+                                              values(?nome, ?id_estado)", Global.Conexao);
 
             // criando os parâmetros
-            Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?id_estado", cboEstado.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?nome", nome);
+            Global.Comando.Parameters.AddWithValue("?id_estado", idEstado);
 
             // executa comando
             Global.Comando.ExecuteNonQuery();
@@ -86,15 +97,26 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string nome = txtNome.Text;
+            int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
+
+            if (Global.TemCidade(nome, idEstado))
+            {
+                MessageBox.Show("Não é possível atualizar a cidade, pois ela seria idêntica a outra.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // abre a conexão
             Global.Conexao.Open();
 
             // comando update
-            Global.Comando = new MySqlCommand("update cidades set nome = ?nome, id_estado = ?id_estado where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update cidades set nome = ?nome, id_estado = ?id_estado 
+                                              where id = ?id", Global.Conexao);
 
             // criando os parâmetros
-            Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?id_estado", cboEstado.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?nome", nome);
+            Global.Comando.Parameters.AddWithValue("?id_estado", idEstado);
             Global.Comando.Parameters.AddWithValue("?id", txtID.Text);
 
             // executa comando

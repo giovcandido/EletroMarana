@@ -93,16 +93,25 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "") return;
 
+            string cpf = mtbCPF.Text;
+
+            if (Global.TemCliente(cpf))
+            {
+                MessageBox.Show("Não é possível incluir o cliente, pois o CPF inserido já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("insert into clientes(nome, cep, rua, numero, complemento, bairro, id_cidade, cpf, rg, " +
-                                               "fone, celular, email, renda, data_nasc, foto) value(?nome, ?cep, ?rua, ?numero, ?complemento, " +
-                                               "?bairro, ?id_cidade, ?cpf, ?rg, ?fone, ?celular, ?email, ?renda, ?data_nasc, ?foto)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into clientes(nome, cep, rua, numero, complemento, bairro, id_cidade, cpf, rg,
+                                              fone, celular, email, renda, data_nasc, foto) value(?nome, ?cep, ?rua, ?numero, ?complemento,
+                                              ?bairro, ?id_cidade, ?cpf, ?rg, ?fone, ?celular, ?email, ?renda, ?data_nasc, ?foto)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
             Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
-            Global.Comando.Parameters.AddWithValue("?cpf", mtbCPF.Text);
+            Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
             Global.Comando.Parameters.AddWithValue("?rua", txtRua.Text);
@@ -128,16 +137,25 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            string cpf = mtbCPF.Text;
+
+            if (Global.TemCliente(cpf))
+            {
+                MessageBox.Show("Não é possível atualizar o cliente, o CPF já consta no sistema.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("update clientes set nome = ?nome, cep = ?cep, rua = ?rua, numero = ?numero, complemento = ?complemento, bairro = ?bairro, " +
-                                              "id_cidade = ?id_cidade, cpf = ?cpf, rg = ?rg, fone = ?fone, celular = ?celular, email = ?email, " +
-                                              "renda = ?renda, data_nasc = ?data_nasc, foto = ?foto where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update clientes set nome = ?nome, cep = ?cep, rua = ?rua, numero = ?numero, complemento = ?complemento, 
+                                              bairro = ?bairro, id_cidade = ?id_cidade, cpf = ?cpf, rg = ?rg, fone = ?fone, celular = ?celular, email = ?email, 
+                                              renda = ?renda, data_nasc = ?data_nasc, foto = ?foto where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
             Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
-            Global.Comando.Parameters.AddWithValue("?cpf", mtbCPF.Text);
+            Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
             Global.Comando.Parameters.AddWithValue("?rua", txtRua.Text);
@@ -194,11 +212,6 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
     }
 }
