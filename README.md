@@ -75,16 +75,25 @@
     </a>
     <br/>
 </p>
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+EletroMarana Store, located in Bauru-SP, is a highlight in sales of high quality home appliances and is already part of the heart of families in Bauru. However, the store needs a system capable of automating its activities due to the difficulties of the administration manual, which has arisen with its strong growth... and this system is present in this repository!
+<br/>
+<br/>
+It has several functions such as:
+<br/>
+<br/>
+
+* Registration and Consultation of Customers, Suppliers, Products and Sales;
+* User Management, separating those who are System Administrators;
+* Automatic generation of requests for supply of missing products;
+* among several other functions...
 
 
 ### Built With
 
 * [Microsoft Visual Studio 2019: Forms for Desktop](https://visualstudio.microsoft.com/pt-br/)
-* [MySQL Community Server and Workbench](https://dev.mysql.com/downloads/)
-* A Giovani and Candido skills.
+* [MySQL Community Server, Workbench and Connector/NET](https://dev.mysql.com/downloads/)
+* A Giovani and Candido skills
+* Extreme metal music and anger processing from the participants
 
 
 <!-- INSTALLATION -->
@@ -93,8 +102,9 @@ Here's a blank template to get started:
 
 In order to correctly use the EletroMarana Store application, it is necessary to follow the following steps:
 
-1. Install and Configure MySQL Community Server and Workbench <b> same as presented </b> in the <i><a href="/Docs/documentation.pdf">Documentation</a></i>.
-2. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simple run it. :)
+1. Install and Configure <b> MySQL Community Server, Workbench and Connector/NET same as presented </b> in this <a href="/Docs/my-sql-installer-guide-eletromarana.pdf">Tutorial</a>.
+2. If you are in Linux or Mac, you need to download and install the <b>'DotNet' (.NET) Runtime Package (v5 or newer) </b> through <a href="https://dotnet.microsoft.com/download">this link</a>.
+3. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simply run it. :)
 
 
 <!-- USAGE EXAMPLES -->
@@ -103,7 +113,6 @@ In order to correctly use the EletroMarana Store application, it is necessary to
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the <a href="/Docs/documentation.pdf">Documentation</strong></a>._
-
 
 
 <!-- ROADMAP -->
