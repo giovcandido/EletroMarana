@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClientes));
             this.label2 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.mtbNascimento = new System.Windows.Forms.MaskedTextBox();
@@ -36,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtRenda = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cboCidade = new System.Windows.Forms.ComboBox();
@@ -71,6 +69,7 @@
             this.mtbRG = new System.Windows.Forms.MaskedTextBox();
             this.mtbCelular = new System.Windows.Forms.MaskedTextBox();
             this.mtbFone = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRenda = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -138,17 +137,10 @@
             this.label3.TabIndex = 75;
             this.label3.Text = "Nascimento";
             // 
-            // txtRenda
-            // 
-            this.txtRenda.Location = new System.Drawing.Point(380, 63);
-            this.txtRenda.Name = "txtRenda";
-            this.txtRenda.Size = new System.Drawing.Size(142, 20);
-            this.txtRenda.TabIndex = 4;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(321, 66);
+            this.label4.Location = new System.Drawing.Point(337, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 77;
@@ -425,7 +417,7 @@
             // mtbCelular
             // 
             this.mtbCelular.Location = new System.Drawing.Point(383, 219);
-            this.mtbCelular.Mask = "(00) 00000-0000";
+            this.mtbCelular.Mask = "(000)00000-0000";
             this.mtbCelular.Name = "mtbCelular";
             this.mtbCelular.Size = new System.Drawing.Size(139, 20);
             this.mtbCelular.TabIndex = 112;
@@ -433,16 +425,26 @@
             // mtbFone
             // 
             this.mtbFone.Location = new System.Drawing.Point(90, 218);
-            this.mtbFone.Mask = "(00)0000-0000";
+            this.mtbFone.Mask = "(000)0000-0000";
             this.mtbFone.Name = "mtbFone";
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
             this.mtbFone.TabIndex = 113;
+            // 
+            // mtbRenda
+            // 
+            this.mtbRenda.Location = new System.Drawing.Point(383, 63);
+            this.mtbRenda.Mask = "$ ";
+            this.mtbRenda.Name = "mtbRenda";
+            this.mtbRenda.Size = new System.Drawing.Size(139, 20);
+            this.mtbRenda.TabIndex = 114;
+            this.mtbRenda.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
             // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 548);
+            this.Controls.Add(this.mtbRenda);
             this.Controls.Add(this.mtbFone);
             this.Controls.Add(this.mtbCelular);
             this.Controls.Add(this.mtbRG);
@@ -472,7 +474,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtRenda);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtNome);
             this.Controls.Add(this.label1);
@@ -504,7 +505,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtRenda;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboCidade;
@@ -541,5 +541,6 @@
         private System.Windows.Forms.MaskedTextBox mtbRG;
         private System.Windows.Forms.MaskedTextBox mtbCelular;
         private System.Windows.Forms.MaskedTextBox mtbFone;
+        private System.Windows.Forms.MaskedTextBox mtbRenda;
     }
 }

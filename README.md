@@ -94,7 +94,7 @@ It has several functions such as:
 * [MySQL Community Server, Workbench and Connector/NET](https://dev.mysql.com/downloads/)
 * A Giovani and Candido skills
 * Extreme metal music and anger processing from the participants
-
+* Fuck the active data in Users
 
 <!-- INSTALLATION -->
 
@@ -102,8 +102,8 @@ It has several functions such as:
 
 In order to correctly use the EletroMarana Store application, it is necessary to follow the following steps:
 
-1. Install and Configure <b> MySQL Community Server, Workbench and Connector/NET same as presented </b> in this <a href="/Docs/my-sql-installer-guide-eletromarana.pdf">Tutorial</a>.
-2. If you are in Linux or Mac, you need to download and install the <b>'DotNet' (.NET) Runtime Package (v5 or newer) </b> through <a href="https://dotnet.microsoft.com/download">this link</a>.
+1. Install and Configure <b> MySQL Community Server, Workbench and Connector/NET same as presented </b> in this <a href="https://www.youtube.com/watch?v=fmerTu7dWk8">Tutorial</a>.
+2. After this, you need to download and install the <b>.NET SDK (v5 or newer) </b> through <a href="https://dotnet.microsoft.com/download/dotnet/5.0">this link</a>.
 3. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simply run it. :)
 
 

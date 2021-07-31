@@ -285,5 +285,10 @@ namespace _EletroMarana
                 dgvVendas.DataSource = Global.ConsultaVendaCAB("");
             }
         }
+
+        private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }

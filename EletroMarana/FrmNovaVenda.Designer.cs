@@ -38,6 +38,7 @@ namespace _EletroMarana
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mtbValUnit = new System.Windows.Forms.MaskedTextBox();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnRemover = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@ namespace _EletroMarana
             this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.btnExcluirVenda = new System.Windows.Forms.Button();
+            this.mtbValTotal = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -142,6 +144,7 @@ namespace _EletroMarana
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.mtbValUnit);
             this.groupBox1.Controls.Add(this.btnAtualizar);
             this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.btnRemover);
@@ -159,6 +162,15 @@ namespace _EletroMarana
             this.groupBox1.TabIndex = 136;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Adicionar Produtos";
+            // 
+            // mtbValUnit
+            // 
+            this.mtbValUnit.Location = new System.Drawing.Point(78, 46);
+            this.mtbValUnit.Mask = "$ ";
+            this.mtbValUnit.Name = "mtbValUnit";
+            this.mtbValUnit.Size = new System.Drawing.Size(130, 20);
+            this.mtbValUnit.TabIndex = 146;
+            this.mtbValUnit.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox2_MaskInputRejected);
             // 
             // btnAtualizar
             // 
@@ -392,12 +404,21 @@ namespace _EletroMarana
             this.btnExcluirVenda.UseVisualStyleBackColor = true;
             this.btnExcluirVenda.Click += new System.EventHandler(this.BtnExcluirVenda_Click);
             // 
+            // mtbValTotal
+            // 
+            this.mtbValTotal.Location = new System.Drawing.Point(393, 61);
+            this.mtbValTotal.Mask = "$ ";
+            this.mtbValTotal.Name = "mtbValTotal";
+            this.mtbValTotal.Size = new System.Drawing.Size(141, 20);
+            this.mtbValTotal.TabIndex = 145;
+            // 
             // FrmNovaVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(566, 528);
+            this.Controls.Add(this.mtbValTotal);
             this.Controls.Add(this.btnExcluirVenda);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnAtualizarVenda);
@@ -467,5 +488,7 @@ namespace _EletroMarana
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnExcluirVenda;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MaskedTextBox mtbValUnit;
+        private System.Windows.Forms.MaskedTextBox mtbValTotal;
     }
 }
