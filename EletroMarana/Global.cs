@@ -244,14 +244,18 @@ namespace _EletroMarana
             return datTabela.Rows.Count;
         }
 
-        public static Tuple<int, int> VerificaUsuario(String usuario, String senha)
+        public static Tuple<int, int> VerificaUsuario(String login, String senha)
         {
             // instrução sql
-            Comando = new MySqlCommand("select id from usuarios " +
-                                       "where login = ?usuario and senha = ?senha and adm = true and ativo = true", Conexao);
+            Comando = new MySqlCommand(@"select id 
+                                       from usuarios 
+                                       where login = ?login 
+                                       and senha = ?senha 
+                                       and adm = true 
+                                       and ativo = true", Conexao);
 
             // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?usuario", usuario);
+            Comando.Parameters.AddWithValue("?login", login);
             Comando.Parameters.AddWithValue("?senha", senha);
 
             // adaptador recebe consulta
@@ -266,11 +270,14 @@ namespace _EletroMarana
             }
 
             // instrução sql
-            Comando = new MySqlCommand("select id from usuarios " +
-                                       "where login = ?usuario and senha = ?senha and ativo = true", Conexao);
+            Comando = new MySqlCommand(@"select id 
+                                       from usuarios 
+                                       where login = ?login 
+                                       and senha = ?senha 
+                                       and ativo = true", Conexao);
 
             // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?usuario", usuario);
+            Comando.Parameters.AddWithValue("?login", login);
             Comando.Parameters.AddWithValue("?senha", senha);
 
             // adaptador recebe consulta
@@ -290,9 +297,11 @@ namespace _EletroMarana
         public static DataTable ConsultaEstados(String estado)
         {
             // instrução sql
-            Comando = new MySqlCommand("select id 'Código', " +
-                                       "nome 'Nome' from estados " +
-                                       "where nome like ?estado order by nome", Conexao);
+            Comando = new MySqlCommand(@"select id 'Código', 
+                                       nome 'Nome' 
+                                       from estados 
+                                       where nome like ?estado 
+                                       order by nome", Conexao);
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?estado", "%" + estado + "%");
@@ -308,11 +317,13 @@ namespace _EletroMarana
 
         public static DataTable ConsultaCidades(String cidade) {
             // instrução sql
-            Comando = new MySqlCommand("select cid.id 'Código', " +
-                                       "cid.nome 'Nome', " +
-                                       "est.nome 'Estado' from cidades cid " +
-                                       "left join estados est on est.id = cid.id_estado " +
-                                       "where cid.nome like ?cidade order by cid.nome", Conexao);
+            Comando = new MySqlCommand(@"select cid.id 'Código', 
+                                       cid.nome 'Nome', 
+                                       est.nome 'Estado' 
+                                       from cidades cid 
+                                       left join estados est on est.id = cid.id_estado 
+                                       where cid.nome like ?cidade 
+                                       order by cid.nome", Conexao);
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?cidade", "%" + cidade + "%");
@@ -328,9 +339,11 @@ namespace _EletroMarana
 
         public static DataTable ConsultaCategorias(String categoria) {
             // instrução sql
-            Comando = new MySqlCommand("select id 'Código', " +
-                                       "descricao 'Nome' from categorias " +
-                                       "where descricao like ?categoria order by descricao", Conexao);
+            Comando = new MySqlCommand(@"select id 'Código', 
+                                       descricao 'Nome' 
+                                       from categorias 
+                                       where descricao like ?categoria 
+                                       order by descricao", Conexao);
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?categoria", "%" + categoria + "%");
@@ -370,23 +383,25 @@ namespace _EletroMarana
 
         public static DataTable ConsultaFornecedores(String fornecedor) {
             // instrução sql
-            Comando = new MySqlCommand("select forn.id 'Código', " +
-                                       "forn.razao_social 'Razão Social', " +
-                                       "forn.fantasia 'Fantasia', " +
-                                       "forn.cep 'CEP', " +
-                                       "forn.rua 'Rua', " +
-                                       "forn.numero 'Numero', " +
-                                       "forn.complemento 'Complemento', " +
-                                       "forn.bairro 'Bairro', " +
-                                       "cid.nome 'Cidade', " + 
-                                       "forn.cnpj 'CNPJ', " +
-                                       "forn.ie 'IE', " +
-                                       "forn.fone 'Fone', " +
-                                       "forn.celular 'Celular', " +
-                                       "forn.email 'E-mail', " +
-                                       "forn.representante 'Representante' from fornecedores forn " +
-                                       "left join cidades cid on cid.id = forn.id_cidade " +
-                                       "where fantasia like ?fornecedor order by fantasia", Conexao);
+            Comando = new MySqlCommand(@"select forn.id 'Código', 
+                                       forn.razao_social 'Razão Social', 
+                                       forn.fantasia 'Fantasia', 
+                                       forn.cep 'CEP', 
+                                       forn.rua 'Rua', 
+                                       forn.numero 'Numero', 
+                                       forn.complemento 'Complemento', 
+                                       forn.bairro 'Bairro', 
+                                       cid.nome 'Cidade', 
+                                       forn.cnpj 'CNPJ', 
+                                       forn.ie 'IE', 
+                                       forn.fone 'Fone', 
+                                       forn.celular 'Celular', 
+                                       forn.email 'E-mail', 
+                                       forn.representante 'Representante' 
+                                       from fornecedores forn 
+                                       left join cidades cid on cid.id = forn.id_cidade 
+                                       where fantasia like ?fornecedor 
+                                       order by fantasia", Conexao);
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?fornecedor", "%" + fornecedor + "%");
@@ -402,24 +417,26 @@ namespace _EletroMarana
 
         public static DataTable ConsultaClientes(String cliente) {
             // instrução sql
-            Comando = new MySqlCommand("select cli.id 'Código', " +
-                                       "cli.nome 'Nome', " +
-                                       "cli.data_nasc 'Nascimento', " +
-                                       "cli.renda 'Renda', " +
-                                       "cli.cpf 'CPF', " +
-                                       "cli.rg 'RG', " +
-                                       "cli.cep 'CEP', " +
-                                       "cli.rua 'Rua', " +
-                                       "cli.numero 'Numero', " +
-                                       "cli.complemento 'Complemento', " +
-                                       "cli.bairro 'Bairro', " +
-                                       "cid.nome 'Cidade', " +
-                                       "cli.fone 'Fone', " +
-                                       "cli.celular 'Celular', " +
-                                       "cli.email 'E-mail', " +
-                                       "cli.foto 'Foto' from clientes cli " +
-                                       "left join cidades cid on cid.id = cli.id_cidade " +
-                                       "where cli.nome like ?cliente order by cli.nome", Conexao);
+            Comando = new MySqlCommand(@"select cli.id 'Código', 
+                                       cli.nome 'Nome', 
+                                       cli.data_nasc 'Nascimento', 
+                                       cli.renda 'Renda', 
+                                       cli.cpf 'CPF', 
+                                       cli.rg 'RG', 
+                                       cli.cep 'CEP', 
+                                       cli.rua 'Rua', 
+                                       cli.numero 'Numero', 
+                                       cli.complemento 'Complemento', 
+                                       cli.bairro 'Bairro', 
+                                       cid.nome 'Cidade', 
+                                       cli.fone 'Fone', 
+                                       cli.celular 'Celular', 
+                                       cli.email 'E-mail', 
+                                       cli.foto 'Foto' 
+                                       from clientes cli 
+                                       left join cidades cid on cid.id = cli.id_cidade 
+                                       where cli.nome like ?cliente 
+                                       order by cli.nome", Conexao);
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?cliente", "%" + cliente + "%");
@@ -433,16 +450,18 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaTiposPGTO(String tipo_pgto)
+        public static DataTable ConsultaTiposPGTO(String tipoPGTO)
         {
             // instrução sql
-            Comando = new MySqlCommand("select id 'Código', " +
-                                       "descricao 'Nome', " +
-                                       "baixa_aut 'Baixa Automática' from tipos_pgto " +
-                                       "where descricao like ?tipo_pgto order by descricao", Conexao);
+            Comando = new MySqlCommand(@"select id 'Código', 
+                                       descricao 'Nome', 
+                                       baixa_aut 'Baixa Automática' 
+                                       from tipos_pgto 
+                                       where descricao like ?tipo_pgto 
+                                       order by descricao", Conexao);
 
             // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?tipo_pgto", "%" + tipo_pgto + "%");
+            Comando.Parameters.AddWithValue("?tipo_pgto", "%" + tipoPGTO + "%");
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -455,21 +474,23 @@ namespace _EletroMarana
 
         public static DataTable ConsultaProdutos(String produto) {
             // instrução sql
-            Comando = new MySqlCommand("select prod.id 'Código', " +
-                                       "prod.fora_linha 'Fora de Linha', " +
-                                       "prod.descricao 'Nome', " +
-                                       "prod.codigo_barra 'Código de Barra', " +
-                                       "cat.descricao 'Categoria', " +
-                                       "forn.fantasia 'Fornecedor', " +
-                                       "prod.valor_venda 'Valor Venda', " +
-                                       "prod.valor_custo 'Valor Custo', " +
-                                       "prod.prazo_garantia 'Prazo de Garantia', " +
-                                       "prod.estoque 'Estoque', " +
-                                       "prod.estoque_minimo 'Estoque Mínimo', " +
-                                       "prod.foto 'Foto' from produtos prod " +
-                                       "left join categorias cat on cat.id = prod.id_categoria " +
-                                       "left join fornecedores forn on forn.id = prod.id_fornecedor " +
-                                       "where prod.descricao like ?produto order by prod.descricao", Conexao);
+            Comando = new MySqlCommand(@"select prod.id 'Código', 
+                                       prod.fora_linha 'Fora de Linha', 
+                                       prod.descricao 'Nome', 
+                                       prod.codigo_barra 'Código de Barra', 
+                                       cat.descricao 'Categoria', 
+                                       forn.fantasia 'Fornecedor', 
+                                       prod.valor_venda 'Valor Venda', 
+                                       prod.valor_custo 'Valor Custo', 
+                                       prod.prazo_garantia 'Prazo de Garantia', 
+                                       prod.estoque 'Estoque', 
+                                       prod.estoque_minimo 'Estoque Mínimo', 
+                                       prod.foto 'Foto' 
+                                       from produtos prod 
+                                       left join categorias cat on cat.id = prod.id_categoria 
+                                       left join fornecedores forn on forn.id = prod.id_fornecedor 
+                                       where prod.descricao like ?produto 
+                                       order by prod.descricao", Conexao);
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?produto", "%" + produto +"%");
@@ -483,22 +504,24 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaVendaCAB(String nome_cliente)
+        public static DataTable ConsultaVendaCAB(String nomeCliente)
         {
             // instrução sql
-            Comando = new MySqlCommand("select vend.id 'Código', " +
-                                       "usu.nome 'Usuário', " +
-                                       "cli.nome 'Cliente', " +
-                                       "vend.data_hora 'Data e Hora', " +
-                                       "vend.total 'Total', " +
-                                       "pgt.descricao 'Pagamento' from venda_cab vend " +
-                                       "left join usuarios usu on usu.id = vend.id_usuario " +
-                                       "left join clientes cli on cli.id = vend.id_cliente " +
-                                       "left join tipos_pgto pgt on pgt.id = vend.id_tipo_pgto " +
-                                       "where cli.nome like ?nome_cliente order by vend.data_hora", Conexao);
+            Comando = new MySqlCommand(@"select vend.id 'Código', 
+                                       usu.nome 'Usuário', 
+                                       cli.nome 'Cliente', 
+                                       vend.data_hora 'Data e Hora', 
+                                       vend.total 'Total', 
+                                       pgt.descricao 'Pagamento' 
+                                       from venda_cab vend 
+                                       left join usuarios usu on usu.id = vend.id_usuario 
+                                       left join clientes cli on cli.id = vend.id_cliente 
+                                       left join tipos_pgto pgt on pgt.id = vend.id_tipo_pgto 
+                                       where cli.nome like ?nome_cliente 
+                                       order by vend.data_hora", Conexao);
 
             // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?nome_cliente", "%" + nome_cliente + "%");
+            Comando.Parameters.AddWithValue("?nome_cliente", "%" + nomeCliente + "%");
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -509,19 +532,21 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaVendaDET(int id_venda)
+        public static DataTable ConsultaVendaDET(int idVenda)
         {
             // instrução sql
-            Comando = new MySqlCommand("select prod.id 'Código', " +
-                                       "prod.descricao 'Produto', " +
-                                       "det.vlr_unitario 'Valor Unitário', " +
-                                       "det.qtd 'Quantidade' from venda_det det " + 
-                                       "left join venda_cab cab on cab.id = det.id_venda " +
-                                       "left join produtos prod on prod.id = det.id_produto " +
-                                       "where det.id_venda = ?id_venda order by prod.descricao", Conexao);
+            Comando = new MySqlCommand(@"select prod.id 'Código', 
+                                       prod.descricao 'Produto', 
+                                       det.vlr_unitario 'Valor Unitário', 
+                                       det.qtd 'Quantidade' 
+                                       from venda_det det 
+                                       left join venda_cab cab on cab.id = det.id_venda 
+                                       left join produtos prod on prod.id = det.id_produto 
+                                       where det.id_venda = ?id_venda 
+                                       order by prod.descricao", Conexao);
 
             // definindo parâmetro da intrução
-            Comando.Parameters.AddWithValue("?id_venda", id_venda);
+            Comando.Parameters.AddWithValue("?id_venda", idVenda);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
