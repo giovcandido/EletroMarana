@@ -50,25 +50,26 @@ namespace _EletroMarana
             // cria tabela de estados
             ExecutaComandoSimples(@"create table if not exists Estados
                                   (id integer not null auto_increment primary key,
-                                  nome char(2) not null)");
+                                  nome char(2) not null unique)");
 
             // cria tabela de cidades
             ExecutaComandoSimples(@"create table if not exists Cidades
                                   (id integer not null auto_increment primary key,
                                   nome char(40) not null,
                                   id_estado integer not null,
-                                  foreign key (id_estado) references Estados(id))");
+                                  unique (nome, id_estado),
+                                  foreign key (id_estado) references Estados(id) on delete cascade)");
 
             // cria tabela de categorias
             ExecutaComandoSimples(@"create table if not exists Categorias
                                   (id integer not null auto_increment primary key,
-                                  descricao char(40) not null)");
+                                  descricao char(40) not null unique)");
 
             // cria tabela de usuario
             ExecutaComandoSimples(@"create table if not exists Usuarios
                                   (id integer not null auto_increment primary key,
                                   nome varchar(100) not null,
-                                  login char(40) not null,
+                                  login char(40) not null unique,
                                   senha char(10) not null,
                                   adm boolean not null,
                                   ativo boolean not null)");
@@ -84,13 +85,13 @@ namespace _EletroMarana
                                   complemento varchar(100),
                                   bairro char(30) not null,
                                   id_cidade integer not null,
-                                  cnpj char(18) not null,
+                                  cnpj char(18) not null unique,
                                   ie char(15) not null,
                                   fone char(14),
                                   celular char(15) not null,
                                   representante varchar(80) not null,
                                   email varchar(100) not null,
-                                  foreign key (id_cidade) references Cidades(id))");
+                                  foreign key (id_cidade) references Cidades(id) on delete cascade)");
 
             // cria tabela de clientes
             ExecutaComandoSimples(@"create table if not exists Clientes
@@ -102,7 +103,7 @@ namespace _EletroMarana
                                   complemento varchar(100),
                                   bairro char(30) not null,
                                   id_cidade integer not null,
-                                  cpf char(14) not null,
+                                  cpf char(14) not null unique,
                                   rg char(12) not null,
                                   fone char(14),
                                   celular char(15) not null,
@@ -110,19 +111,19 @@ namespace _EletroMarana
                                   renda decimal(10,2),
                                   data_nasc date not null,
                                   foto varchar(100),
-                                  foreign key (id_cidade) references Cidades(id))");
+                                  foreign key (id_cidade) references Cidades(id) on delete cascade)");
 
             // cria tabela de tipos de pagamento
             ExecutaComandoSimples(@"create table if not exists Tipos_PGTO
                                   (id integer not null auto_increment primary key,
-                                  descricao char(40) not null,
+                                  descricao char(40) not null unique,
                                   baixa_aut boolean not null)");
 
             // cria tabela de produtos
             ExecutaComandoSimples(@"create table if not exists Produtos
                                   (id integer not null auto_increment primary key,
                                   descricao varchar(200) not null,
-                                  codigo_barra char(14) not null,
+                                  codigo_barra char(14) not null unique,
                                   id_categoria integer not null,
                                   id_fornecedor integer not null,
                                   prazo_garantia integer not null,
@@ -132,8 +133,8 @@ namespace _EletroMarana
                                   valor_custo decimal(10,2) not null,
                                   foto varchar(100),
                                   fora_linha boolean not null,
-                                  foreign key (id_categoria) references Categorias(id),
-                                  foreign key (id_fornecedor) references Fornecedores(id))");
+                                  foreign key (id_categoria) references Categorias(id) on delete cascade,
+                                  foreign key (id_fornecedor) references Fornecedores(id) on delete cascade)");
 
             // cria tabela de vendas (cabeçalho)
             ExecutaComandoSimples(@"create table if not exists Venda_CAB
@@ -143,9 +144,9 @@ namespace _EletroMarana
                                   data_hora datetime not null,
                                   total decimal(15, 2) not null,
                                   id_tipo_pgto integer not null,
-                                  foreign key (id_usuario) references Usuarios(id),
-                                  foreign key (id_cliente) references Clientes(id),
-                                  foreign key (id_tipo_pgto) references Tipos_PGTO(id))");
+                                  foreign key (id_usuario) references Usuarios(id) on delete cascade,
+                                  foreign key (id_cliente) references Clientes(id) on delete cascade,
+                                  foreign key (id_tipo_pgto) references Tipos_PGTO(id) on delete cascade)");
 
             // cria tabela de vendas (detalhe)
             ExecutaComandoSimples(@"create table if not exists Venda_DET
@@ -155,7 +156,7 @@ namespace _EletroMarana
                                   qtd integer not null, 
                                   vlr_unitario decimal(10, 2) not null,
                                   foreign key (id_venda) references Venda_CAB(id) on delete cascade,
-                                  foreign key (id_produto) references Produtos(id))");
+                                  foreign key (id_produto) references Produtos(id) on delete cascade)");
 
             // cria tabela de abastecimento
             ExecutaComandoSimples(@"create table if not exists Abastecimento
@@ -167,8 +168,8 @@ namespace _EletroMarana
                                   qtd integer not null,
                                   total decimal(15, 2) not null,
                                   chegou boolean not null,
-                                  foreign key (id_fornecedor) references Fornecedores(id),
-                                  foreign key (id_produto) references Produtos(id))");
+                                  foreign key (id_fornecedor) references Fornecedores(id) on delete cascade,
+                                  foreign key (id_produto) references Produtos(id) on delete cascade)");
         }
 
         private static void CriaTriggers()
