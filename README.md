@@ -94,7 +94,7 @@ It has several functions such as:
 * [MySQL Community Server, Workbench and Connector/NET](https://dev.mysql.com/downloads/)
 * A Giovani and Candido skills
 * Extreme metal music and anger processing from the participants
-
+* Fuck the active data in Users
 
 <!-- INSTALLATION -->
 
