@@ -95,6 +95,7 @@ It has several functions such as:
 * A Giovani and Candido skills
 * Extreme metal music and anger processing from the participants
 * Fuck the active data in Users
+* Not love, only war...
 
 <!-- INSTALLATION -->
 
