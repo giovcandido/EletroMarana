@@ -7,8 +7,12 @@ namespace _EletroMarana
 {
     public partial class FrmUsuarios : Form
     {
-        public FrmUsuarios()
+        private readonly FrmMenu FrmMenuPrincipal;
+
+        public FrmUsuarios(FrmMenu FrmMenuPrincipal)
         {
+            this.FrmMenuPrincipal = FrmMenuPrincipal;
+
             InitializeComponent();
         }
 
@@ -60,8 +64,8 @@ namespace _EletroMarana
 
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand(@"insert into usuarios(nome, login, senha, adm, ativo) 
-                                              values(?nome, ?login, ?senha, ?adm, true)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into usuarios(nome, login, senha, adm) 
+                                              values(?nome, ?login, ?senha, ?adm)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?login", txtLogin.Text);
@@ -81,20 +85,30 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            Global.Conexao.Open();
+            int idUsuario = Convert.ToInt16(txtID.Text);
 
-            Global.Comando = new MySqlCommand(@"update usuarios set nome = ?nome, login = ?login, 
+            if (Global.TemUnicoAdm() == idUsuario)
+            {
+                MessageBox.Show("Não é possível atualizar o usuário, pois deve haver ao menos um usuário administrador.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Global.Conexao.Open();
+
+                Global.Comando = new MySqlCommand(@"update usuarios set nome = ?nome, login = ?login, 
                                               senha = ?senha, adm = ?adm where id = ?id", Global.Conexao);
 
-            Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?login", txtLogin.Text);
-            Global.Comando.Parameters.AddWithValue("?senha", txtSenha.Text);
-            Global.Comando.Parameters.AddWithValue("?adm", Convert.ToBoolean(chkAdm.Checked));
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+                Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
+                Global.Comando.Parameters.AddWithValue("?login", txtLogin.Text);
+                Global.Comando.Parameters.AddWithValue("?senha", txtSenha.Text);
+                Global.Comando.Parameters.AddWithValue("?adm", Convert.ToBoolean(chkAdm.Checked));
+                Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
 
-            Global.Comando.ExecuteNonQuery();
+                Global.Comando.ExecuteNonQuery();
 
-            Global.Conexao.Close();
+                Global.Conexao.Close();
+            }
 
             LimpaCampos();
 
@@ -110,34 +124,48 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
-
-            if (MessageBox.Show("Deseja realmente excluir o usuário " + txtNome.Text + "?", "Exclusão", 
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            if (txtID.Text == "")
             {
-
-                if (Global.RetornaNumeroUsuariosAdm() == 1)
-                {
-                    MessageBox.Show("Deve haver pelo menos um usuário admin!", "Aviso",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    Global.Conexao.Open();
-
-                    Global.Comando = new MySqlCommand("update usuarios set ativo = false where id = ?id", Global.Conexao);
-
-                    Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
-
-                    Global.Comando.ExecuteNonQuery();
-
-                    Global.Conexao.Close();
-
-                    LimpaCampos();
-
-                    dgvUsuarios.DataSource = Global.ConsultaUsuarios("");
-                }
+                return;
             }
+
+            if (MessageBox.Show("Deseja realmente excluir o usuário " + txtNome.Text + "? Como consequência, as " +
+                                "vendas feitas por ele serão automaticamente excluídas.", "Exclusão", MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            if (Global.TemUnicoAdm() != -1)
+            {
+                MessageBox.Show("Não é possível excluir o usuário, pois deve haver ao menos um usuário administrador.", 
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand("delete from usuarios where id = ?id", Global.Conexao);
+
+            int idUsuario = Convert.ToInt16(txtID.Text);
+
+            Global.Comando.Parameters.AddWithValue("?id", idUsuario);
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
+
+            if (Global.usuarioLogado.Item1 == idUsuario)
+            {
+                MessageBox.Show("Seu login foi excluído! Você será desconectado do sistema.",
+                                "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                FrmMenuPrincipal.Logout();
+            }
+
+            LimpaCampos();
+
+            dgvUsuarios.DataSource = Global.ConsultaUsuarios("");
         }
 
         private void BtnFechar_Click(object sender, EventArgs e)
