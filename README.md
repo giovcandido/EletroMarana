@@ -102,7 +102,7 @@ It has several functions such as:
 In order to correctly use the EletroMarana Store application, it is necessary to follow the following steps:
 
 1. Install and Configure MySQL Community Server and Workbench <b> same as presented </b> in the <i><a href="/Docs/documentation.pdf">Documentation</a></i>.
-2. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simple run it. :)
+2. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simply run it. :)
 
 
 <!-- USAGE EXAMPLES -->
