@@ -17,7 +17,7 @@ namespace _EletroMarana
 
         public static void CriaBanco() {
             // define string de conexão
-            Conexao = new MySqlConnection("server=localhost; uid=root; pwd=5971; charset=utf8;");
+            Conexao = new MySqlConnection("server=localhost; uid=root; pwd=1234; charset=utf8;");
             
             // abre a conexão
             Conexao.Open();
@@ -71,8 +71,7 @@ namespace _EletroMarana
                                   nome varchar(100) not null,
                                   login char(40) not null unique,
                                   senha char(10) not null,
-                                  adm boolean not null,
-                                  ativo boolean not null)");
+                                  adm boolean not null)");
 
             // cria tabela de fornecedores
             ExecutaComandoSimples(@"create table if not exists Fornecedores
@@ -226,15 +225,15 @@ namespace _EletroMarana
         {
             if (!TemAdm())
             {
-                ExecutaComandoSimples(@"insert into usuarios(nome, login, senha, adm, ativo) 
-                                      values('administrador', 'admin', 'admin', true, true)");
+                ExecutaComandoSimples(@"insert into usuarios(nome, login, senha, adm) 
+                                      values('administrador', 'admin', 'admin', true)");
             }
         }
 
         public static bool TemAdm()
         {
             // instrução sql
-            Comando = new MySqlCommand("select id from usuarios where adm = 1 and ativo = 1", Conexao);
+            Comando = new MySqlCommand("select id from usuarios where adm = 1", Conexao);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -245,10 +244,10 @@ namespace _EletroMarana
             return datTabela.Rows.Count > 0;
         }
 
-        public static bool TemUnicoAdm()
+        public static int TemUnicoAdm()
         {
             // instrução sql
-            Comando = new MySqlCommand("select id from usuarios where adm = 1 and ativo = 1", Conexao);
+            Comando = new MySqlCommand("select id from usuarios where adm = 1", Conexao);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -256,7 +255,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static Tuple<int, int> VerificaUsuario(String login, String senha)
@@ -266,8 +270,7 @@ namespace _EletroMarana
                                        from usuarios 
                                        where login = ?login 
                                        and senha = ?senha 
-                                       and adm = true 
-                                       and ativo = true", Conexao);
+                                       and adm = true", Conexao);
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?login", login);
@@ -288,8 +291,7 @@ namespace _EletroMarana
             Comando = new MySqlCommand(@"select id 
                                        from usuarios 
                                        where login = ?login 
-                                       and senha = ?senha 
-                                       and ativo = true", Conexao);
+                                       and senha = ?senha", Conexao);
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?login", login);
@@ -378,8 +380,7 @@ namespace _EletroMarana
                                        nome 'Nome', 
                                        login 'Login',
                                        senha 'Senha', 
-                                       adm 'Administrador',
-                                       ativo 'Ativo'
+                                       adm 'Administrador'
                                        from usuarios 
                                        where nome like ?usuario
                                        order by nome", Conexao);
