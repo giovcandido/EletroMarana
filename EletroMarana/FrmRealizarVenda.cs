@@ -6,18 +6,18 @@ using MySql.Data.MySqlClient;
 
 namespace _EletroMarana
 {
-    public partial class FrmNovaVenda : Form
+    public partial class FrmRealizarVenda : Form
     {
         DataTable datTabelaProduto;
         int linhaAtualProdutos;
         double valorTotal;
 
-        public FrmNovaVenda()
+        public FrmRealizarVenda()
         {
             InitializeComponent();
         }
 
-        private void FrmNovaVenda_Load(object sender, EventArgs e)
+        private void FrmRealizarVenda_Load(object sender, EventArgs e)
         {
             cboCliente.DataSource = Global.ConsultaClientes("");
             cboCliente.DisplayMember = "Nome";

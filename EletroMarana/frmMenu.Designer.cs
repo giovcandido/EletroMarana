@@ -79,56 +79,56 @@
             this.itemCidades.Name = "itemCidades";
             this.itemCidades.Size = new System.Drawing.Size(182, 22);
             this.itemCidades.Text = "Cidades";
-            this.itemCidades.Click += new System.EventHandler(this.CidadesToolStripMenuItem_Click);
+            this.itemCidades.Click += new System.EventHandler(this.ItemCidades_Click);
             // 
             // itemEstados
             // 
             this.itemEstados.Name = "itemEstados";
             this.itemEstados.Size = new System.Drawing.Size(182, 22);
             this.itemEstados.Text = "Estados";
-            this.itemEstados.Click += new System.EventHandler(this.EstadosToolStripMenuItem_Click);
+            this.itemEstados.Click += new System.EventHandler(this.ItemEstados_Click);
             // 
             // itemCategorias
             // 
             this.itemCategorias.Name = "itemCategorias";
             this.itemCategorias.Size = new System.Drawing.Size(182, 22);
             this.itemCategorias.Text = "Categorias";
-            this.itemCategorias.Click += new System.EventHandler(this.CategoriasToolStripMenuItem_Click);
+            this.itemCategorias.Click += new System.EventHandler(this.ItemCategorias_Click);
             // 
             // itemClientes
             // 
             this.itemClientes.Name = "itemClientes";
             this.itemClientes.Size = new System.Drawing.Size(182, 22);
             this.itemClientes.Text = "Clientes";
-            this.itemClientes.Click += new System.EventHandler(this.ClientesToolStripMenuItem_Click);
+            this.itemClientes.Click += new System.EventHandler(this.ItemClientes_Click);
             // 
             // itemFornecedores
             // 
             this.itemFornecedores.Name = "itemFornecedores";
             this.itemFornecedores.Size = new System.Drawing.Size(182, 22);
             this.itemFornecedores.Text = "Fornecedores";
-            this.itemFornecedores.Click += new System.EventHandler(this.FornecedoresToolStripMenuItem_Click);
+            this.itemFornecedores.Click += new System.EventHandler(this.ItemFornecedores_Click);
             // 
             // itemProdutos
             // 
             this.itemProdutos.Name = "itemProdutos";
             this.itemProdutos.Size = new System.Drawing.Size(182, 22);
             this.itemProdutos.Text = "Produtos";
-            this.itemProdutos.Click += new System.EventHandler(this.ProdutosToolStripMenuItem_Click);
+            this.itemProdutos.Click += new System.EventHandler(this.ItemProdutos_Click);
             // 
             // itemUsuarios
             // 
             this.itemUsuarios.Name = "itemUsuarios";
             this.itemUsuarios.Size = new System.Drawing.Size(182, 22);
             this.itemUsuarios.Text = "Usuários";
-            this.itemUsuarios.Click += new System.EventHandler(this.UsuariosToolStripMenuItem_Click);
+            this.itemUsuarios.Click += new System.EventHandler(this.ItemUsuarios_Click);
             // 
             // itemTiposPGTO
             // 
             this.itemTiposPGTO.Name = "itemTiposPGTO";
             this.itemTiposPGTO.Size = new System.Drawing.Size(182, 22);
             this.itemTiposPGTO.Text = "Tipos de Pagamento";
-            this.itemTiposPGTO.Click += new System.EventHandler(this.TiposPGTOToolStripMenuItem_Click);
+            this.itemTiposPGTO.Click += new System.EventHandler(this.ItemTiposPGTO_Click);
             // 
             // menuVenda
             // 
@@ -141,9 +141,9 @@
             // itemRealizarVenda
             // 
             this.itemRealizarVenda.Name = "itemRealizarVenda";
-            this.itemRealizarVenda.Size = new System.Drawing.Size(180, 22);
+            this.itemRealizarVenda.Size = new System.Drawing.Size(149, 22);
             this.itemRealizarVenda.Text = "Realizar Venda";
-            this.itemRealizarVenda.Click += new System.EventHandler(this.NovaVendaToolStripMenuItem_Click);
+            this.itemRealizarVenda.Click += new System.EventHandler(this.ItemRealizarVenda_Click);
             // 
             // menuAbastecimentos
             // 
@@ -158,7 +158,7 @@
             this.itemAcompanharSolicitacoes.Name = "itemAcompanharSolicitacoes";
             this.itemAcompanharSolicitacoes.Size = new System.Drawing.Size(208, 22);
             this.itemAcompanharSolicitacoes.Text = "Acompanhar Solicitações";
-            this.itemAcompanharSolicitacoes.Click += new System.EventHandler(this.NovaSolicitacaoToolStripMenuItem_Click);
+            this.itemAcompanharSolicitacoes.Click += new System.EventHandler(this.ItemAcompanharSolicitacoes_Click);
             // 
             // menuLogout
             // 
@@ -166,7 +166,7 @@
             this.menuLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.menuLogout.Size = new System.Drawing.Size(57, 20);
             this.menuLogout.Text = "Logout";
-            this.menuLogout.Click += new System.EventHandler(this.LogoutToolStripMenuItem_Click);
+            this.menuLogout.Click += new System.EventHandler(this.MenuLogout_Click);
             // 
             // FrmMenu
             // 

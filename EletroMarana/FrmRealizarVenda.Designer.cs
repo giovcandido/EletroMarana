@@ -1,7 +1,7 @@
 ﻿
 namespace _EletroMarana
 {
-    partial class FrmNovaVenda
+    partial class FrmRealizarVenda
     {
         /// <summary>
         /// Required designer variable.
@@ -392,12 +392,12 @@ namespace _EletroMarana
             this.btnExcluirVenda.UseVisualStyleBackColor = true;
             this.btnExcluirVenda.Click += new System.EventHandler(this.BtnExcluirVenda_Click);
             // 
-            // FrmNovaVenda
+            // FrmRealizarVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(566, 528);
+            this.ClientSize = new System.Drawing.Size(583, 528);
             this.Controls.Add(this.btnExcluirVenda);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnAtualizarVenda);
@@ -417,10 +417,10 @@ namespace _EletroMarana
             this.Controls.Add(this.txtID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FrmNovaVenda";
+            this.Name = "FrmRealizarVenda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nova Venda";
-            this.Load += new System.EventHandler(this.FrmNovaVenda_Load);
+            this.Text = "Realizar Venda";
+            this.Load += new System.EventHandler(this.FrmRealizarVenda_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();

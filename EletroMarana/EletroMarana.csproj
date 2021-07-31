@@ -128,17 +128,17 @@
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="FrmNovaSolicitacao.cs">
+    <Compile Include="FrmAcompanharSolicitacoes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmNovaSolicitacao.Designer.cs">
-      <DependentUpon>FrmNovaSolicitacao.cs</DependentUpon>
+    <Compile Include="FrmAcompanharSolicitacoes.Designer.cs">
+      <DependentUpon>FrmAcompanharSolicitacoes.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmNovaVenda.cs">
+    <Compile Include="FrmRealizarVenda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmNovaVenda.Designer.cs">
-      <DependentUpon>FrmNovaVenda.cs</DependentUpon>
+    <Compile Include="FrmRealizarVenda.Designer.cs">
+      <DependentUpon>FrmRealizarVenda.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -163,11 +163,11 @@
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmNovaSolicitacao.resx">
-      <DependentUpon>FrmNovaSolicitacao.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAcompanharSolicitacoes.resx">
+      <DependentUpon>FrmAcompanharSolicitacoes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmNovaVenda.resx">
-      <DependentUpon>FrmNovaVenda.cs</DependentUpon>
+    <EmbeddedResource Include="FrmRealizarVenda.resx">
+      <DependentUpon>FrmRealizarVenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProdutos.resx">
       <DependentUpon>FrmProdutos.cs</DependentUpon>

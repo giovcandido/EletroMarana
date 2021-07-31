@@ -1,7 +1,7 @@
 ﻿
 namespace _EletroMarana
 {
-    partial class FrmNovaSolicitacao
+    partial class FrmAcompanharSolicitacoes
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace _EletroMarana
             this.MaximizeBox = false;
             this.Name = "FrmNovaSolicitacao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nova Solicitação";
+            this.Text = "Acompanhar Solicitações";
             this.ResumeLayout(false);
 
         }
