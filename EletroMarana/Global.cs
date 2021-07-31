@@ -17,14 +17,15 @@ namespace _EletroMarana
 
         public static void CriaBanco() {
             // define string de conexão
-            Conexao = new MySqlConnection(@"server=localhost; database=bd_eletromarana; 
-                                          uid=root; pwd=1234; charset=utf8;");
-            
+            string stringConexao = "server=localhost; uid=root; pwd=1234; charset=utf8;";
+            Conexao = new MySqlConnection(stringConexao);
+
             // abre a conexão
             Conexao.Open();
 
             // cria o banco de dados e o seleciona para uso
-            ExecutaComandoSimples(@"create database if not exists bd_eletromarana");
+            ExecutaComandoSimples("create database if not exists bd_eletromarana");
+            ExecutaComandoSimples("use bd_eletromarana");
 
             // cria as tabelas
             CriaTabelas();
@@ -37,6 +38,10 @@ namespace _EletroMarana
 
             // fecha a conexão
             Conexao.Close();
+
+            // redefine a string de conexão
+            stringConexao = "server=localhost; database=bd_eletromarana; uid=root; pwd=1234; charset=utf8;";
+            Conexao = new MySqlConnection(stringConexao);
         }
 
         private static void ExecutaComandoSimples(string construcao)
