@@ -111,9 +111,10 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            // confirma exclusão
-            if (MessageBox.Show("Deseja realmente excluir o estado " + txtNome.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja realmente excluir o estado " + txtNome.Text + "? As cidades que " +
+                                "pertençam a ele serão automaticamente excluídas. Como consequência, clientes " +
+                                "e fornecedores também serão.", "Exclusão", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
                 // abre a conexão

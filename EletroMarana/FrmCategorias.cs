@@ -111,10 +111,10 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            // confirma exclusão
-            if (MessageBox.Show("Deseja realmente excluir a categoria " + txtNome.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-
+            if (MessageBox.Show("Deseja realmente excluir a categoria " + txtNome.Text + "? Os produtos que " +
+                                "pertençam a ela serão automaticamente excluídos.", "Exclusão", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
                 // abre a conexão
                 Global.Conexao.Open();
                 
