@@ -62,6 +62,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.mtbCodigoBarra = new System.Windows.Forms.MaskedTextBox();
+            this.mtbValVenda = new System.Windows.Forms.MaskedTextBox();
+            this.mtbValCusto = new System.Windows.Forms.MaskedTextBox();
+            this.mtbEstoqueMin = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
@@ -367,11 +370,38 @@
             this.mtbCodigoBarra.Size = new System.Drawing.Size(432, 20);
             this.mtbCodigoBarra.TabIndex = 154;
             // 
+            // mtbValVenda
+            // 
+            this.mtbValVenda.Location = new System.Drawing.Point(411, 111);
+            this.mtbValVenda.Mask = "$ ";
+            this.mtbValVenda.Name = "mtbValVenda";
+            this.mtbValVenda.Size = new System.Drawing.Size(130, 20);
+            this.mtbValVenda.TabIndex = 155;
+            // 
+            // mtbValCusto
+            // 
+            this.mtbValCusto.Location = new System.Drawing.Point(411, 137);
+            this.mtbValCusto.Mask = "$ ";
+            this.mtbValCusto.Name = "mtbValCusto";
+            this.mtbValCusto.Size = new System.Drawing.Size(130, 20);
+            this.mtbValCusto.TabIndex = 156;
+            // 
+            // mtbEstoqueMin
+            // 
+            this.mtbEstoqueMin.Location = new System.Drawing.Point(411, 163);
+            this.mtbEstoqueMin.Mask = "$ ";
+            this.mtbEstoqueMin.Name = "mtbEstoqueMin";
+            this.mtbEstoqueMin.Size = new System.Drawing.Size(130, 20);
+            this.mtbEstoqueMin.TabIndex = 157;
+            // 
             // FrmProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 466);
+            this.Controls.Add(this.mtbEstoqueMin);
+            this.Controls.Add(this.mtbValCusto);
+            this.Controls.Add(this.mtbValVenda);
             this.Controls.Add(this.mtbCodigoBarra);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -452,5 +482,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.MaskedTextBox mtbCodigoBarra;
+        private System.Windows.Forms.MaskedTextBox mtbValVenda;
+        private System.Windows.Forms.MaskedTextBox mtbValCusto;
+        private System.Windows.Forms.MaskedTextBox mtbEstoqueMin;
     }
 }
