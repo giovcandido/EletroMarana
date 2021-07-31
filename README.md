@@ -91,7 +91,7 @@ It has several functions such as:
 ### Built With
 
 * [Microsoft Visual Studio 2019: Forms for Desktop](https://visualstudio.microsoft.com/pt-br/)
-* [MySQL Community Server and Workbench](https://dev.mysql.com/downloads/)
+* [MySQL Community Server, Workbench and Connector/NET](https://dev.mysql.com/downloads/)
 * A Giovani and Candido skills
 * Extreme fury of members
 
