@@ -81,8 +81,8 @@ namespace _EletroMarana
             // cria tabela de fornecedores
             ExecutaComandoSimples(@"create table if not exists Fornecedores
                                   (id integer not null auto_increment primary key,
-                                  razao_social char(40) not null,
-                                  fantasia char(30),
+                                  razao_social varchar(100) not null,
+                                  fantasia char(40) not null,
                                   cep char(9) not null,
                                   rua varchar(100) not null,
                                   numero integer not null,
@@ -91,8 +91,8 @@ namespace _EletroMarana
                                   id_cidade integer not null,
                                   cnpj char(18) not null unique,
                                   ie char(15) not null,
-                                  fone char(14),
-                                  celular char(15) not null,
+                                  fone char(14) not null,
+                                  celular char(15),
                                   representante varchar(80) not null,
                                   email varchar(100) not null,
                                   foreign key (id_cidade) references Cidades(id) on delete cascade)");
