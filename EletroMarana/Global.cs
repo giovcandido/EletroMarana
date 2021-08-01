@@ -163,7 +163,8 @@ namespace _EletroMarana
                                   foreign key (id_produto) references Produtos(id) on delete cascade)");
 
             // cria tabela de abastecimento
-            ExecutaComandoSimples(@"create table if not exists Abastecimento
+            ExecutaComandoSimples(@"create table if not exists Abastecimentos
+
                                   (id integer not null auto_increment primary key,
                                   data_hora datetime not null,
                                   id_fornecedor integer not null,
@@ -200,7 +201,7 @@ namespace _EletroMarana
                                   declare valor_total decimal(15, 2);
                                   declare chegou_flag boolean;
                                   declare fora_linha_flag boolean;
-                                  set chegou_flag := (select chegou from Abastecimento
+                                  set chegou_flag := (select chegou from Abastecimentos
                                   where id_produto = new.id);
                                   set fora_linha_flag := (select fora_linha from Produtos
                                   where id = new.id);
@@ -209,14 +210,14 @@ namespace _EletroMarana
                                   and (fora_linha_flag = false)) then
                                   set qtd := (3 * new.estoque_minimo);
                                   set valor_total := (qtd * new.valor_custo);
-                                  insert into Abastecimento (data_hora, id_fornecedor, id_produto, valor_custo, qtd, total, chegou) 
+                                  insert into Abastecimentos (data_hora, id_fornecedor, id_produto, valor_custo, qtd, total, chegou) 
                                   values (sysdate(), new.id_fornecedor, new.id, new.valor_custo, qtd, valor_total, false); 
                                   end if;
                                   end");
 
             // trigger para aumentar o estoque de um produto
             ExecutaComandoSimples(@"create trigger Tgr_Abastecimento_ProdutoEstoque_Update
-                                  after update on Abastecimento
+                                  after update on Abastecimentos
                                   for each row
                                   begin
                                   if (new.chegou = true) then
@@ -738,15 +739,16 @@ namespace _EletroMarana
             // instrução sql
             Comando = new MySqlCommand(@"select abas.id 'Código',
                                        abas.data_hora 'Data e Hora',
-                                       forn.fantasia 'Fornecedor',
                                        prod.descricao 'Produto',
+                                       forn.fantasia 'Fornecedor',
                                        prod.valor_custo 'Valor Custo',
                                        abas.qtd 'Quantidade',
                                        abas.total 'Total',
                                        abas.chegou 'Chegou'
+                                       from abastecimentos abas
                                        left join produtos prod on prod.id = abas.id_produto 
                                        left join fornecedores forn on forn.id = abas.id_fornecedor 
-                                       where prod.descricao = ?produto 
+                                       where prod.descricao like ?produto 
                                        order by data_hora desc", Conexao);
 
             // definindo parâmetro da intrução
