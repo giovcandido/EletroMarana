@@ -144,7 +144,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* "Maraninha", as you can see in logo image, is the mascot of the EletroMarana Store.
+* For the "Maraninha" who, as you can see in the logo image, is the mascot of the EletroMarana Store..
 
 
 
