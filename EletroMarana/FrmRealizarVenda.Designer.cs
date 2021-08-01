@@ -56,7 +56,6 @@ namespace _EletroMarana
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnAtualizarVenda = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dgvVendas = new System.Windows.Forms.DataGridView();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtPesquisa = new System.Windows.Forms.TextBox();
@@ -326,7 +325,6 @@ namespace _EletroMarana
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.dgvVendas);
             this.groupBox2.Controls.Add(this.btnPesquisar);
             this.groupBox2.Controls.Add(this.txtPesquisa);
@@ -337,13 +335,6 @@ namespace _EletroMarana
             this.groupBox2.TabIndex = 143;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Consultar Vendas";
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(6, 193);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 145;
             // 
             // dgvVendas
             // 
@@ -466,6 +457,5 @@ namespace _EletroMarana
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnExcluirVenda;
-        private System.Windows.Forms.Panel panel1;
     }
 }
