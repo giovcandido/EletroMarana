@@ -23,7 +23,7 @@ namespace _EletroMarana
             cboCliente.DisplayMember = "Nome";
             cboCliente.ValueMember = "Código";
 
-            datTabelaProduto = Global.ConsultaProdutos("");
+            datTabelaProduto = Global.ConsultaProdutosDescricao("");
 
             cboProduto.DataSource = datTabelaProduto;
             cboProduto.DisplayMember = "Nome";
@@ -266,8 +266,9 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
-            if (MessageBox.Show("Deseja realmente excluir a venda " + txtID.Text + "?", "Exclusão",
-                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja realmente excluir a venda feita ao cliente " + cboCliente.Text + " em " +
+                                mtbDataHora.Text + "?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
+                                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
                 Global.Conexao.Open();
