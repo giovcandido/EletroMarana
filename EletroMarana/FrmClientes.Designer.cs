@@ -100,6 +100,7 @@
             this.mtbNascimento.Name = "mtbNascimento";
             this.mtbNascimento.Size = new System.Drawing.Size(83, 20);
             this.mtbNascimento.TabIndex = 3;
+            this.mtbNascimento.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // picFoto
             // 
@@ -397,6 +398,7 @@
             this.mtbCPF.Name = "mtbCPF";
             this.mtbCPF.Size = new System.Drawing.Size(139, 20);
             this.mtbCPF.TabIndex = 109;
+            this.mtbCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbCEP
             // 
@@ -405,6 +407,7 @@
             this.mtbCEP.Name = "mtbCEP";
             this.mtbCEP.Size = new System.Drawing.Size(113, 20);
             this.mtbCEP.TabIndex = 110;
+            this.mtbCEP.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbRG
             // 
@@ -413,6 +416,7 @@
             this.mtbRG.Name = "mtbRG";
             this.mtbRG.Size = new System.Drawing.Size(139, 20);
             this.mtbRG.TabIndex = 111;
+            this.mtbRG.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbCelular
             // 
@@ -421,6 +425,7 @@
             this.mtbCelular.Name = "mtbCelular";
             this.mtbCelular.Size = new System.Drawing.Size(139, 20);
             this.mtbCelular.TabIndex = 112;
+            this.mtbCelular.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbFone
             // 
@@ -429,6 +434,7 @@
             this.mtbFone.Name = "mtbFone";
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
             this.mtbFone.TabIndex = 113;
+            this.mtbFone.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // txtRenda
             // 

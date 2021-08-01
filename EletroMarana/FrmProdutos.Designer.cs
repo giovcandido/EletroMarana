@@ -366,6 +366,7 @@
             this.mtbCodigoBarra.Name = "mtbCodigoBarra";
             this.mtbCodigoBarra.Size = new System.Drawing.Size(432, 20);
             this.mtbCodigoBarra.TabIndex = 154;
+            this.mtbCodigoBarra.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // FrmProdutos
             // 

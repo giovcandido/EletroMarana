@@ -112,6 +112,7 @@ namespace _EletroMarana
             this.mtbDataHora.ReadOnly = true;
             this.mtbDataHora.Size = new System.Drawing.Size(126, 20);
             this.mtbDataHora.TabIndex = 87;
+            this.mtbDataHora.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // label1
             // 
