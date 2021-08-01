@@ -14,7 +14,7 @@ namespace _EletroMarana
 
         private void FrmProdutos_Load(object sender, EventArgs e)
         {
-            dgvProdutos.DataSource = Global.ConsultaProdutos("");
+            dgvProdutos.DataSource = Global.ConsultaProdutosDescricao("");
 
             dgvProdutos.Columns[3].Width = 120;
             dgvProdutos.Columns[9].Width = 120;
@@ -58,7 +58,7 @@ namespace _EletroMarana
 
         private void BtnPesquisar_Click(object sender, EventArgs e)
         {
-            dgvProdutos.DataSource = Global.ConsultaProdutos(txtPesquisa.Text);
+            dgvProdutos.DataSource = Global.ConsultaProdutosDescricao(txtPesquisa.Text);
 
             txtPesquisa.Clear();
         }
@@ -131,7 +131,7 @@ namespace _EletroMarana
 
             LimpaCampos();
 
-            dgvProdutos.DataSource = Global.ConsultaProdutos("");
+            dgvProdutos.DataSource = Global.ConsultaProdutosDescricao("");
         }
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
@@ -173,14 +173,14 @@ namespace _EletroMarana
 
             LimpaCampos();
 
-            dgvProdutos.DataSource = Global.ConsultaProdutos("");
+            dgvProdutos.DataSource = Global.ConsultaProdutosDescricao("");
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             LimpaCampos();
 
-            dgvProdutos.DataSource = Global.ConsultaProdutos("");
+            dgvProdutos.DataSource = Global.ConsultaProdutosDescricao("");
         }
 
         private void BtnExcluir_Click(object sender, EventArgs e)
@@ -204,7 +204,7 @@ namespace _EletroMarana
 
                 LimpaCampos();
 
-                dgvProdutos.DataSource = Global.ConsultaProdutos("");
+                dgvProdutos.DataSource = Global.ConsultaProdutosDescricao("");
             }
         }
 
