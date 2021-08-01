@@ -785,5 +785,25 @@ namespace _EletroMarana
 
             return datTabela;
         }
+
+        public static bool TemSolicitacaoAberta(int idProduto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select id
+                                       from abastecimentos
+                                       where id_produto = ?id_produto 
+                                       and chegou = false", Conexao);
+
+            // definindo parâmetro da intrução
+            Comando.Parameters.AddWithValue("?id_produto", idProduto);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados do adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela.Rows.Count == 1;
+        }
     }
 }

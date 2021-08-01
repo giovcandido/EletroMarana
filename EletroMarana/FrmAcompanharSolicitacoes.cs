@@ -119,6 +119,13 @@ namespace _EletroMarana
         {
             if (cboProduto.Text == "") return;
 
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
+
+            if (Global.TemSolicitacaoAberta(idProduto))
+            {
+                return;
+            }
+
             Global.Conexao.Open();
 
             Global.Comando = new MySqlCommand(@"insert into abastecimentos(data_hora, id_fornecedor, id_produto, valor_custo, qtd, total, chegou) 
@@ -126,7 +133,7 @@ namespace _EletroMarana
 
             Global.Comando.Parameters.AddWithValue("?data_hora", Convert.ToDateTime(mtbDataHora.Text).ToString("yyyy-MM-dd HH:mm:ss"));
             Global.Comando.Parameters.AddWithValue("?id_fornecedor", idFornecedor);
-            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?id_produto", idProduto);
             Global.Comando.Parameters.AddWithValue("?valor_custo", Convert.ToDouble(txtValorCusto.Text));
             Global.Comando.Parameters.AddWithValue("?qtd", Convert.ToInt16(txtQuantidade.Text));
             Global.Comando.Parameters.AddWithValue("?total", Convert.ToDouble(txtValorTotal.Text));
@@ -144,6 +151,13 @@ namespace _EletroMarana
         private void BtnAtualizar_Click(object sender, System.EventArgs e)
         {
             if (txtID.Text == "") return;
+
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
+
+            if (Global.TemSolicitacaoAberta(idProduto))
+            {
+                return;
+            }
 
             Global.Conexao.Open();
 
