@@ -629,7 +629,7 @@ namespace _EletroMarana
             return datTabela.Rows.Count == 1;
         }
 
-        public static DataTable ConsultaProdutos(String produto) 
+        public static DataTable ConsultaProdutosDescricao(String produto) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select prod.id 'Código', 
@@ -652,6 +652,29 @@ namespace _EletroMarana
 
             // definindo parâmetro da instrução
             Comando.Parameters.AddWithValue("?produto", "%" + produto +"%");
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela;
+        }
+
+        public static DataTable ConsultaProdutoID(int idProduto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select forn.id 'Código Fornecedor',
+                                       forn.fantasia 'Fornecedor',
+                                       prod.valor_custo 'Custo',
+                                       prod.estoque_minimo 'Minimo'
+                                       from produtos prod 
+                                       left join fornecedores forn on forn.id = prod.id_fornecedor 
+                                       where prod.id = ?id_produto", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?id_produto", idProduto);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
