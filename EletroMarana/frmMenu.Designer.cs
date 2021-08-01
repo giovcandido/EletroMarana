@@ -62,14 +62,14 @@
             // menuCadastros
             // 
             this.menuCadastros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.itemCidades,
             this.itemEstados,
-            this.itemCategorias,
+            this.itemCidades,
             this.itemClientes,
+            this.itemCategorias,
             this.itemFornecedores,
             this.itemProdutos,
-            this.itemUsuarios,
-            this.itemTiposPGTO});
+            this.itemTiposPGTO,
+            this.itemUsuarios});
             this.menuCadastros.Name = "menuCadastros";
             this.menuCadastros.Size = new System.Drawing.Size(71, 20);
             this.menuCadastros.Text = "Cadastros";

@@ -17,7 +17,10 @@ namespace _EletroMarana
             if (Global.usuarioLogado.Item2 != 1)
             {
                 itemUsuarios.Available = false;
-                menuAbastecimentos.Available = false;
+                itemCategorias.Available = false;
+                itemFornecedores.Available = false;
+                itemProdutos.Available = false;
+                itemTiposPGTO.Available = false;
             }
         }
 
