@@ -60,9 +60,10 @@ namespace _EletroMarana
             if (txtNome.Text == "") return;
 
             string nome = txtNome.Text;
+
             int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
 
-            if (Global.TemCidade(nome, idEstado))
+            if (Global.TemCidade(nome, idEstado) != -1)
             {
                 MessageBox.Show("Não é possível incluir a cidade, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -97,10 +98,13 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string nome = txtNome.Text;
+
             int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
 
-            if (Global.TemCidade(nome, idEstado))
+            if (Global.TemCidade(nome, idEstado) != id)
             {
                 MessageBox.Show("Não é possível atualizar a cidade, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -117,7 +121,7 @@ namespace _EletroMarana
             // criando os parâmetros
             Global.Comando.Parameters.AddWithValue("?nome", nome);
             Global.Comando.Parameters.AddWithValue("?id_estado", idEstado);
-            Global.Comando.Parameters.AddWithValue("?id", txtID.Text);
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             // executa comando
             Global.Comando.ExecuteNonQuery();

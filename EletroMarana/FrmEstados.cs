@@ -53,7 +53,7 @@ namespace _EletroMarana
 
             string nome = txtNome.Text;
 
-            if (Global.TemEstado(nome))
+            if (Global.TemEstado(nome) != -1)
             {
                 MessageBox.Show("Não é possível inserir o estado, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -86,9 +86,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string nome = txtNome.Text;
 
-            if (Global.TemEstado(nome))
+            if (Global.TemEstado(nome) != id)
             {
                 MessageBox.Show("Não é possível atualizar o estado, pois ele seria idêntico a outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -103,7 +105,7 @@ namespace _EletroMarana
 
             // criando os parâmetros
             Global.Comando.Parameters.AddWithValue("?nome", nome);
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             // executa comando
             Global.Comando.ExecuteNonQuery();

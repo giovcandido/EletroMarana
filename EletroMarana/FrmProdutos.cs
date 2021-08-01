@@ -99,7 +99,7 @@ namespace _EletroMarana
 
             string codigoBarra = mtbCodigoBarra.Text;
 
-            if (Global.TemProduto(codigoBarra))
+            if (Global.TemProduto(codigoBarra) != -1)
             {
                 MessageBox.Show("Não é possível inserir o produto, pois o código de barra já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -138,9 +138,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string codigoBarra = mtbCodigoBarra.Text;
 
-            if (Global.TemProduto(codigoBarra))
+            if (Global.TemProduto(codigoBarra) != id)
             {
                 MessageBox.Show("Não é possível atualizar o produto, pois o código de barra colide com o de outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -165,7 +167,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?valor_custo", Convert.ToDouble(txtValorCusto.Text));
             Global.Comando.Parameters.AddWithValue("?foto", picFoto.ImageLocation);
             Global.Comando.Parameters.AddWithValue("?fora_linha", Convert.ToBoolean(chkForaLinha.Checked));
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 

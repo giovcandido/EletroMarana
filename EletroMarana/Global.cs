@@ -338,7 +338,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemEstado(string nome) 
+        public static int TemEstado(string nome) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id
@@ -354,7 +354,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaCidades(String cidade) {
@@ -379,7 +384,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemCidade(string nome, int idEstado) 
+        public static int TemCidade(string nome, int idEstado) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id  
@@ -397,7 +402,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaCategorias(String categoria) {
@@ -420,7 +430,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemCategoria(string descricao) 
+        public static int TemCategoria(string descricao) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id 
@@ -436,7 +446,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaUsuarios(String usuario) {
@@ -462,7 +477,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemUsuario(String login)
+        public static int TemUsuario(String login)
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id 
@@ -478,7 +493,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaFornecedores(String fornecedor) {
@@ -515,7 +535,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemFornecedor(string cnpj)
+        public static int TemFornecedor(string cnpj)
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id
@@ -531,7 +551,12 @@ namespace _EletroMarana
             // datTabela recebe dados no adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaClientes(String cliente) {
@@ -569,7 +594,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemCliente(string cpf) 
+        public static int TemCliente(string cpf) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id
@@ -585,7 +610,12 @@ namespace _EletroMarana
             // datTabela recebe dados no adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaTiposPGTO(String tipoPGTO)
@@ -610,7 +640,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemTipoPGTO(string descricao) 
+        public static int TemTipoPGTO(string descricao) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id 
@@ -626,7 +656,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaProdutosDescricao(String produto) 
@@ -685,7 +720,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemProduto(string codigoBarra) 
+        public static int TemProduto(string codigoBarra) 
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id
@@ -701,7 +736,12 @@ namespace _EletroMarana
             // datTabela recebe dados no adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
 
         public static DataTable ConsultaVendaCAB(String nomeCliente)
@@ -786,7 +826,7 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static bool TemSolicitacaoAberta(int idProduto)
+        public static int TemSolicitacaoAberta(int idProduto)
         {
             // instrução sql
             Comando = new MySqlCommand(@"select id
@@ -803,7 +843,12 @@ namespace _EletroMarana
             // datTabela recebe dados do adaptador
             Adaptador.Fill(datTabela = new DataTable());
 
-            return datTabela.Rows.Count == 1;
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
         }
     }
 }

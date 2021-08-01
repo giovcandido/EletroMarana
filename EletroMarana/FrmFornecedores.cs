@@ -83,7 +83,7 @@ namespace _EletroMarana
 
             string cnpj = mtbCNPJ.Text;
 
-            if (Global.TemFornecedor(cnpj))
+            if (Global.TemFornecedor(cnpj) != -1)
             {
                 MessageBox.Show("Não é possível inserir o fornecedor, pois o CNPJ já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -124,9 +124,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string cnpj = mtbCNPJ.Text;
 
-            if (Global.TemFornecedor(cnpj))
+            if (Global.TemFornecedor(cnpj) != id)
             {
                 MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -153,7 +155,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?celular", mtbCelular.Text);
             Global.Comando.Parameters.AddWithValue("?representante", txtRepresentante.Text);
             Global.Comando.Parameters.AddWithValue("?email", txtEmail.Text);
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 

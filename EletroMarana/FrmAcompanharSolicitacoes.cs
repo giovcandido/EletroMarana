@@ -121,7 +121,7 @@ namespace _EletroMarana
 
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
-            if (Global.TemSolicitacaoAberta(idProduto))
+            if (Global.TemSolicitacaoAberta(idProduto) != -1)
             {
                 return;
             }
@@ -152,9 +152,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
-            if (Global.TemSolicitacaoAberta(idProduto))
+            if (Global.TemSolicitacaoAberta(idProduto) != id)
             {
                 return;
             }
@@ -170,7 +172,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?qtd", txtQuantidade.Text);
             Global.Comando.Parameters.AddWithValue("?total", Convert.ToDouble(txtValorTotal.Text));
             Global.Comando.Parameters.AddWithValue("?chegou", Convert.ToBoolean(chkChegou.Checked));
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 

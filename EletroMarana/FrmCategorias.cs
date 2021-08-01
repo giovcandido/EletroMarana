@@ -53,7 +53,7 @@ namespace _EletroMarana
 
             string descricao = txtNome.Text;
 
-            if (Global.TemCategoria(descricao))
+            if (Global.TemCategoria(descricao) != -1)
             {
                 MessageBox.Show("Não é possível incluir a categoria, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -87,9 +87,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string descricao = txtNome.Text;
 
-            if (Global.TemCategoria(descricao))
+            if (Global.TemCategoria(descricao) != id)
             {
                 MessageBox.Show("Não é possível atualizar a categoria, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -105,7 +107,7 @@ namespace _EletroMarana
 
             // criando os parâmetros
             Global.Comando.Parameters.AddWithValue("?descricao", descricao);
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             // executa comando
             Global.Comando.ExecuteNonQuery();

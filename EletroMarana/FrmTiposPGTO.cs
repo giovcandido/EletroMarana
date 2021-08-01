@@ -56,7 +56,7 @@ namespace _EletroMarana
 
             string descricao = txtNome.Text;
 
-            if (Global.TemTipoPGTO(descricao))
+            if (Global.TemTipoPGTO(descricao) != -1)
             {
                 MessageBox.Show("Não é possível incluir o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -91,9 +91,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+            
             string descricao = txtNome.Text;
 
-            if (Global.TemTipoPGTO(descricao))
+            if (Global.TemTipoPGTO(descricao) != id)
             {
                 MessageBox.Show("Não é possível atualizar o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -110,7 +112,7 @@ namespace _EletroMarana
             // criando os parâmetros
             Global.Comando.Parameters.AddWithValue("?descricao", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?baixa_aut", Convert.ToBoolean(chkBaixaAutomatica.Checked));
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             // executa comando
             Global.Comando.ExecuteNonQuery();

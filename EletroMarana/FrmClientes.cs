@@ -95,7 +95,7 @@ namespace _EletroMarana
 
             string cpf = mtbCPF.Text;
 
-            if (Global.TemCliente(cpf))
+            if (Global.TemCliente(cpf) != -1)
             {
                 MessageBox.Show("Não é possível incluir o cliente, pois o CPF inserido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -137,9 +137,11 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string cpf = mtbCPF.Text;
 
-            if (Global.TemCliente(cpf))
+            if (Global.TemCliente(cpf) != id)
             {
                 MessageBox.Show("Não é possível atualizar o cliente, o CPF já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -167,7 +169,7 @@ namespace _EletroMarana
             Global.Comando.Parameters.AddWithValue("?celular", mtbCelular.Text);
             Global.Comando.Parameters.AddWithValue("?email", txtEmail.Text);
             Global.Comando.Parameters.AddWithValue("?foto", picFoto.ImageLocation);
-            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 

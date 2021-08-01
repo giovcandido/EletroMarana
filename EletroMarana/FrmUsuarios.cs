@@ -64,7 +64,7 @@ namespace _EletroMarana
 
             string login = txtLogin.Text;
 
-            if (Global.TemUsuario(login))
+            if (Global.TemUsuario(login) != -1)
             {
                 MessageBox.Show("Não é possível incluir o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -94,18 +94,18 @@ namespace _EletroMarana
         {
             if (txtID.Text == "") return;
 
+            int id = Convert.ToInt16(txtID.Text);
+
             string login = txtLogin.Text;
 
-            if (Global.TemUsuario(login))
+            if (Global.TemUsuario(login) != id)
             {
-                MessageBox.Show("Não é possível atualiz o usuário, pois o login escolhido já consta no sistema.",
+                MessageBox.Show("Não é possível atualizar o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int idUsuario = Convert.ToInt16(txtID.Text);
-
-            if (Global.TemUnicoAdm() == idUsuario)
+            if (Global.TemUnicoAdm() == id)
             {
                 MessageBox.Show("Não é possível atualizar o usuário, pois deve haver ao menos um usuário administrador.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -121,7 +121,7 @@ namespace _EletroMarana
                 Global.Comando.Parameters.AddWithValue("?login", login);
                 Global.Comando.Parameters.AddWithValue("?senha", txtSenha.Text);
                 Global.Comando.Parameters.AddWithValue("?adm", Convert.ToBoolean(chkAdm.Checked));
-                Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+                Global.Comando.Parameters.AddWithValue("?id", id);
 
                 Global.Comando.ExecuteNonQuery();
 
