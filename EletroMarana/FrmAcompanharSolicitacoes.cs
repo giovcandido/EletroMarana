@@ -78,7 +78,7 @@ namespace _EletroMarana
 
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand(@"insert into abastecimento(data_hora, id_fornecedor, id_produto, valor_custo, qtd, total, chegou) 
+            Global.Comando = new MySqlCommand(@"insert into abastecimentos(data_hora, id_fornecedor, id_produto, valor_custo, qtd, total, chegou) 
                                               values(?data_hora, ?id_fornecedor, ?id_produto, ?valor_custo, ?qtd, ?total, ?chegou)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?data_hora", Convert.ToDateTime(mtbDataHora.Text).ToString("yyyy-MM-dd HH:mm:ss"));
@@ -105,12 +105,12 @@ namespace _EletroMarana
 
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand(@"update abastecimento set id_fornecedor = ?id_fornecedor, id_produto = ?id_produto, valor_custo = ?valor_custo, 
+            Global.Comando = new MySqlCommand(@"update abastecimentos set id_fornecedor = ?id_fornecedor, id_produto = ?id_produto, valor_custo = ?valor_custo, 
                                               qtd = ?qtd, total = ?total, chegou = ?chegou where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?id_fornecedor", cboFornecedor.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
-            Global.Comando.Parameters.AddWithValue("?valor_custo", txtValorCusto.Text);
+            Global.Comando.Parameters.AddWithValue("?valor_custo", Convert.ToDouble(txtValorCusto.Text));
             Global.Comando.Parameters.AddWithValue("?qtd", txtQuantidade.Text);
             Global.Comando.Parameters.AddWithValue("?total", txtValorTotal.Text);
             Global.Comando.Parameters.AddWithValue("?chegou", Convert.ToBoolean(chkChegou.Checked));
