@@ -103,8 +103,8 @@ It has several functions such as:
 
 In order to correctly use the EletroMarana Store application, it is necessary to follow the following steps:
 
-1. Install and Configure <b> MySQL Community Server, Workbench and Connector/NET same as presented </b> in this <a href="https://www.youtube.com/watch?v=fmerTu7dWk8">Tutorial</a>.
-2. After this, you need to download and install the <b>.NET SDK (v5 or newer) </b> through <a href="https://dotnet.microsoft.com/download/dotnet/5.0">this link</a>.
+1. Install and Configure <b> MySQL Community Server, Workbench and Connector/NET same as presented </b> in this <a href="/Docs/installation-guide.pdf">Official Installation Guide</a>.
+2. After this, you need to download and install the <b> last version of .NET SDK v5</b> through <a href="https://dotnet.microsoft.com/download/dotnet/5.0">this link</a>. For more details, please refer to the <a href="/Docs/installation-guide.pdf">Official Installation Guide</a>.
 3. See the <i><a href="https://github.com/giovcandido/EletroMarana/releases">Releases</a></i> and pickup the latest version (.EXE file), and simply run it. :)
 
 
