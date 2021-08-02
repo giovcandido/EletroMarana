@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -89,9 +90,148 @@ namespace _EletroMarana
             picFoto.ImageLocation = ofdArquivo.FileName;
         }
 
+        private Boolean validaCampos()
+        {
+            String nome = txtNome.Text, data_nasc = mtbNascimento.Text, rua = txtRua.Text,
+                   bairro = txtBairro.Text, complemento = txtComplemento.Text,
+                   email = txtEmail.Text, cpf = mtbCPF.Text, rg = mtbRG.Text,
+                   cep = mtbCEP.Text, fone = mtbFone.Text, celular = mtbCelular.Text,
+                   numero = txtNumero.Text, renda = txtRenda.Text;
+
+            string[] data = data_nasc.Split('/');
+
+            if (nome == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return false;
+            }
+
+            if (data_nasc.Length != 10)// DD/MMY/YYY
+            {
+                MessageBox.Show("Ocorreu um erro! A data de nascimento não está completa",
+                                "Data Inválida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbNascimento.Focus();
+                return false;
+            }
+            else
+            {
+                int dia = Int32.Parse(data[0]),
+                    mes = Int32.Parse(data[1]),
+                    ano = Int32.Parse(data[2]);
+
+                if (((mes == 2 && dia > 28) || (dia > 31 || dia < 1) ||
+                    (mes > 12 || mes < 1) || (ano < 1900 || ano > 2021)))
+                {
+                    MessageBox.Show("Ocorreu um erro! A data é inválida!", "Data Inválida",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mtbNascimento.Focus();
+                    return false;
+                }
+            }
+
+            if (renda == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo renda inválido!", "Renda Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (cpf.Length != 11) //11 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O CPF não está completo",
+                                "CPF Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCPF.Focus();
+                return false;
+            }
+
+            if (rg.Length != 9) //9 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O RG não está completo",
+                                "RG Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (cep.Length != 8) //8 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O CEP não está completo",
+                                "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (rua == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo rua inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (numero == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo número inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (bairro == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo bairro inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBairro.Focus();
+                return false;
+            }
+
+            if (cboCidade.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma cidade!", "Cidade Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCidade.Focus();
+                return false;
+            }
+
+            if (fone != "") 
+            {
+                if(fone.Length != 11) //11 dígitos
+                {
+                    MessageBox.Show("Ocorreu um erro! O fone não está completo",
+                                "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mtbFone.Focus();
+                    return false;
+                }
+                
+            }
+
+            if (celular.Length != 12) //12 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O celular não está completo",
+                                "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCelular.Focus();
+                return false;
+            }
+
+            if (email == "" || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo email inválido!", "Email Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string cpf = mtbCPF.Text;
 
@@ -99,6 +239,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir o cliente, pois o CPF inserido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -109,8 +252,17 @@ namespace _EletroMarana
                                               ?bairro, ?id_cidade, ?cpf, ?rg, ?fone, ?celular, ?email, ?renda, ?data_nasc, ?foto)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
-            Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text).ToString("yyyy-MM-dd"));
+
+            if (txtRenda.Text == "")
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", null);
+            }
+            else
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            }
+
             Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
@@ -135,16 +287,29 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o cliente que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validaCampos())
+            {
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
             string cpf = mtbCPF.Text;
 
-            if (Global.TemCliente(cpf) != id)
+            if (Global.TemCliente(cpf) != id && Global.TemCliente(cpf) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o cliente, o CPF já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -155,8 +320,17 @@ namespace _EletroMarana
                                               renda = ?renda, data_nasc = ?data_nasc, foto = ?foto where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
-            Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text).ToString("yyyy-MM-dd"));
+
+            if (txtRenda.Text == "")
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", null);
+            }
+            else
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            }
+
             Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
@@ -189,7 +363,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o cliente que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir o cliente " + txtNome.Text + "? Como consequência, as " +
                                 "vendas feitas a ele serão automaticamente excluídas.", "Exclusão", MessageBoxButtons.YesNo, 
@@ -214,6 +393,30 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtRenda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

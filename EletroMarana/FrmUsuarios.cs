@@ -60,7 +60,27 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome digitado é inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (txtLogin.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O login digitado é inválido!", "Login Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtLogin.Focus();
+                return;
+            }
+            else if (txtSenha.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A senha digitada é inválida!", "Senha Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSenha.Focus();
+                return;
+            }
 
             string login = txtLogin.Text;
 
@@ -68,6 +88,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -92,16 +115,45 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "") {
+                MessageBox.Show("Selecione o usuário que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome digitado é inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (txtLogin.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O login digitado é inválido!", "Login Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtLogin.Focus();
+                return;
+            }
+            else if (txtSenha.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A senha digitada é inválida!", "Senha Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSenha.Focus();
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
             string login = txtLogin.Text;
 
-            if (Global.TemUsuario(login) != id)
+            if (Global.TemUsuario(login) != id && Global.TemUsuario(login) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -144,6 +196,8 @@ namespace _EletroMarana
         {
             if (txtID.Text == "")
             {
+                MessageBox.Show("Selecione o usuário que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

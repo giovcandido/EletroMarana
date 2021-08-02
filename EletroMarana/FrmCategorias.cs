@@ -49,7 +49,13 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A categoria digitada é inválida!", "Categoria Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             string descricao = txtNome.Text;
 
@@ -57,6 +63,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir a categoria, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -85,13 +94,29 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione a categoria que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A categoria digitada é inválida!", "Categoria Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
             string descricao = txtNome.Text;
 
-            if (Global.TemCategoria(descricao) != id)
+            if (Global.TemCategoria(descricao) != id && Global.TemCategoria(descricao) != -1)
             {
                 MessageBox.Show("Não é possível atualizar a categoria, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -131,7 +156,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione a categoria que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir a categoria " + txtNome.Text + "? Os produtos que " +
                                 "pertençam a ela serão automaticamente excluídos.", "Exclusão", MessageBoxButtons.YesNo,
@@ -162,6 +192,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

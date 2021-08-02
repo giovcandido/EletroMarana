@@ -697,6 +697,54 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static DataTable ConsultaProdutosDisponiveisDescricao(String produto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select prod.id 'Código', 
+                                       prod.descricao 'Nome', 
+                                       prod.valor_venda 'Valor Venda',
+                                       prod.estoque 'Estoque'
+                                       from produtos prod
+                                       where prod.descricao like ?produto
+                                       and prod.estoque > 0
+                                       order by prod.descricao", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?produto", "%" + produto + "%");
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela;
+        }
+
+        public static int ConsultaEstoqueProduto(int idProduto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select estoque
+                                       from produtos
+                                       where id = ?id_produto", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?id_produto", idProduto);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
+        }
+
         public static DataTable ConsultaProdutoID(int idProduto)
         {
             // instrução sql
@@ -725,10 +773,10 @@ namespace _EletroMarana
             // instrução sql
             Comando = new MySqlCommand(@"select id
                                        from produtos
-                                       where codigoBarra = ?codigoBarra", Conexao);
+                                       where codigo_barra = ?codigo_barra", Conexao);
 
             // definindo parâmetro da instrução
-            Comando.Parameters.AddWithValue("?codigoBarra", codigoBarra);
+            Comando.Parameters.AddWithValue("?codigo_barra", codigoBarra);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
@@ -758,7 +806,7 @@ namespace _EletroMarana
                                        left join clientes cli on cli.id = vend.id_cliente 
                                        left join tipos_pgto pgt on pgt.id = vend.id_tipo_pgto 
                                        where cli.nome like ?nome_cliente 
-                                       order by vend.data_hora", Conexao);
+                                       order by vend.data_hora desc", Conexao);
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?nome_cliente", "%" + nomeCliente + "%");
@@ -772,10 +820,11 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaVendaDET(int idVenda)
+        public static DataTable ConsultaVendaDET(long idVenda)
         {
             // instrução sql
-            Comando = new MySqlCommand(@"select prod.id 'Código', 
+            Comando = new MySqlCommand(@"select det.id 'No Item', 
+                                       prod.id 'Código Produto', 
                                        prod.descricao 'Produto', 
                                        det.vlr_unitario 'Valor Unitário', 
                                        det.qtd 'Quantidade' 

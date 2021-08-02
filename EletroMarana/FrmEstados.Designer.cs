@@ -167,10 +167,13 @@ namespace _EletroMarana
             // 
             // txtNome
             // 
+            this.txtNome.AccessibleDescription = "Ex.: SP";
+            this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNome.Location = new System.Drawing.Point(75, 34);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(432, 20);
             this.txtNome.TabIndex = 2;
+            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // txtID
             // 

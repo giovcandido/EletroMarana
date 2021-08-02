@@ -30,14 +30,14 @@
         {
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.menuCadastros = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemCidades = new System.Windows.Forms.ToolStripMenuItem();
             this.itemEstados = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemCategorias = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemCidades = new System.Windows.Forms.ToolStripMenuItem();
             this.itemClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemCategorias = new System.Windows.Forms.ToolStripMenuItem();
             this.itemFornecedores = new System.Windows.Forms.ToolStripMenuItem();
             this.itemProdutos = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.itemTiposPGTO = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.itemRealizarVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAbastecimentos = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +48,7 @@
             // 
             // mainMenu
             // 
+            this.mainMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCadastros,
             this.menuVenda,
@@ -74,13 +75,6 @@
             this.menuCadastros.Size = new System.Drawing.Size(71, 20);
             this.menuCadastros.Text = "Cadastros";
             // 
-            // itemCidades
-            // 
-            this.itemCidades.Name = "itemCidades";
-            this.itemCidades.Size = new System.Drawing.Size(182, 22);
-            this.itemCidades.Text = "Cidades";
-            this.itemCidades.Click += new System.EventHandler(this.ItemCidades_Click);
-            // 
             // itemEstados
             // 
             this.itemEstados.Name = "itemEstados";
@@ -88,12 +82,12 @@
             this.itemEstados.Text = "Estados";
             this.itemEstados.Click += new System.EventHandler(this.ItemEstados_Click);
             // 
-            // itemCategorias
+            // itemCidades
             // 
-            this.itemCategorias.Name = "itemCategorias";
-            this.itemCategorias.Size = new System.Drawing.Size(182, 22);
-            this.itemCategorias.Text = "Categorias";
-            this.itemCategorias.Click += new System.EventHandler(this.ItemCategorias_Click);
+            this.itemCidades.Name = "itemCidades";
+            this.itemCidades.Size = new System.Drawing.Size(182, 22);
+            this.itemCidades.Text = "Cidades";
+            this.itemCidades.Click += new System.EventHandler(this.ItemCidades_Click);
             // 
             // itemClientes
             // 
@@ -101,6 +95,13 @@
             this.itemClientes.Size = new System.Drawing.Size(182, 22);
             this.itemClientes.Text = "Clientes";
             this.itemClientes.Click += new System.EventHandler(this.ItemClientes_Click);
+            // 
+            // itemCategorias
+            // 
+            this.itemCategorias.Name = "itemCategorias";
+            this.itemCategorias.Size = new System.Drawing.Size(182, 22);
+            this.itemCategorias.Text = "Categorias";
+            this.itemCategorias.Click += new System.EventHandler(this.ItemCategorias_Click);
             // 
             // itemFornecedores
             // 
@@ -116,19 +117,19 @@
             this.itemProdutos.Text = "Produtos";
             this.itemProdutos.Click += new System.EventHandler(this.ItemProdutos_Click);
             // 
-            // itemUsuarios
-            // 
-            this.itemUsuarios.Name = "itemUsuarios";
-            this.itemUsuarios.Size = new System.Drawing.Size(182, 22);
-            this.itemUsuarios.Text = "Usuários";
-            this.itemUsuarios.Click += new System.EventHandler(this.ItemUsuarios_Click);
-            // 
             // itemTiposPGTO
             // 
             this.itemTiposPGTO.Name = "itemTiposPGTO";
             this.itemTiposPGTO.Size = new System.Drawing.Size(182, 22);
             this.itemTiposPGTO.Text = "Tipos de Pagamento";
             this.itemTiposPGTO.Click += new System.EventHandler(this.ItemTiposPGTO_Click);
+            // 
+            // itemUsuarios
+            // 
+            this.itemUsuarios.Name = "itemUsuarios";
+            this.itemUsuarios.Size = new System.Drawing.Size(182, 22);
+            this.itemUsuarios.Text = "Usuários";
+            this.itemUsuarios.Click += new System.EventHandler(this.ItemUsuarios_Click);
             // 
             // menuVenda
             // 

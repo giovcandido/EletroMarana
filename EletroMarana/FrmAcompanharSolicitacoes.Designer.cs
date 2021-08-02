@@ -170,7 +170,8 @@ namespace _EletroMarana
             this.txtValorCusto.Name = "txtValorCusto";
             this.txtValorCusto.Size = new System.Drawing.Size(130, 20);
             this.txtValorCusto.TabIndex = 5;
-            this.txtValorCusto.TextChanged += new System.EventHandler(this.TxtValorCusto_TextChanged);
+            this.txtValorCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorCusto_KeyPress);
+            this.txtValorCusto.Leave += new System.EventHandler(this.txtValorCusto_Leave);
             // 
             // label4
             // 
@@ -187,6 +188,7 @@ namespace _EletroMarana
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(141, 20);
             this.txtQuantidade.TabIndex = 6;
+            this.txtQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantidade_KeyPress);
             this.txtQuantidade.Leave += new System.EventHandler(this.TxtQuantidade_Leave);
             // 
             // label3
@@ -204,6 +206,7 @@ namespace _EletroMarana
             this.txtValorTotal.Name = "txtValorTotal";
             this.txtValorTotal.Size = new System.Drawing.Size(130, 20);
             this.txtValorTotal.TabIndex = 7;
+            this.txtValorTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorTotal_KeyPress);
             // 
             // chkChegou
             // 
@@ -232,7 +235,6 @@ namespace _EletroMarana
             this.mtbDataHora.ReadOnly = true;
             this.mtbDataHora.Size = new System.Drawing.Size(126, 20);
             this.mtbDataHora.TabIndex = 2;
-            this.mtbDataHora.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // btnCancelar
             // 

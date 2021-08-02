@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -49,7 +50,13 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, System.EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "" || txtNome.Text.Length != 2 || !Regex.IsMatch(txtNome.Text, @"[A-Z]{2}"))
+            {
+                MessageBox.Show("A sigla do Estado é inválida! A sigla deve conter duas letras maiúsculas.", "Estado Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             string nome = txtNome.Text;
 
@@ -57,6 +64,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o estado, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -84,16 +94,32 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, System.EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o estado que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "" || txtNome.Text.Length != 2 || !Regex.IsMatch(txtNome.Text, @"[A-Z]{2}"))
+            {
+                MessageBox.Show("O conteúdo do campo é inválido! Por favor, arrume.", "Campo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
             string nome = txtNome.Text;
 
-            if (Global.TemEstado(nome) != id)
+            if (Global.TemEstado(nome) != id && Global.TemEstado(nome) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o estado, pois ele seria idêntico a outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -129,7 +155,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o estado que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir o estado " + txtNome.Text + "? As cidades que " +
                                 "pertençam a ele serão automaticamente excluídas. Como consequência, clientes " +
@@ -163,6 +194,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

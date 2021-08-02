@@ -57,7 +57,20 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome da cidade digitada é inválido!", "Nome da Cidade Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (cboEstado.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Estado Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboEstado.Focus();
+                return;
+            }
 
             string nome = txtNome.Text;
 
@@ -67,6 +80,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir a cidade, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -96,7 +112,26 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "") {
+                MessageBox.Show("Selecione a cidade que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome da cidade digitada é inválido!", "Nome da Cidade Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (cboEstado.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Estado Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboEstado.Focus();
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
@@ -104,10 +139,13 @@ namespace _EletroMarana
 
             int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
 
-            if (Global.TemCidade(nome, idEstado) != id)
+            if (Global.TemCidade(nome, idEstado) != id && Global.TemCidade(nome, idEstado) != -1)
             {
                 MessageBox.Show("Não é possível atualizar a cidade, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -145,7 +183,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione a cidade que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir a cidade " + txtNome.Text + "? Clientes e fornecedores " +
                                 "que residam na cidade serão automaticamente excluídos.", "Exclusão", MessageBoxButtons.YesNo,
@@ -177,6 +220,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

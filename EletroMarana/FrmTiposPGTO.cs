@@ -52,7 +52,13 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O método de pagamento digitado é inválido!", "Método de Pagamento Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             string descricao = txtNome.Text;
 
@@ -60,6 +66,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -89,16 +98,32 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o tipo de pagamento que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O método de pagamento digitado é inválido!", "Método de Pagamento Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
             
             string descricao = txtNome.Text;
 
-            if (Global.TemTipoPGTO(descricao) != id)
+            if (Global.TemTipoPGTO(descricao) != id && Global.TemTipoPGTO(descricao) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -136,7 +161,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o tipo de pagamento que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir o tipo de pagamento " + txtNome.Text + "? As vendas realizadas " +
                                 "com este tipo serão excluídas automaticamente.", "Exclusão", MessageBoxButtons.YesNo, 
@@ -169,6 +199,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

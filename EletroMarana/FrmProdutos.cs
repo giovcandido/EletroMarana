@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -93,9 +94,96 @@ namespace _EletroMarana
             picFoto.ImageLocation = ofdArquivo.FileName;
         }
 
+        private Boolean validaCampos()
+        {
+            //Falta acabar as validações
+
+            String nome = txtNome.Text, cod_barra = mtbCodigoBarra.Text,
+                   prazo_garantia = txtPrazoGarantia.Text, valor_venda = txtValorVenda.Text,
+                   valor_custo = txtValorCusto.Text, estoque = txtEstoque.Text,
+                   estoque_minimo = txtEstoqueMinimo.Text;
+
+            if (nome == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome do produto digitado é inválido!", "Nome do Produto Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return false;
+            }
+
+            if (cod_barra.Length != 13)
+            {
+                MessageBox.Show("Ocorreu um erro! O código de barras digitado é inválido!", "Código de Barras Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCodigoBarra.Focus();
+                return false;
+            }
+
+            if (prazo_garantia == "" || Int32.Parse(prazo_garantia) < 1)
+            {
+                MessageBox.Show("Ocorreu um erro! O prazo de garantia digitado é inválido!",
+                                "Prazo de Garantia Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPrazoGarantia.Focus();
+                return false;
+            }
+
+            if (cboCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma categoria",
+                                "Categoria Inválida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCategoria.Focus();
+                return false;
+            }
+
+            if (valor_venda == "" || Double.Parse(valor_venda) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de venda digitado é inválido",
+                                "Valor de Venda Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorVenda.Focus();
+                return false;
+            }
+
+            if (cboFornecedor.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum fornecedor!", "Fornecedor Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboFornecedor.Focus();
+                return false;
+            }
+
+            if (valor_custo == "" || Double.Parse(valor_custo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de custo digitado é inválido",
+                                "Valor de Custo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorCusto.Focus();
+                return false;
+            }
+
+            if (estoque == "" || Int32.Parse(estoque) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O estoque digitado é inválido!",
+                                "Estoque Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEstoque.Focus();
+                return false;
+            }
+
+            if (estoque_minimo == "" || Int32.Parse(estoque_minimo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O estoque mínimo é inválido!",
+                                "Estoque Mínimo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEstoqueMinimo.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string codigoBarra = mtbCodigoBarra.Text;
 
@@ -103,6 +191,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o produto, pois o código de barra já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -136,16 +227,29 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o produto que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
+            if (!validaCampos())
+            {
+                return;
+            }
+
             string codigoBarra = mtbCodigoBarra.Text;
 
-            if (Global.TemProduto(codigoBarra) != id)
+            if (Global.TemProduto(codigoBarra) != id && Global.TemProduto(codigoBarra) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o produto, pois o código de barra colide com o de outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -187,7 +291,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o produto que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir o produto " + txtNome.Text + "? O produto será removido " +
                                 "automaticamente das vendas e das solicitações de abastecimento em que " +
@@ -213,6 +322,46 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtPrazoGarantia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorVenda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtEstoque_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtEstoqueMinimo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 

@@ -162,6 +162,7 @@
             this.txtRazaoSocial.Name = "txtRazaoSocial";
             this.txtRazaoSocial.Size = new System.Drawing.Size(432, 20);
             this.txtRazaoSocial.TabIndex = 2;
+            this.txtRazaoSocial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRazaoSocial_KeyPress);
             // 
             // txtID
             // 
@@ -315,6 +316,7 @@
             this.txtRepresentante.Name = "txtRepresentante";
             this.txtRepresentante.Size = new System.Drawing.Size(432, 20);
             this.txtRepresentante.TabIndex = 15;
+            this.txtRepresentante.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRepresentante_KeyPress);
             // 
             // txtComplemento
             // 
@@ -511,8 +513,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtRepresentante;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
-        private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;

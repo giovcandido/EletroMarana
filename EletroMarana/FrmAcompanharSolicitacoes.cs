@@ -97,7 +97,7 @@ namespace _EletroMarana
             }
         }
 
-        private void TxtValorCusto_TextChanged(object sender, EventArgs e)
+        private void txtValorCusto_Leave(object sender, EventArgs e)
         {
             CalculaTotal();
         }
@@ -115,14 +115,59 @@ namespace _EletroMarana
             }
         }
 
+        private Boolean validaCampos()
+        {
+            string valor_custo = txtValorCusto.Text, valor_total = txtValorTotal.Text,
+                   quantidade = txtQuantidade.Text;
+
+            if(cboProduto.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum produto!", "Produto Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+            else if(valor_custo == "" || Double.Parse(valor_custo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de custo inserido é inválido!", "Valor de Custo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorCusto.Focus();
+                return false;
+            }
+            else if(valor_total == "" || Double.Parse(valor_total) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de total inserido é inválido!", "Valor de Total Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorTotal.Focus();
+                return false;
+            }
+            else if(quantidade == "" || Int32.Parse(quantidade) < 1)
+            {
+                MessageBox.Show("Ocorreu um erro! A quantidade inserida é inválida!", "Quantidade Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQuantidade.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, System.EventArgs e)
         {
-            if (cboProduto.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
             if (Global.TemSolicitacaoAberta(idProduto) != -1)
             {
+                MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -150,14 +195,28 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, System.EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "") {
+                MessageBox.Show("Selecione a solicitação que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validaCampos())
+            {
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
-            if (Global.TemSolicitacaoAberta(idProduto) != id)
+            if (Global.TemSolicitacaoAberta(idProduto) != id && Global.TemSolicitacaoAberta(idProduto) != -1)
             {
+                MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -192,7 +251,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, System.EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione a solicitação que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir a solicitação de " + cboProduto.Text + " feita em " +
                                 mtbDataHora.Text + "?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
@@ -218,6 +282,30 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+        private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -76,10 +77,131 @@ namespace _EletroMarana
                 txtRepresentante.Text = dgvFornecedores.CurrentRow.Cells[14].Value.ToString();
             }
         }
+        private Boolean validaCampos()
+        {
+            //Falta acabar as validações
 
+            String razaoSocial = txtRazaoSocial.Text, nomeFantasia = txtFantasia.Text,
+                   cep = mtbCEP.Text, rua = txtRua.Text, numero = txtNumero.Text,
+                   bairro = txtBairro.Text, cidade = cboCidade.Text, cnpj = mtbCNPJ.Text,
+                   ie = mtbIE.Text, fone = mtbFone.Text, celular = mtbCelular.Text,
+                   email = txtEmail.Text, representante = txtRepresentante.Text;
+
+            if (razaoSocial == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A Razão Social é inválida!", "Razão Social Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRazaoSocial.Focus();
+                return false;
+            }
+
+            if (nomeFantasia == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome fantasia é inválido!", "Nome Fantasia Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRazaoSocial.Focus();
+                return false;
+            }
+
+            if (cep.Length != 8) //8 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O CEP não está completo",
+                                "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCEP.Focus();
+                return false;
+            }
+
+            if (rua == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A rua digitada é inválida!", "Rua Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (numero == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O número digitado é inválido!", "Número Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNumero.Focus();
+                return false;
+            }
+
+            if (bairro == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O bairro digitado é inválido!", "Bairro Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBairro.Focus();
+                return false;
+            }
+
+            if (cboCidade.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma cidade!", "Cidade Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCidade.Focus();
+                return false;
+            }
+
+            if (cnpj.Length != 14) //14 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O CNPJ não está completo",
+                                "CNPJ Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCNPJ.Focus();
+                return false;
+            }
+
+            if (ie.Length != 12)
+            {
+                MessageBox.Show("Ocorreu um erro! A Inscrição Estadual digitada é inválida!", "Inscrição Estadual Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbIE.Focus();
+                return false;
+            }
+
+            if (fone.Length != 11) //11 dígitos
+            {
+                MessageBox.Show("Ocorreu um erro! O fone não está completo",
+                                "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbFone.Focus();
+                return false;
+            }
+
+            if (celular != "")
+            {
+                if(celular.Length != 12)
+                {
+                    MessageBox.Show("Ocorreu um erro! O celular não está completo",
+                                "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mtbCelular.Focus();
+                    return false;
+                }
+            }
+
+            if (email == "" || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                MessageBox.Show("Ocorreu um erro! O email digitado é inválido!", "Email Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return false;
+            }
+
+            if (representante == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Nome de representante é inválido!", "Representante Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRepresentante.Focus();
+                return false;
+            }
+
+            return true;
+        }
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtRazaoSocial.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string cnpj = mtbCNPJ.Text;
 
@@ -87,6 +209,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o fornecedor, pois o CNPJ já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -122,16 +247,29 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o fornecedor que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
+            if (!validaCampos())
+            {
+                return;
+            }
+
             string cnpj = mtbCNPJ.Text;
 
-            if (Global.TemFornecedor(cnpj) != id)
+            if (Global.TemFornecedor(cnpj) != id && Global.TemFornecedor(cnpj) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -175,7 +313,12 @@ namespace _EletroMarana
 
         private void BtnExcluir_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "")
+            {
+                MessageBox.Show("Selecione o fornecedor que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (MessageBox.Show("Deseja realmente excluir o fornecedor " + txtFantasia.Text + "? Os produtos fornecidos " +
                                 "por ele e as solicitações de abastecimento serão automaticamente excluídas.", "Exclusão", 
@@ -201,6 +344,22 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtRepresentante_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtRazaoSocial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
