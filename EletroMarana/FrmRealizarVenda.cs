@@ -240,7 +240,7 @@ namespace _EletroMarana
 
             Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?qtd", qtd);
-            Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
+            Global.Comando.Parameters.AddWithValue("?valor_unitario", valor_unit);
 
             Global.Comando.ExecuteNonQuery();
 
