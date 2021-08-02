@@ -772,10 +772,11 @@ namespace _EletroMarana
             return datTabela;
         }
 
-        public static DataTable ConsultaVendaDET(int idVenda)
+        public static DataTable ConsultaVendaDET(long idVenda)
         {
             // instrução sql
-            Comando = new MySqlCommand(@"select prod.id 'Código', 
+            Comando = new MySqlCommand(@"select det.id 'No Item', 
+                                       prod.id 'Código Produto', 
                                        prod.descricao 'Produto', 
                                        det.vlr_unitario 'Valor Unitário', 
                                        det.qtd 'Quantidade' 
