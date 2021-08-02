@@ -97,7 +97,7 @@ namespace _EletroMarana
             }
         }
 
-        private void TxtValorCusto_TextChanged(object sender, EventArgs e)
+        private void txtValorCusto_Leave(object sender, EventArgs e)
         {
             CalculaTotal();
         }
