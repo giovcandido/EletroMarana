@@ -248,7 +248,7 @@ namespace _EletroMarana
                                               ?bairro, ?id_cidade, ?cpf, ?rg, ?fone, ?celular, ?email, ?renda, ?data_nasc, ?foto)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
+            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text).ToString("yyyy-MM-dd"));
 
             if (txtRenda.Text == "")
             {
@@ -316,7 +316,7 @@ namespace _EletroMarana
                                               renda = ?renda, data_nasc = ?data_nasc, foto = ?foto where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
-            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
+            Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text).ToString("yyyy-MM-dd"));
 
             if (txtRenda.Text == "")
             {

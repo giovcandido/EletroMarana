@@ -400,7 +400,7 @@ namespace _EletroMarana
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(605, 467);
+            this.ClientSize = new System.Drawing.Size(576, 467);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.cboTipoPGTO);
             this.Controls.Add(this.label9);
