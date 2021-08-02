@@ -102,7 +102,7 @@ namespace _EletroMarana
 
             string login = txtLogin.Text;
 
-            if (Global.TemUsuario(login) != id)
+            if (Global.TemUsuario(login) != id && Global.TemUsuario(login) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -96,7 +96,7 @@ namespace _EletroMarana
 
             string descricao = txtNome.Text;
 
-            if (Global.TemCategoria(descricao) != id)
+            if (Global.TemCategoria(descricao) != id && Global.TemCategoria(descricao) != -1)
             {
                 MessageBox.Show("Não é possível atualizar a categoria, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

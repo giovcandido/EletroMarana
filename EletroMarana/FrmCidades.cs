@@ -108,7 +108,7 @@ namespace _EletroMarana
 
             int idEstado = Convert.ToInt16(cboEstado.SelectedValue);
 
-            if (Global.TemCidade(nome, idEstado) != id)
+            if (Global.TemCidade(nome, idEstado) != id && Global.TemCidade(nome, idEstado) != -1)
             {
                 MessageBox.Show("Não é possível atualizar a cidade, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
