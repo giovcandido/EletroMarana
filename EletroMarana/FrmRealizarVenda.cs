@@ -292,6 +292,11 @@ namespace _EletroMarana
             LimpaCamposProduto();
         }
 
+        private void dgvProdutos_DataSourceChanged(object sender, EventArgs e)
+        {
+            dgvProdutos.Columns[0].Visible = false;
+        }
+
         private void DgvVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVendas.RowCount > 0)
@@ -390,11 +395,6 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
