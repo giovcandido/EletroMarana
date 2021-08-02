@@ -172,6 +172,7 @@ namespace _EletroMarana
             this.txtValorCusto.TabIndex = 5;
             this.txtValorCusto.TextChanged += new System.EventHandler(this.TxtValorCusto_TextChanged);
             this.txtValorCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorCusto_KeyPress);
+            this.txtValorCusto.Leave += new System.EventHandler(this.txtValorCusto_Leave);
             // 
             // label4
             // 
