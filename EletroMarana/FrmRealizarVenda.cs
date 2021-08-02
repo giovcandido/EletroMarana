@@ -8,6 +8,8 @@ namespace _EletroMarana
 {
     public partial class FrmRealizarVenda : Form
     {
+        long idVenda;
+
         DataTable datTabelaProduto;
         int linhaAtualProdutos;
         double valorTotal;
@@ -33,14 +35,6 @@ namespace _EletroMarana
             cboTipoPGTO.DisplayMember = "Nome";
             cboTipoPGTO.ValueMember = "Código";
 
-            if (dgvProdutos.DataSource == null)
-            {
-                dgvProdutos.Columns.Add("id", "Código");
-                dgvProdutos.Columns.Add("produto", "Produto");
-                dgvProdutos.Columns.Add("valor_unit", "Valor Unitário");
-                dgvProdutos.Columns.Add("quantidade", "Quantidade");
-            }
-
             LimpaCampos();
 
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
@@ -48,6 +42,8 @@ namespace _EletroMarana
 
         private void LimpaCampos()
         {
+            idVenda = -1;
+
             txtID.Clear();
 
             cboCliente.SelectedItem = null;
@@ -56,7 +52,7 @@ namespace _EletroMarana
             mtbDataHora.Text = DateTime.Now.ToString();
 
             valorTotal = 0;
-            txtValorTotal.Clear();
+            txtValorTotal.Text = valorTotal.ToString("0.00");
 
             LimpaCamposProduto();
 
@@ -84,102 +80,18 @@ namespace _EletroMarana
         {
             if (cboProduto.SelectedItem != null)
             {
-                string valor_unit = datTabelaProduto.Rows[cboProduto.SelectedIndex]["Valor Venda"].ToString();
-
-                txtValorUnitario.Text = valor_unit;
+                txtValorUnitario.Text = datTabelaProduto.Rows[cboProduto.SelectedIndex]["Valor Venda"].ToString();
             }
         }
 
-        private void BtnAdicionar_Click(object sender, EventArgs e)
-        {
-            if (dgvProdutos.DataSource == null)
-            {
-                dgvProdutos.Columns.Add("id", "Código");
-                dgvProdutos.Columns.Add("produto", "Produto");
-                dgvProdutos.Columns.Add("valor_unit", "Valor Unitário");
-                dgvProdutos.Columns.Add("quantidade", "Quantidade");
-            }
-
-            int id = Convert.ToInt16(cboProduto.SelectedValue);
-            string produto = cboProduto.GetItemText(cboProduto.SelectedItem);
-            string valor_unit = txtValorUnitario.Text;
-            string quantidade = txtQuantidade.Text;
-
-            dgvProdutos.Rows.Add(id, produto, valor_unit, quantidade);
-
-            LimpaCamposProduto();
-
-            valorTotal += Convert.ToDouble(valor_unit) * Convert.ToInt16(quantidade);
-
-            txtValorTotal.Text = valorTotal.ToString("0.00");
-        }
-
-        private void BtnRemover_Click(object sender, EventArgs e)
-        {
-            string valor_unit = dgvProdutos.Rows[linhaAtualProdutos].Cells[2].Value.ToString();
-            string quantidade = dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString();
-
-            valorTotal -= Convert.ToDouble(valor_unit) * Convert.ToInt16(quantidade);
-
-            txtValorTotal.Text = valorTotal.ToString("0.00");
-
-            dgvProdutos.Rows.RemoveAt(linhaAtualProdutos);
-
-            LimpaCamposProduto();
-        }
-
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            LimpaCamposProduto();
-        }
-
-        private void DgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            linhaAtualProdutos = dgvProdutos.CurrentRow.Index;
-
-            cboProduto.Text = dgvProdutos.CurrentRow.Cells[1].Value.ToString();
-            txtValorUnitario.Text = dgvProdutos.CurrentRow.Cells[2].Value.ToString();
-            txtQuantidade.Text = dgvProdutos.CurrentRow.Cells[3].Value.ToString();
-        }
-
-        private void BtnAtualizar_Click(object sender, EventArgs e)
-        {
-            string valor_unit = dgvProdutos.Rows[linhaAtualProdutos].Cells[2].Value.ToString();
-            string quantidade = dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString();
-
-            valorTotal -= Convert.ToDouble(valor_unit) * Convert.ToInt16(quantidade);
-
-            dgvProdutos.Rows.RemoveAt(linhaAtualProdutos);
-
-            int id = cboProduto.SelectedIndex;
-            string produto = cboProduto.GetItemText(cboProduto.SelectedItem);
-            
-            valor_unit = txtValorUnitario.Text;
-            quantidade = txtQuantidade.Text;
-
-            dgvProdutos.Rows.Add(id, produto, valor_unit, quantidade);
-
-            valorTotal += Convert.ToDouble(valor_unit) * Convert.ToInt16(quantidade);
-
-            txtValorTotal.Text = valorTotal.ToString("0.00");
-
-            LimpaCamposProduto();
-        }
-
-        private void BtnFechar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void BtnEfetuarVenda_Click(object sender, EventArgs e)
+        private void BtnIniciar_Click(object sender, EventArgs e)
         {
             if (cboCliente.SelectedItem == null) return;
 
             Global.Conexao.Open();
 
-            // Venda_CAB
-            Global.Comando = new MySqlCommand("insert into venda_cab(id_usuario, id_cliente, data_hora, total, id_tipo_pgto) " +
-                                              "value(?id_usuario, ?id_cliente, ?data_hora, ?total, ?id_tipo_pgto)", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"insert into venda_cab(id_usuario, id_cliente, data_hora, total, id_tipo_pgto) 
+                                              value(?id_usuario, ?id_cliente, ?data_hora, ?total, ?id_tipo_pgto)", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?id_usuario", Global.usuarioLogado.Item1);
             Global.Comando.Parameters.AddWithValue("?id_cliente", cboCliente.SelectedValue);
@@ -189,27 +101,146 @@ namespace _EletroMarana
 
             Global.Comando.ExecuteNonQuery();
 
-            long id_venda = Global.Comando.LastInsertedId;
+            Global.Conexao.Close();
 
-            foreach (DataGridViewRow row in dgvProdutos.Rows)
+            idVenda = Global.Comando.LastInsertedId;
+
+            txtID.Text = idVenda.ToString();
+
+            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+            dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
+        }
+
+        private void DgvProdutos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvVendas.RowCount > 0)
             {
-                // Venda_DET
-                Global.Comando = new MySqlCommand("insert into venda_det(id_venda, id_produto, qtd, vlr_unitario) " +
-                                                  "value(?id_venda, ?id_produto, ?qtd, ?vlr_unitario)", Global.Conexao);
+                linhaAtualProdutos = dgvProdutos.CurrentRow.Index;
 
-                Global.Comando.Parameters.AddWithValue("?id_venda", id_venda);
-                Global.Comando.Parameters.AddWithValue("?id_produto", Convert.ToInt16(row.Cells[0].Value.ToString()));
-                Global.Comando.Parameters.AddWithValue("?vlr_unitario", Convert.ToDouble(row.Cells[2].Value.ToString()));
-                Global.Comando.Parameters.AddWithValue("?qtd", Convert.ToInt16(row.Cells[3].Value.ToString()));
-
-                Global.Comando.ExecuteNonQuery();
+                cboProduto.Text = dgvProdutos.CurrentRow.Cells[2].Value.ToString();
+                txtValorUnitario.Text = dgvProdutos.CurrentRow.Cells[3].Value.ToString();
+                txtQuantidade.Text = dgvProdutos.CurrentRow.Cells[4].Value.ToString();
             }
+        }
+
+        private void BtnAdicionar_Click(object sender, EventArgs e)
+        {
+            if (cboProduto.SelectedItem == null) return;
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"insert into venda_det(id_venda, id_produto, qtd, vlr_unitario) 
+                                              value(?id_venda, ?id_produto, ?qtd, ?vlr_unitario)", Global.Conexao);
+
+            double valor_unit = Convert.ToDouble(txtValorUnitario.Text);
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
+
+            Global.Comando.Parameters.AddWithValue("?id_venda", idVenda);
+            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
+            Global.Comando.Parameters.AddWithValue("?qtd", qtd);
+
+            Global.Comando.ExecuteNonQuery();
 
             Global.Conexao.Close();
 
-            LimpaCampos();
+            LimpaCamposProduto();
 
+            dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
+           
+            valorTotal += valor_unit * qtd;
+
+            txtValorTotal.Text = valorTotal.ToString("0.00");
+
+            AtualizaVendaCAB();
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
+        private void AtualizaVendaCAB()
+        {
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"update venda_cab set id_cliente = ?id_cliente, total = ?total, 
+                                              id_tipo_pgto = ?id_tipo_pgto where id = ?id", Global.Conexao);
+
+            Global.Comando.Parameters.AddWithValue("?id_cliente", cboCliente.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?total", valorTotal);
+            Global.Comando.Parameters.AddWithValue("?id_tipo_pgto", cboTipoPGTO.SelectedValue);
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
+        }
+
+        private void BtnAtualizar_Click(object sender, EventArgs e)
+        {
+            if (cboProduto.SelectedItem == null) return;
+
+            double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString());
+            int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString());
+
+            valorTotal -= valor_unit * qtd;
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"update venda_det set id_produto = ?id_produto, valor_unitario = ?valor_unitario, 
+                                              qtd = ?qtd where id = ?id", Global.Conexao);
+
+            valor_unit = Convert.ToDouble(txtValorUnitario.Text);
+            qtd = Convert.ToInt16(txtQuantidade.Text);
+
+            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?qtd", qtd);
+            Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
+
+            dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
+
+            LimpaCamposProduto();
+
+            valorTotal += valor_unit * qtd;
+
+            txtValorTotal.Text = valorTotal.ToString("0.00");
+
+            AtualizaVendaCAB();
+            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
+        private void BtnRemover_Click(object sender, EventArgs e)
+        {
+            if (cboProduto.SelectedItem == null) return;
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"delete from venda_det where id_venda = ?id_venda 
+                                              and id_produto = ?id_produto", Global.Conexao);
+
+            Global.Comando.Parameters.AddWithValue("?id_venda", idVenda);
+            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
+
+            dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
+
+            string valor_unit = dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString();
+            string qtd = dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString();
+
+            valorTotal -= Convert.ToDouble(valor_unit) * Convert.ToInt16(qtd);
+
+            txtValorTotal.Text = valorTotal.ToString("0.00");
+
+            AtualizaVendaCAB();
+            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpaCamposProduto();
         }
 
         private void DgvVenda_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -231,17 +262,30 @@ namespace _EletroMarana
             }
         }
 
+        private void BtnFinalizarVenda_Click(object sender, EventArgs e)
+        {
+            if (cboCliente.SelectedItem == null) return;
+
+            MessageBox.Show("Venda finalizada com sucesso!",
+                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            AtualizaVendaCAB();
+
+            LimpaCampos();
+
+            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
         private void BtnAtualizarVenda_Click(object sender, EventArgs e)
         {
             if (txtID.Text == "") return;
 
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand("update venda_cab set id_cliente = ?id_cliente, data_hora = ?data_hora, " +
-                                              "total = ?total, id_tipo_pgto = ?id_tipo_pgto where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update venda_cab set id_cliente = ?id_cliente, total = ?total, 
+                                              id_tipo_pgto = ?id_tipo_pgto where id = ?id", Global.Conexao);
 
             Global.Comando.Parameters.AddWithValue("?id_cliente", cboCliente.SelectedValue);
-            Global.Comando.Parameters.AddWithValue("?data_hora", Convert.ToDateTime(mtbDataHora.Text).ToString("yyyy - MM - dd HH: mm:ss"));
             Global.Comando.Parameters.AddWithValue("?total", valorTotal);
             Global.Comando.Parameters.AddWithValue("?id_tipo_pgto", cboTipoPGTO.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?id", txtID.Text);
@@ -285,6 +329,11 @@ namespace _EletroMarana
 
                 dgvVendas.DataSource = Global.ConsultaVendaCAB("");
             }
+        }
+
+        private void BtnFechar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
