@@ -62,11 +62,11 @@
 ## About The Project
 
 <p align="center">
-    <img src="/Images/screenshot01.png" alt="Screenshot01" height="300">
+    <img src="/Images/Screenshot01.png" alt="Screenshot01" height="300">
     <br/>
-    <img src="/Images/screenshot02.png" alt="Screenshot02" height="300">
+    <img src="/Images/Screenshot02.png" alt="Screenshot02" height="300">
     <br/>
-    <img src="/Images/screenshot03.png" alt="Screenshot03" height="300">
+    <img src="/Images/Screenshot03.png" alt="Screenshot03" height="300">
     <br/>
 </p>
 EletroMarana Store, located in Bauru-SP, is a highlight in sales of high quality home appliances and is already part of the heart of families in Bauru. However, the store needs a system capable of automating its activities due to the difficulties of the administration manual, which has arisen with its strong growth... and this system is present in this repository!
