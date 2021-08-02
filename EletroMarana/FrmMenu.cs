@@ -115,10 +115,5 @@ namespace _EletroMarana
                 FrmLogin.Close();
             }
         }
-
-        private void FrmMenu_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

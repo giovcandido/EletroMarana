@@ -25,7 +25,7 @@ namespace _EletroMarana
             cboCliente.DisplayMember = "Nome";
             cboCliente.ValueMember = "Código";
 
-            datTabelaProduto = Global.ConsultaProdutosDescricao("");
+            datTabelaProduto = Global.ConsultaProdutosDisponiveisDescricao("");
 
             cboProduto.DataSource = datTabelaProduto;
             cboProduto.DisplayMember = "Nome";
@@ -175,16 +175,34 @@ namespace _EletroMarana
                 return;
             }
 
+            if (cboProduto.SelectedItem == null)
+            {
+                return;
+            }
+
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
+
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
+
+            if (qtd > Global.ConsultaEstoqueProduto(idProduto))
+            {
+                MessageBox.Show("Não foi possível adicionar o produto, pois a quantidade supera o estoque disponível.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
+                return;
+            }
+
             Global.Conexao.Open();
 
             Global.Comando = new MySqlCommand(@"insert into venda_det(id_venda, id_produto, qtd, vlr_unitario) 
                                               value(?id_venda, ?id_produto, ?qtd, ?vlr_unitario)", Global.Conexao);
 
             double valor_unit = Convert.ToDouble(txtValorUnitario.Text);
-            int qtd = Convert.ToInt16(txtQuantidade.Text);
-
+       
             Global.Comando.Parameters.AddWithValue("?id_venda", idVenda);
-            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?id_produto", idProduto);
             Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
             Global.Comando.Parameters.AddWithValue("?qtd", qtd);
 
@@ -225,22 +243,46 @@ namespace _EletroMarana
                 return;
             }
 
-            double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString());
-            int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString());
+            if (cboProduto.SelectedItem == null)
+            {
+                return;
+            }
 
-            valorTotal -= valor_unit * qtd;
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
-            Global.Conexao.Open();
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
 
-            Global.Comando = new MySqlCommand(@"update venda_det set id_produto = ?id_produto, valor_unitario = ?valor_unitario, 
-                                              qtd = ?qtd where id = ?id", Global.Conexao);
+            if (qtd > Global.ConsultaEstoqueProduto(idProduto))
+            {
+                MessageBox.Show("Não foi possível adicionar o produto, pois a quantidade supera o estoque disponível.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
+                return;
+            }
+
+            double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value);
+            qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value);
+
+            double valorQueSai = valor_unit * qtd;
 
             valor_unit = Convert.ToDouble(txtValorUnitario.Text);
             qtd = Convert.ToInt16(txtQuantidade.Text);
 
+            double valorQueEntra = valor_unit * qtd;
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"update venda_det set id_produto = ?id_produto, vlr_unitario = ?valor_unitario, 
+                                              qtd = ?qtd where id = ?id", Global.Conexao);
+
+            int id = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[0].Value);
+
             Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?valor_unitario", valor_unit);
             Global.Comando.Parameters.AddWithValue("?qtd", qtd);
-            Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 
@@ -250,7 +292,8 @@ namespace _EletroMarana
 
             LimpaCamposProduto();
 
-            valorTotal += valor_unit * qtd;
+            valorTotal -= valorQueSai;
+            valorTotal += valorQueEntra;
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
@@ -276,10 +319,12 @@ namespace _EletroMarana
 
             dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
 
-            string valor_unit = dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString();
-            string qtd = dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString();
+            double valor_unit = Convert.ToDouble(txtValorUnitario.Text);
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
 
-            valorTotal -= Convert.ToDouble(valor_unit) * Convert.ToInt16(qtd);
+            valorTotal -= valor_unit * qtd;
+
+            LimpaCamposProduto();
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
@@ -292,40 +337,38 @@ namespace _EletroMarana
             LimpaCamposProduto();
         }
 
+        private void dgvProdutos_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (dgvProdutos.DataSource != null)
+            {
+                dgvProdutos.Columns[0].Visible = false;
+            }
+        }
+
         private void DgvVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVendas.RowCount > 0)
             {
-                string id = dgvVendas.CurrentRow.Cells[0].Value.ToString();
+                idVenda = Convert.ToInt32(dgvVendas.CurrentRow.Cells[0].Value);
 
-                txtID.Text = id;
+                txtID.Text = idVenda.ToString();
 
                 cboCliente.Text = dgvVendas.CurrentRow.Cells[2].Value.ToString();
                 mtbDataHora.Text = dgvVendas.CurrentRow.Cells[3].Value.ToString();
-                txtValorTotal.Text = dgvVendas.CurrentRow.Cells[4].Value.ToString();
+
+                valorTotal = Convert.ToDouble(dgvVendas.CurrentRow.Cells[4].Value);
+
+                txtValorTotal.Text = valorTotal.ToString();
+
                 cboTipoPGTO.Text = dgvVendas.CurrentRow.Cells[5].Value.ToString();
 
                 dgvProdutos.Columns.Clear();
 
-                dgvProdutos.DataSource = Global.ConsultaVendaDET(Convert.ToInt16(id));
+                dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
             }
         }
 
         private void BtnFinalizarVenda_Click(object sender, EventArgs e)
-        {
-            if (txtID.Text == "") return;
-
-            AtualizaVendaCAB();
-
-            LimpaCampos();
-
-            MessageBox.Show("Venda finalizada com sucesso!",
-                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
-        }
-
-        private void AtualizaVendaCAB()
         {
             if (txtID.Text == "") return;
 
@@ -342,44 +385,31 @@ namespace _EletroMarana
             Global.Comando.ExecuteNonQuery();
 
             Global.Conexao.Close();
-        }
-
-        private void BtnAtualizarVenda_Click(object sender, EventArgs e)
-        {
-            if (txtID.Text == "") return;
-
-            AtualizaVendaCAB();
 
             LimpaCampos();
 
+            MessageBox.Show("Venda finalizada com sucesso!",
+                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            LimpaCampos();
         }
 
         private void BtnCancelarVenda_Click(object sender, EventArgs e)
         {
-            LimpaCampos();
-
-            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
-        }
-
-        private void BtnExcluirVenda_Click(object sender, EventArgs e)
-        {
-            if (txtID.Text == "") return;
-
-            if (MessageBox.Show("Deseja realmente excluir a venda feita ao cliente " + cboCliente.Text + " em " +
-                                mtbDataHora.Text + "?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
-                                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (txtID.Text == "")
             {
+                return;
+            }
 
-                Global.Conexao.Open();
-
-                Global.Comando = new MySqlCommand("delete from venda_cab where id = ?id", Global.Conexao);
-
-                Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
-
-                Global.Comando.ExecuteNonQuery();
-
-                Global.Conexao.Close();
+            if (MessageBox.Show("Deseja realmente cancelar a venda?", "Cancelamento", MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                ExcluiVenda();
 
                 LimpaCampos();
 
@@ -387,14 +417,17 @@ namespace _EletroMarana
             }
         }
 
-        private void BtnFechar_Click(object sender, EventArgs e)
+        private void ExcluiVenda()
         {
-            Close();
-        }
+            Global.Conexao.Open();
 
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
+            Global.Comando = new MySqlCommand("delete from venda_cab where id = ?id", Global.Conexao);
 
+            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
         }
 
         private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
@@ -402,6 +435,21 @@ namespace _EletroMarana
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void FrmRealizarVenda_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult resp = MessageBox.Show("Deseja mesmo continuar?", "Fechar", MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (resp == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else if(txtID.Text != "")
+            {
+                ExcluiVenda();
             }
         }
     }
