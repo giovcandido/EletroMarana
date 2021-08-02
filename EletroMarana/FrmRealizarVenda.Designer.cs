@@ -52,7 +52,6 @@ namespace _EletroMarana
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnCancelarVenda = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.btnAtualizar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvVendas = new System.Windows.Forms.DataGridView();
             this.btnPesquisar = new System.Windows.Forms.Button();
@@ -85,7 +84,6 @@ namespace _EletroMarana
             this.txtID.Size = new System.Drawing.Size(99, 20);
             this.txtID.TabIndex = 70;
             this.txtID.TabStop = false;
-            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // cboCliente
             // 
@@ -228,6 +226,7 @@ namespace _EletroMarana
             this.dgvProdutos.ReadOnly = true;
             this.dgvProdutos.Size = new System.Drawing.Size(501, 125);
             this.dgvProdutos.TabIndex = 139;
+            this.dgvProdutos.DataSourceChanged += new System.EventHandler(this.dgvProdutos_DataSourceChanged);
             this.dgvProdutos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvProdutos_CellClick);
             // 
             // label4
@@ -269,7 +268,7 @@ namespace _EletroMarana
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(46, 489);
+            this.btnFinalizar.Location = new System.Drawing.Point(199, 489);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(86, 23);
             this.btnFinalizar.TabIndex = 139;
@@ -279,9 +278,9 @@ namespace _EletroMarana
             // 
             // btnCancelarVenda
             // 
-            this.btnCancelarVenda.Location = new System.Drawing.Point(352, 489);
+            this.btnCancelarVenda.Location = new System.Drawing.Point(378, 489);
             this.btnCancelarVenda.Name = "btnCancelarVenda";
-            this.btnCancelarVenda.Size = new System.Drawing.Size(101, 23);
+            this.btnCancelarVenda.Size = new System.Drawing.Size(75, 23);
             this.btnCancelarVenda.TabIndex = 140;
             this.btnCancelarVenda.Text = "Cancelar";
             this.btnCancelarVenda.UseVisualStyleBackColor = true;
@@ -296,16 +295,6 @@ namespace _EletroMarana
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
-            // 
-            // btnAtualizar
-            // 
-            this.btnAtualizar.Location = new System.Drawing.Point(138, 489);
-            this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(101, 23);
-            this.btnAtualizar.TabIndex = 142;
-            this.btnAtualizar.Text = "Atualizar";
-            this.btnAtualizar.UseVisualStyleBackColor = true;
-            this.btnAtualizar.Click += new System.EventHandler(this.BtnAtualizarVenda_Click);
             // 
             // groupBox2
             // 
@@ -359,9 +348,9 @@ namespace _EletroMarana
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(245, 489);
+            this.btnExcluir.Location = new System.Drawing.Point(291, 489);
             this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(101, 23);
+            this.btnExcluir.Size = new System.Drawing.Size(81, 23);
             this.btnExcluir.TabIndex = 144;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
@@ -401,13 +390,12 @@ namespace _EletroMarana
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(576, 467);
+            this.ClientSize = new System.Drawing.Size(593, 467);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.cboTipoPGTO);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.btnCancelarVenda);
             this.Controls.Add(this.btnFinalizar);
@@ -461,7 +449,6 @@ namespace _EletroMarana
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Button btnCancelarVenda;
         private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvVendas;
         private System.Windows.Forms.Button btnPesquisar;

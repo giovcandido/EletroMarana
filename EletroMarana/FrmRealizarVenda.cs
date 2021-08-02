@@ -228,21 +228,23 @@ namespace _EletroMarana
             double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value);
             int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value);
 
-            valorTotal -= valor_unit * qtd;
-
-            Global.Conexao.Open();
-
-            Global.Comando = new MySqlCommand(@"update venda_det set id_produto = ?id_produto, valor_unitario = ?valor_unitario, 
-                                              qtd = ?qtd where id = ?id", Global.Conexao);
+            double valorQueSai = valor_unit * qtd;
 
             valor_unit = Convert.ToDouble(txtValorUnitario.Text);
             qtd = Convert.ToInt16(txtQuantidade.Text);
 
+            double valorQueEntra = valor_unit * qtd;
+
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand(@"update venda_det set id_produto = ?id_produto, vlr_unitario = ?valor_unitario, 
+                                              qtd = ?qtd where id = ?id", Global.Conexao);
+
             int id = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[0].Value);
 
             Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
-            Global.Comando.Parameters.AddWithValue("?qtd", qtd);
             Global.Comando.Parameters.AddWithValue("?valor_unitario", valor_unit);
+            Global.Comando.Parameters.AddWithValue("?qtd", qtd);
             Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
@@ -253,7 +255,8 @@ namespace _EletroMarana
 
             LimpaCamposProduto();
 
-            valorTotal += valor_unit * qtd;
+            valorTotal -= valorQueSai;
+            valorTotal += valorQueEntra;
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
@@ -279,10 +282,12 @@ namespace _EletroMarana
 
             dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
 
-            string valor_unit = dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString();
-            string qtd = dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString();
+            double valor_unit = Convert.ToDouble(txtValorUnitario.Text);
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
 
-            valorTotal -= Convert.ToDouble(valor_unit) * Convert.ToInt16(qtd);
+            valorTotal -= valor_unit * qtd;
+
+            LimpaCamposProduto();
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
@@ -297,43 +302,36 @@ namespace _EletroMarana
 
         private void dgvProdutos_DataSourceChanged(object sender, EventArgs e)
         {
-            dgvProdutos.Columns[0].Visible = false;
+            if (dgvProdutos.DataSource != null)
+            {
+                dgvProdutos.Columns[0].Visible = false;
+            }
         }
 
         private void DgvVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVendas.RowCount > 0)
             {
-                string id = dgvVendas.CurrentRow.Cells[0].Value.ToString();
+                idVenda = Convert.ToInt32(dgvVendas.CurrentRow.Cells[0].Value);
 
-                txtID.Text = id;
+                txtID.Text = idVenda.ToString();
 
                 cboCliente.Text = dgvVendas.CurrentRow.Cells[2].Value.ToString();
                 mtbDataHora.Text = dgvVendas.CurrentRow.Cells[3].Value.ToString();
-                txtValorTotal.Text = dgvVendas.CurrentRow.Cells[4].Value.ToString();
+
+                valorTotal = Convert.ToDouble(dgvVendas.CurrentRow.Cells[4].Value);
+
+                txtValorTotal.Text = valorTotal.ToString();
+
                 cboTipoPGTO.Text = dgvVendas.CurrentRow.Cells[5].Value.ToString();
 
                 dgvProdutos.Columns.Clear();
 
-                dgvProdutos.DataSource = Global.ConsultaVendaDET(Convert.ToInt16(id));
+                dgvProdutos.DataSource = Global.ConsultaVendaDET(idVenda);
             }
         }
 
         private void BtnFinalizarVenda_Click(object sender, EventArgs e)
-        {
-            if (txtID.Text == "") return;
-
-            AtualizaVendaCAB();
-
-            LimpaCampos();
-
-            MessageBox.Show("Venda finalizada com sucesso!",
-                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
-        }
-
-        private void AtualizaVendaCAB()
         {
             if (txtID.Text == "") return;
 
@@ -350,15 +348,11 @@ namespace _EletroMarana
             Global.Comando.ExecuteNonQuery();
 
             Global.Conexao.Close();
-        }
-
-        private void BtnAtualizarVenda_Click(object sender, EventArgs e)
-        {
-            if (txtID.Text == "") return;
-
-            AtualizaVendaCAB();
 
             LimpaCampos();
+
+            MessageBox.Show("Venda finalizada com sucesso!",
+                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
