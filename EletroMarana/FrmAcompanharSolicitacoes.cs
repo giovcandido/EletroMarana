@@ -123,6 +123,8 @@ namespace _EletroMarana
 
             if (Global.TemSolicitacaoAberta(idProduto) != -1)
             {
+                MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -162,6 +164,8 @@ namespace _EletroMarana
 
             if (Global.TemSolicitacaoAberta(idProduto) != id)
             {
+                MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
