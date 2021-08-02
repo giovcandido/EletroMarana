@@ -105,7 +105,7 @@ namespace _EletroMarana
 
             if (nome == "")
             {
-                MessageBox.Show("Ocorreu um erro! Nome do Produto inválido!", "Nome do Produto Inválido",
+                MessageBox.Show("Ocorreu um erro! O nome do produto digitado é inválido!", "Nome do Produto Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return false;
@@ -113,7 +113,7 @@ namespace _EletroMarana
 
             if (cod_barra.Length != 15)
             {
-                MessageBox.Show("Ocorreu um erro! Código de Barras inválido!", "Código de Barras Inválido",
+                MessageBox.Show("Ocorreu um erro! O código de barras digitado é inválido!", "Código de Barras Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 mtbCodigoBarra.Focus();
                 return false;
@@ -121,7 +121,7 @@ namespace _EletroMarana
 
             if (prazo_garantia == "" || Int32.Parse(prazo_garantia) < 1)
             {
-                MessageBox.Show("Ocorreu um erro! Prazo de Garantia inválido!",
+                MessageBox.Show("Ocorreu um erro! O prazo de garantia digitado é inválido!",
                                 "Prazo de Garantia Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPrazoGarantia.Focus();
                 return false;
@@ -137,7 +137,7 @@ namespace _EletroMarana
 
             if (valor_venda == "" || Double.Parse(valor_venda) < 0)
             {
-                MessageBox.Show("Ocorreu um erro! Valor de venda inválido",
+                MessageBox.Show("Ocorreu um erro! O valor de venda digitado é inválido",
                                 "Valor de Venda Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtValorVenda.Focus();
                 return false;
@@ -153,7 +153,7 @@ namespace _EletroMarana
 
             if (valor_custo == "" || Double.Parse(valor_custo) < 0)
             {
-                MessageBox.Show("Ocorreu um erro! Valor de custo inválido",
+                MessageBox.Show("Ocorreu um erro! O valor de custo digitado é inválido",
                                 "Valor de Custo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtValorCusto.Focus();
                 return false;
@@ -161,7 +161,7 @@ namespace _EletroMarana
 
             if (estoque == "" || Int32.Parse(estoque) < 0)
             {
-                MessageBox.Show("Ocorreu um erro! Estoque inválido!",
+                MessageBox.Show("Ocorreu um erro! O estoque digitado é inválido!",
                                 "Estoque Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEstoque.Focus();
                 return false;
@@ -169,7 +169,7 @@ namespace _EletroMarana
 
             if (estoque_minimo == "" || Int32.Parse(estoque_minimo) < 0)
             {
-                MessageBox.Show("Ocorreu um erro! Estoque Mínimo inválido!",
+                MessageBox.Show("Ocorreu um erro! O estoque mínimo é inválido!",
                                 "Estoque Mínimo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEstoqueMinimo.Focus();
                 return false;
@@ -322,14 +322,6 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
-            {
-                e.Handled = true;
-            }
         }
 
         private void txtPrazoGarantia_KeyPress(object sender, KeyPressEventArgs e)

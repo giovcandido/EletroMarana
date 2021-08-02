@@ -59,14 +59,14 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo Cidade inválido!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! O nome da cidade digitada é inválido!", "Nome da Cidade Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return;
             }
             else if (cboEstado.SelectedIndex == -1)
             {
-                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Estado Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboEstado.Focus();
                 return;
@@ -120,14 +120,14 @@ namespace _EletroMarana
 
             if (txtNome.Text == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo Cidade inválido!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! O nome da cidade digitada é inválido!", "Nome da Cidade Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return;
             }
             else if (cboEstado.SelectedIndex == -1)
             {
-                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Estado Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboEstado.Focus();
                 return;
@@ -220,6 +220,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

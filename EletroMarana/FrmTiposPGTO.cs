@@ -54,7 +54,7 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                MessageBox.Show("Ocorreu um erro! O método de pagamento digitado é inválido!", "Método de Pagamento Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return;
@@ -107,7 +107,7 @@ namespace _EletroMarana
 
             if (txtNome.Text == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                MessageBox.Show("Ocorreu um erro! O método de pagamento digitado é inválido!", "Método de Pagamento Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return;
@@ -199,6 +199,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -115,9 +115,49 @@ namespace _EletroMarana
             }
         }
 
+        private Boolean validaCampos()
+        {
+            string valor_custo = txtValorCusto.Text, valor_total = txtValorTotal.Text,
+                   quantidade = txtQuantidade.Text;
+
+            if(cboProduto.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum produto!", "Produto Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+            else if(valor_custo == "" || Int32.Parse(valor_custo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de custo inserido é inválido!", "Valor de Custo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorCusto.Focus();
+                return false;
+            }
+            else if(valor_total == "" || Int32.Parse(valor_total) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! O valor de total inserido é inválido!", "Valor de Total Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorTotal.Focus();
+                return false;
+            }
+            else if(quantidade == "" || Int32.Parse(quantidade) < 1)
+            {
+                MessageBox.Show("Ocorreu um erro! A quantidade inserida é inválida!", "Quantidade Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQuantidade.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, System.EventArgs e)
         {
-            if (cboProduto.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
@@ -158,6 +198,11 @@ namespace _EletroMarana
             if (txtID.Text == "") {
                 MessageBox.Show("Selecione a solicitação que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validaCampos())
+            {
                 return;
             }
 
@@ -237,6 +282,30 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+        private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 46)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

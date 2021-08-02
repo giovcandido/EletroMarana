@@ -245,6 +245,7 @@ namespace _EletroMarana
             this.txtQuantidade.Name = "txtQuantidade";
             this.txtQuantidade.Size = new System.Drawing.Size(130, 20);
             this.txtQuantidade.TabIndex = 137;
+            this.txtQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantidade_KeyPress);
             // 
             // cboProduto
             // 
@@ -400,7 +401,7 @@ namespace _EletroMarana
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(605, 467);
+            this.ClientSize = new System.Drawing.Size(622, 467);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.cboTipoPGTO);
             this.Controls.Add(this.label9);

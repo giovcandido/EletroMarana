@@ -139,7 +139,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (cpf.Length != 14) //11 dígitos + 3 operadores
+            if (cpf.Length != 11) //11 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O CPF não está completo",
                                 "CPF Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -147,7 +147,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (rg.Length != 12) //9 dígitos + 3 operadores
+            if (rg.Length != 9) //9 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O RG não está completo",
                                 "RG Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -155,7 +155,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (cep.Length != 9) //8 dígitos + 1 operador
+            if (cep.Length != 8) //8 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O CEP não está completo",
                                 "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -195,19 +195,23 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (fone.Length != 13) //10 dígitos + 3 operadores
+            if (fone != "") 
             {
-                MessageBox.Show("Ocorreu um erro! O fone não está completo",
+                if(fone.Length != 11) //11 dígitos
+                {
+                    MessageBox.Show("Ocorreu um erro! O fone não está completo",
                                 "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mtbRG.Focus();
-                return false;
+                    mtbFone.Focus();
+                    return false;
+                }
+                
             }
 
-            if (celular.Length != 14)
+            if (celular.Length != 12) //12 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O celular não está completo",
                                 "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mtbRG.Focus();
+                mtbCelular.Focus();
                 return false;
             }
 

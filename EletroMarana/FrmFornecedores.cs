@@ -103,7 +103,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (cep.Length != 9) //8 dígitos + 1 operador
+            if (cep.Length != 8) //8 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O CEP não está completo",
                                 "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -113,7 +113,7 @@ namespace _EletroMarana
 
             if (rua == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo rua inválido!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! A rua digitada é inválida!", "Rua Inválida",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtRua.Focus();
                 return false;
@@ -121,15 +121,15 @@ namespace _EletroMarana
 
             if (numero == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo número inválido!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! O número digitado é inválido!", "Número Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtRua.Focus();
+                txtNumero.Focus();
                 return false;
             }
 
             if (bairro == "")
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo bairro inválido!", "Conteúdo Inválido",
+                MessageBox.Show("Ocorreu um erro! O bairro digitado é inválido!", "Bairro Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtBairro.Focus();
                 return false;
@@ -143,7 +143,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (cnpj.Length != 18) //14 dígitos + 4 operadores
+            if (cnpj.Length != 14) //14 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O CNPJ não está completo",
                                 "CNPJ Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -153,13 +153,13 @@ namespace _EletroMarana
 
             if (ie.Length != 11)
             {
-                MessageBox.Show("Ocorreu um erro! A Inscrição Estadual é inválida!", "Inscrição Estadual Inválida",
+                MessageBox.Show("Ocorreu um erro! A Inscrição Estadual digitada é inválida!", "Inscrição Estadual Inválida",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtRua.Focus();
+                mtbIE.Focus();
                 return false;
             }
 
-            if (fone.Length != 14) //10 dígitos + 3 operadores
+            if (fone.Length != 11) //11 dígitos
             {
                 MessageBox.Show("Ocorreu um erro! O fone não está completo",
                                 "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -167,17 +167,20 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (celular.Length != 15)
+            if (celular != "")
             {
-                MessageBox.Show("Ocorreu um erro! O celular não está completo",
+                if(celular.Length != 12)
+                {
+                    MessageBox.Show("Ocorreu um erro! O celular não está completo",
                                 "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mtbCelular.Focus();
-                return false;
+                    mtbCelular.Focus();
+                    return false;
+                }
             }
 
             if (email == "" || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
-                MessageBox.Show("Ocorreu um erro! Conteúdo do campo email inválido!", "Email Inválido",
+                MessageBox.Show("Ocorreu um erro! O email digitado é inválido!", "Email Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
                 return false;
@@ -187,7 +190,7 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Ocorreu um erro! Nome de representante é inválido!", "Representante Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtRua.Focus();
+                txtRepresentante.Focus();
                 return false;
             }
 
@@ -253,6 +256,11 @@ namespace _EletroMarana
 
             int id = Convert.ToInt16(txtID.Text);
 
+            if (!validaCampos())
+            {
+                return;
+            }
+
             string cnpj = mtbCNPJ.Text;
 
             if (Global.TemFornecedor(cnpj) != id && Global.TemFornecedor(cnpj) != -1)
@@ -262,11 +270,6 @@ namespace _EletroMarana
 
                 LimpaCampos();
 
-                return;
-            }
-
-            if (!validaCampos())
-            {
                 return;
             }
 

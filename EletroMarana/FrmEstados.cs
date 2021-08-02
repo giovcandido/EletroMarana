@@ -52,7 +52,7 @@ namespace _EletroMarana
         {
             if (txtNome.Text == "" || txtNome.Text.Length != 2 || !Regex.IsMatch(txtNome.Text, @"[A-Z]{2}"))
             {
-                MessageBox.Show("O conteúdo do campo é inválido! Por favor, arrume.", "Campo Inválido",
+                MessageBox.Show("A sigla do Estado é inválida! A sigla deve conter duas letras maiúsculas.", "Estado Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return;
@@ -194,6 +194,14 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

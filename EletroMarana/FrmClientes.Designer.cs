@@ -100,7 +100,7 @@
             this.mtbNascimento.Mask = "00/00/0000";
             this.mtbNascimento.Name = "mtbNascimento";
             this.mtbNascimento.Size = new System.Drawing.Size(83, 20);
-            this.mtbNascimento.TabIndex = 3;
+            this.mtbNascimento.TabIndex = 2;
             // 
             // picFoto
             // 
@@ -127,7 +127,7 @@
             this.txtNome.Location = new System.Drawing.Point(90, 34);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(432, 20);
-            this.txtNome.TabIndex = 2;
+            this.txtNome.TabIndex = 1;
             this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // label3
@@ -165,7 +165,7 @@
             this.cboCidade.Location = new System.Drawing.Point(358, 192);
             this.cboCidade.Name = "cboCidade";
             this.cboCidade.Size = new System.Drawing.Size(164, 21);
-            this.cboCidade.TabIndex = 12;
+            this.cboCidade.TabIndex = 11;
             // 
             // label7
             // 
@@ -181,7 +181,7 @@
             this.txtBairro.Location = new System.Drawing.Point(90, 192);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(194, 20);
-            this.txtBairro.TabIndex = 11;
+            this.txtBairro.TabIndex = 10;
             // 
             // label6
             // 
@@ -197,7 +197,7 @@
             this.txtRua.Location = new System.Drawing.Point(90, 140);
             this.txtRua.Name = "txtRua";
             this.txtRua.Size = new System.Drawing.Size(270, 20);
-            this.txtRua.TabIndex = 8;
+            this.txtRua.TabIndex = 7;
             // 
             // label8
             // 
@@ -231,7 +231,7 @@
             this.txtEmail.Location = new System.Drawing.Point(90, 245);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(432, 20);
-            this.txtEmail.TabIndex = 15;
+            this.txtEmail.TabIndex = 14;
             // 
             // label11
             // 
@@ -256,7 +256,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(436, 296);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 18;
+            this.btnCancelar.TabIndex = 17;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
@@ -266,7 +266,7 @@
             this.btnAtualizar.Location = new System.Drawing.Point(355, 296);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnAtualizar.TabIndex = 17;
+            this.btnAtualizar.TabIndex = 16;
             this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.BtnAtualizar_Click);
@@ -276,7 +276,7 @@
             this.btnExcluir.Location = new System.Drawing.Point(517, 296);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 19;
+            this.btnExcluir.TabIndex = 18;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
@@ -286,7 +286,7 @@
             this.btnIncluir.Location = new System.Drawing.Point(274, 296);
             this.btnIncluir.Name = "btnIncluir";
             this.btnIncluir.Size = new System.Drawing.Size(75, 23);
-            this.btnIncluir.TabIndex = 16;
+            this.btnIncluir.TabIndex = 15;
             this.btnIncluir.Text = "Inserir";
             this.btnIncluir.UseVisualStyleBackColor = true;
             this.btnIncluir.Click += new System.EventHandler(this.BtnIncluir_Click);
@@ -296,7 +296,7 @@
             this.btnFechar.Location = new System.Drawing.Point(598, 296);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 20;
+            this.btnFechar.TabIndex = 19;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
@@ -330,7 +330,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(577, 17);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btnPesquisar.TabIndex = 22;
+            this.btnPesquisar.TabIndex = 21;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
@@ -340,7 +340,7 @@
             this.txtPesquisa.Location = new System.Drawing.Point(68, 19);
             this.txtPesquisa.Name = "txtPesquisa";
             this.txtPesquisa.Size = new System.Drawing.Size(441, 20);
-            this.txtPesquisa.TabIndex = 21;
+            this.txtPesquisa.TabIndex = 20;
             // 
             // label13
             // 
@@ -374,7 +374,7 @@
             this.txtNumero.Location = new System.Drawing.Point(421, 140);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(101, 20);
-            this.txtNumero.TabIndex = 9;
+            this.txtNumero.TabIndex = 8;
             this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // txtComplemento
@@ -382,7 +382,7 @@
             this.txtComplemento.Location = new System.Drawing.Point(90, 166);
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(432, 20);
-            this.txtComplemento.TabIndex = 10;
+            this.txtComplemento.TabIndex = 9;
             // 
             // label16
             // 
@@ -399,7 +399,7 @@
             this.mtbCPF.Mask = "000.000.000-00";
             this.mtbCPF.Name = "mtbCPF";
             this.mtbCPF.Size = new System.Drawing.Size(139, 20);
-            this.mtbCPF.TabIndex = 109;
+            this.mtbCPF.TabIndex = 4;
             this.mtbCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbCEP
@@ -408,7 +408,7 @@
             this.mtbCEP.Mask = "00000-000";
             this.mtbCEP.Name = "mtbCEP";
             this.mtbCEP.Size = new System.Drawing.Size(113, 20);
-            this.mtbCEP.TabIndex = 110;
+            this.mtbCEP.TabIndex = 6;
             this.mtbCEP.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbRG
@@ -417,7 +417,7 @@
             this.mtbRG.Mask = "00.000.000-0";
             this.mtbRG.Name = "mtbRG";
             this.mtbRG.Size = new System.Drawing.Size(139, 20);
-            this.mtbRG.TabIndex = 111;
+            this.mtbRG.TabIndex = 5;
             this.mtbRG.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbCelular
@@ -426,7 +426,7 @@
             this.mtbCelular.Mask = "(000)00000-0000";
             this.mtbCelular.Name = "mtbCelular";
             this.mtbCelular.Size = new System.Drawing.Size(139, 20);
-            this.mtbCelular.TabIndex = 112;
+            this.mtbCelular.TabIndex = 13;
             this.mtbCelular.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // mtbFone
@@ -435,7 +435,7 @@
             this.mtbFone.Mask = "(000)0000-0000";
             this.mtbFone.Name = "mtbFone";
             this.mtbFone.Size = new System.Drawing.Size(139, 20);
-            this.mtbFone.TabIndex = 113;
+            this.mtbFone.TabIndex = 12;
             this.mtbFone.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // txtRenda
@@ -443,7 +443,7 @@
             this.txtRenda.Location = new System.Drawing.Point(383, 63);
             this.txtRenda.Name = "txtRenda";
             this.txtRenda.Size = new System.Drawing.Size(139, 20);
-            this.txtRenda.TabIndex = 115;
+            this.txtRenda.TabIndex = 3;
             this.txtRenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRenda_KeyPress);
             // 
             // FrmClientes

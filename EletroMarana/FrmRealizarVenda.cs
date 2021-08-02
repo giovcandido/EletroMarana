@@ -84,9 +84,54 @@ namespace _EletroMarana
             }
         }
 
+        private Boolean validaCampos1()
+        { 
+            if(cboCliente.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum cliente!", "Cliente Inválido",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+            else if(cboTipoPGTO.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum método de pagamento!", "Métodod de Pagamento Inválido",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private Boolean validaCampos2()
+        {
+            string quantidade = txtQuantidade.Text;
+
+            if (cboProduto.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum produto!", "Produto Inválido",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+            else if (quantidade == "" || Int32.Parse(quantidade) < 1)
+            {
+                MessageBox.Show("Ocorreu um erro! Quantidade para reposição inválida.\n A quantidade deve ser maior ou igual a 1 item.",
+                                "Cliente Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboProduto.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIniciar_Click(object sender, EventArgs e)
         {
-            if (cboCliente.SelectedItem == null) return;
+            if (!validaCampos1())
+            {
+                return;
+            }
 
             Global.Conexao.Open();
 
@@ -125,7 +170,10 @@ namespace _EletroMarana
 
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
-            if (cboProduto.SelectedItem == null) return;
+            if (!validaCampos2())
+            {
+                return;
+            }
 
             Global.Conexao.Open();
 
@@ -344,6 +392,14 @@ namespace _EletroMarana
         private void txtID_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
