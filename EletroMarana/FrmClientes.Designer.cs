@@ -92,7 +92,6 @@
             this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 1;
             this.txtID.TabStop = false;
-            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // mtbNascimento
             // 
@@ -536,8 +535,6 @@
         private System.Windows.Forms.TextBox txtPesquisa;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.OpenFileDialog ofdArquivo;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtNumero;

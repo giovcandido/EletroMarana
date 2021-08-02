@@ -513,8 +513,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtRepresentante;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
-        private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
