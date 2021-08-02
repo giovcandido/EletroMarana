@@ -391,11 +391,6 @@ namespace _EletroMarana
             Close();
         }
 
-        private void txtID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
