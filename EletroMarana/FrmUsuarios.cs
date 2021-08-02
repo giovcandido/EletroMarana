@@ -118,6 +118,28 @@ namespace _EletroMarana
                 return;
             }
 
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (txtLogin.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo login inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtLogin.Focus();
+                return;
+            }
+            else if (txtSenha.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo senha inválido!", "Conteúdo Inválido",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSenha.Focus();
+                return;
+            }
+
             int id = Convert.ToInt16(txtID.Text);
 
             string login = txtLogin.Text;
