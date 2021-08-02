@@ -240,7 +240,7 @@ namespace _EletroMarana
 
             string codigoBarra = mtbCodigoBarra.Text;
 
-            if (Global.TemProduto(codigoBarra) != id)
+            if (Global.TemProduto(codigoBarra) != id && Global.TemProduto(codigoBarra) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o produto, pois o código de barra colide com o de outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

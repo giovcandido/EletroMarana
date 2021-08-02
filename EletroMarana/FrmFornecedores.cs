@@ -252,7 +252,7 @@ namespace _EletroMarana
 
             string cnpj = mtbCNPJ.Text;
 
-            if (Global.TemFornecedor(cnpj) != id)
+            if (Global.TemFornecedor(cnpj) != id && Global.TemFornecedor(cnpj) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

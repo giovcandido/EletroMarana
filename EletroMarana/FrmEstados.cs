@@ -109,7 +109,7 @@ namespace _EletroMarana
 
             string nome = txtNome.Text;
 
-            if (Global.TemEstado(nome) != id)
+            if (Global.TemEstado(nome) != id && Global.TemEstado(nome) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o estado, pois ele seria idêntico a outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

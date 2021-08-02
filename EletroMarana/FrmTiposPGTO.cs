@@ -114,7 +114,7 @@ namespace _EletroMarana
             
             string descricao = txtNome.Text;
 
-            if (Global.TemTipoPGTO(descricao) != id)
+            if (Global.TemTipoPGTO(descricao) != id && Global.TemTipoPGTO(descricao) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

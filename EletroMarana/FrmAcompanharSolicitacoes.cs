@@ -162,7 +162,7 @@ namespace _EletroMarana
 
             int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
 
-            if (Global.TemSolicitacaoAberta(idProduto) != id)
+            if (Global.TemSolicitacaoAberta(idProduto) != id && Global.TemSolicitacaoAberta(idProduto) != -1)
             {
                 MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -296,7 +296,7 @@ namespace _EletroMarana
 
             string cpf = mtbCPF.Text;
 
-            if (Global.TemCliente(cpf) != id)
+            if (Global.TemCliente(cpf) != id && Global.TemCliente(cpf) != -1)
             {
                 MessageBox.Show("Não é possível atualizar o cliente, o CPF já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
