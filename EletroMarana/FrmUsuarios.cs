@@ -92,7 +92,11 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
+            if (txtID.Text == "") {
+                MessageBox.Show("Selecione o usuário que deseja atualizar.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             int id = Convert.ToInt16(txtID.Text);
 
@@ -144,6 +148,8 @@ namespace _EletroMarana
         {
             if (txtID.Text == "")
             {
+                MessageBox.Show("Selecione o usuário que deseja excluir.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

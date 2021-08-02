@@ -100,7 +100,6 @@
             this.mtbNascimento.Name = "mtbNascimento";
             this.mtbNascimento.Size = new System.Drawing.Size(83, 20);
             this.mtbNascimento.TabIndex = 3;
-            this.mtbNascimento.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // picFoto
             // 
