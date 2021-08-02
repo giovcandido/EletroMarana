@@ -110,7 +110,16 @@ namespace _EletroMarana
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
-            Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+
+            if (txtRenda.Text == "")
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", null);
+            }
+            else
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            }
+
             Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
@@ -161,7 +170,16 @@ namespace _EletroMarana
 
             Global.Comando.Parameters.AddWithValue("?nome", txtNome.Text);
             Global.Comando.Parameters.AddWithValue("?data_nasc", Convert.ToDateTime(mtbNascimento.Text));
-            Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+
+            if (txtRenda.Text == "")
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", null);
+            }
+            else
+            {
+                Global.Comando.Parameters.AddWithValue("?renda", Convert.ToDouble(txtRenda.Text));
+            }
+
             Global.Comando.Parameters.AddWithValue("?cpf", cpf);
             Global.Comando.Parameters.AddWithValue("?rg", mtbRG.Text);
             Global.Comando.Parameters.AddWithValue("?cep", mtbCEP.Text);
