@@ -92,6 +92,7 @@
             this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 1;
             this.txtID.TabStop = false;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // mtbNascimento
             // 
@@ -127,6 +128,7 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(432, 20);
             this.txtNome.TabIndex = 2;
+            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // label3
             // 
@@ -373,6 +375,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(101, 20);
             this.txtNumero.TabIndex = 9;
+            this.txtNumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumero_KeyPress);
             // 
             // txtComplemento
             // 
@@ -441,6 +444,7 @@
             this.txtRenda.Name = "txtRenda";
             this.txtRenda.Size = new System.Drawing.Size(139, 20);
             this.txtRenda.TabIndex = 115;
+            this.txtRenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRenda_KeyPress);
             // 
             // FrmClientes
             // 

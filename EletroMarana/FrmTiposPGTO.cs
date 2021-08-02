@@ -52,7 +52,13 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             string descricao = txtNome.Text;
 
@@ -93,6 +99,14 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Selecione o tipo de pagamento que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
                 return;
             }
 

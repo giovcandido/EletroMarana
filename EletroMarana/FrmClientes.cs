@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -89,9 +90,144 @@ namespace _EletroMarana
             picFoto.ImageLocation = ofdArquivo.FileName;
         }
 
+        private Boolean validaCampos()
+        {
+            String nome = txtNome.Text, data_nasc = mtbNascimento.Text, rua = txtRua.Text,
+                   bairro = txtBairro.Text, complemento = txtComplemento.Text,
+                   email = txtEmail.Text, cpf = mtbCPF.Text, rg = mtbRG.Text,
+                   cep = mtbCEP.Text, fone = mtbFone.Text, celular = mtbCelular.Text,
+                   numero = txtNumero.Text, renda = txtRenda.Text;
+
+            string[] data = data_nasc.Split('/');
+
+            if (nome == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Nome Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return false;
+            }
+
+            if (data_nasc.Length != 10)// DD/MMY/YYY
+            {
+                MessageBox.Show("Ocorreu um erro! A data de nascimento não está completa",
+                                "Data Inválida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbNascimento.Focus();
+                return false;
+            }
+            else
+            {
+                int dia = Int32.Parse(data[0]),
+                    mes = Int32.Parse(data[1]),
+                    ano = Int32.Parse(data[2]);
+
+                if (((mes == 2 && dia > 28) || (dia > 31 || dia < 1) ||
+                    (mes > 12 || mes < 1) || (ano < 1900 || ano > 2021)))
+                {
+                    MessageBox.Show("Ocorreu um erro! A data é inválida!", "Data Inválida",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mtbNascimento.Focus();
+                    return false;
+                }
+            }
+
+            if (renda == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo renda inválido!", "Renda Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (cpf.Length != 14) //11 dígitos + 3 operadores
+            {
+                MessageBox.Show("Ocorreu um erro! O CPF não está completo",
+                                "CPF Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCPF.Focus();
+                return false;
+            }
+
+            if (rg.Length != 12) //9 dígitos + 3 operadores
+            {
+                MessageBox.Show("Ocorreu um erro! O RG não está completo",
+                                "RG Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (cep.Length != 9) //8 dígitos + 1 operador
+            {
+                MessageBox.Show("Ocorreu um erro! O CEP não está completo",
+                                "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (rua == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo rua inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (numero == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo número inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (bairro == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo bairro inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBairro.Focus();
+                return false;
+            }
+
+            if (cboCidade.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma cidade!", "Cidade Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCidade.Focus();
+                return false;
+            }
+
+            if (fone.Length != 13) //10 dígitos + 3 operadores
+            {
+                MessageBox.Show("Ocorreu um erro! O fone não está completo",
+                                "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (celular.Length != 14)
+            {
+                MessageBox.Show("Ocorreu um erro! O celular não está completo",
+                                "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbRG.Focus();
+                return false;
+            }
+
+            if (email == "" || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo email inválido!", "Email Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string cpf = mtbCPF.Text;
 
@@ -148,6 +284,11 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Selecione o cliente que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validaCampos())
+            {
                 return;
             }
 
@@ -242,6 +383,35 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtRenda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -60,7 +60,27 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo nome inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (txtLogin.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo login inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtLogin.Focus();
+                return;
+            }
+            else if (txtSenha.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo senha inválido!", "Conteúdo Inválido",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtSenha.Focus();
+                return;
+            }
 
             string login = txtLogin.Text;
 

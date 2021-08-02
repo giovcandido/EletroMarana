@@ -173,6 +173,7 @@
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(432, 20);
             this.txtNome.TabIndex = 3;
+            this.txtNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNome_KeyPress);
             // 
             // label1
             // 
@@ -285,6 +286,7 @@
             this.txtEstoque.Name = "txtEstoque";
             this.txtEstoque.Size = new System.Drawing.Size(130, 20);
             this.txtEstoque.TabIndex = 10;
+            this.txtEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstoque_KeyPress);
             // 
             // txtEstoqueMinimo
             // 
@@ -292,6 +294,7 @@
             this.txtEstoqueMinimo.Name = "txtEstoqueMinimo";
             this.txtEstoqueMinimo.Size = new System.Drawing.Size(130, 20);
             this.txtEstoqueMinimo.TabIndex = 11;
+            this.txtEstoqueMinimo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstoqueMinimo_KeyPress);
             // 
             // txtValorVenda
             // 
@@ -299,6 +302,7 @@
             this.txtValorVenda.Name = "txtValorVenda";
             this.txtValorVenda.Size = new System.Drawing.Size(130, 20);
             this.txtValorVenda.TabIndex = 7;
+            this.txtValorVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorVenda_KeyPress);
             // 
             // txtValorCusto
             // 
@@ -306,6 +310,7 @@
             this.txtValorCusto.Name = "txtValorCusto";
             this.txtValorCusto.Size = new System.Drawing.Size(130, 20);
             this.txtValorCusto.TabIndex = 9;
+            this.txtValorCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorCusto_KeyPress);
             // 
             // label7
             // 
@@ -340,6 +345,7 @@
             this.txtPrazoGarantia.Name = "txtPrazoGarantia";
             this.txtPrazoGarantia.Size = new System.Drawing.Size(109, 20);
             this.txtPrazoGarantia.TabIndex = 5;
+            this.txtPrazoGarantia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrazoGarantia_KeyPress);
             // 
             // label10
             // 

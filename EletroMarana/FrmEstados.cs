@@ -49,7 +49,13 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, System.EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "" || txtNome.Text.Length != 2 || !Regex.IsMatch(txtNome.Text, @"[A-Z]{2}"))
+            {
+                MessageBox.Show("O conteúdo do campo é inválido! Por favor, arrume.", "Campo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
 
             string nome = txtNome.Text;
 
@@ -88,6 +94,14 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Selecione o estado que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "" || txtNome.Text.Length != 2 || !Regex.IsMatch(txtNome.Text, @"[A-Z]{2}"))
+            {
+                MessageBox.Show("O conteúdo do campo é inválido! Por favor, arrume.", "Campo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
                 return;
             }
 

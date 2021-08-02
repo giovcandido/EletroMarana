@@ -85,6 +85,7 @@ namespace _EletroMarana
             this.txtID.Size = new System.Drawing.Size(99, 20);
             this.txtID.TabIndex = 70;
             this.txtID.TabStop = false;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // cboCliente
             // 

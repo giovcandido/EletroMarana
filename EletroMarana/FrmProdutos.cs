@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -93,9 +94,96 @@ namespace _EletroMarana
             picFoto.ImageLocation = ofdArquivo.FileName;
         }
 
+        private Boolean validaCampos()
+        {
+            //Falta acabar as validações
+
+            String nome = txtNome.Text, cod_barra = mtbCodigoBarra.Text,
+                   prazo_garantia = txtPrazoGarantia.Text, valor_venda = txtValorVenda.Text,
+                   valor_custo = txtValorCusto.Text, estoque = txtEstoque.Text,
+                   estoque_minimo = txtEstoqueMinimo.Text;
+
+            if (nome == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Nome do Produto inválido!", "Nome do Produto Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return false;
+            }
+
+            if (cod_barra.Length != 15)
+            {
+                MessageBox.Show("Ocorreu um erro! Código de Barras inválido!", "Código de Barras Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCodigoBarra.Focus();
+                return false;
+            }
+
+            if (prazo_garantia == "" || Int32.Parse(prazo_garantia) < 1)
+            {
+                MessageBox.Show("Ocorreu um erro! Prazo de Garantia inválido!",
+                                "Prazo de Garantia Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPrazoGarantia.Focus();
+                return false;
+            }
+
+            if (cboCategoria.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma categoria",
+                                "Categoria Inválida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCategoria.Focus();
+                return false;
+            }
+
+            if (valor_venda == "" || Double.Parse(valor_venda) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! Valor de venda inválido",
+                                "Valor de Venda Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorVenda.Focus();
+                return false;
+            }
+
+            if (cboFornecedor.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhum fornecedor!", "Fornecedor Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboFornecedor.Focus();
+                return false;
+            }
+
+            if (valor_custo == "" || Double.Parse(valor_custo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! Valor de custo inválido",
+                                "Valor de Custo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValorCusto.Focus();
+                return false;
+            }
+
+            if (estoque == "" || Int32.Parse(estoque) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! Estoque inválido!",
+                                "Estoque Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEstoque.Focus();
+                return false;
+            }
+
+            if (estoque_minimo == "" || Int32.Parse(estoque_minimo) < 0)
+            {
+                MessageBox.Show("Ocorreu um erro! Estoque Mínimo inválido!",
+                                "Estoque Mínimo Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEstoqueMinimo.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string codigoBarra = mtbCodigoBarra.Text;
 
@@ -144,6 +232,11 @@ namespace _EletroMarana
             }
 
             int id = Convert.ToInt16(txtID.Text);
+
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string codigoBarra = mtbCodigoBarra.Text;
 
@@ -223,6 +316,54 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrazoGarantia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorVenda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtEstoque_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtEstoqueMinimo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 

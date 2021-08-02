@@ -57,7 +57,20 @@ namespace _EletroMarana
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtNome.Text == "") return;
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo Cidade inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (cboEstado.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboEstado.Focus();
+                return;
+            }
 
             string nome = txtNome.Text;
 
@@ -99,6 +112,21 @@ namespace _EletroMarana
             if (txtID.Text == "") {
                 MessageBox.Show("Selecione a cidade que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo Cidade inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNome.Focus();
+                return;
+            }
+            else if (cboEstado.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você precisa selecionar um estado!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboEstado.Focus();
                 return;
             }
 

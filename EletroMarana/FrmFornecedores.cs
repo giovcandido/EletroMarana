@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using MySql.Data.MySqlClient;
 
@@ -76,10 +77,128 @@ namespace _EletroMarana
                 txtRepresentante.Text = dgvFornecedores.CurrentRow.Cells[14].Value.ToString();
             }
         }
+        private Boolean validaCampos()
+        {
+            //Falta acabar as validações
 
+            String razaoSocial = txtRazaoSocial.Text, nomeFantasia = txtFantasia.Text,
+                   cep = mtbCEP.Text, rua = txtRua.Text, numero = txtNumero.Text,
+                   bairro = txtBairro.Text, cidade = cboCidade.Text, cnpj = mtbCNPJ.Text,
+                   ie = mtbIE.Text, fone = mtbFone.Text, celular = mtbCelular.Text,
+                   email = txtEmail.Text, representante = txtRepresentante.Text;
+
+            if (razaoSocial == "")
+            {
+                MessageBox.Show("Ocorreu um erro! A Razão Social é inválida!", "Razão Social Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRazaoSocial.Focus();
+                return false;
+            }
+
+            if (nomeFantasia == "")
+            {
+                MessageBox.Show("Ocorreu um erro! O nome fantasia é inválido!", "Nome Fantasia Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRazaoSocial.Focus();
+                return false;
+            }
+
+            if (cep.Length != 9) //8 dígitos + 1 operador
+            {
+                MessageBox.Show("Ocorreu um erro! O CEP não está completo",
+                                "CEP Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCEP.Focus();
+                return false;
+            }
+
+            if (rua == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo rua inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (numero == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo número inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (bairro == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo bairro inválido!", "Conteúdo Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBairro.Focus();
+                return false;
+            }
+
+            if (cboCidade.SelectedIndex == -1)
+            {
+                MessageBox.Show("Ocorreu um erro! Você não selecionou nenhuma cidade!", "Cidade Inválida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCidade.Focus();
+                return false;
+            }
+
+            if (cnpj.Length != 18) //14 dígitos + 4 operadores
+            {
+                MessageBox.Show("Ocorreu um erro! O CNPJ não está completo",
+                                "CNPJ Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCNPJ.Focus();
+                return false;
+            }
+
+            if (ie.Length != 11)
+            {
+                MessageBox.Show("Ocorreu um erro! A Inscrição Estadual é inválida!", "Inscrição Estadual Inválida",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            if (fone.Length != 14) //10 dígitos + 3 operadores
+            {
+                MessageBox.Show("Ocorreu um erro! O fone não está completo",
+                                "Fone Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbFone.Focus();
+                return false;
+            }
+
+            if (celular.Length != 15)
+            {
+                MessageBox.Show("Ocorreu um erro! O celular não está completo",
+                                "Celular Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCelular.Focus();
+                return false;
+            }
+
+            if (email == "" || !Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                MessageBox.Show("Ocorreu um erro! Conteúdo do campo email inválido!", "Email Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                return false;
+            }
+
+            if (representante == "")
+            {
+                MessageBox.Show("Ocorreu um erro! Nome de representante é inválido!", "Representante Inválido",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRua.Focus();
+                return false;
+            }
+
+            return true;
+        }
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            if (txtRazaoSocial.Text == "") return;
+            if (!validaCampos())
+            {
+                return;
+            }
 
             string cnpj = mtbCNPJ.Text;
 
@@ -137,6 +256,11 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!validaCampos())
+            {
                 return;
             }
 
@@ -211,6 +335,22 @@ namespace _EletroMarana
         private void BtnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtRepresentante_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtRazaoSocial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)32)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
