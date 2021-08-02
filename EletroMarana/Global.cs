@@ -725,10 +725,10 @@ namespace _EletroMarana
             // instrução sql
             Comando = new MySqlCommand(@"select id
                                        from produtos
-                                       where codigoBarra = ?codigoBarra", Conexao);
+                                       where codigo_barra = ?codigo_barra", Conexao);
 
             // definindo parâmetro da instrução
-            Comando.Parameters.AddWithValue("?codigoBarra", codigoBarra);
+            Comando.Parameters.AddWithValue("?codigo_barra", codigoBarra);
 
             // adaptador recebe consulta
             Adaptador = new MySqlDataAdapter(Comando);
