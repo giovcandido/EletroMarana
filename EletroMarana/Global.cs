@@ -758,7 +758,7 @@ namespace _EletroMarana
                                        left join clientes cli on cli.id = vend.id_cliente 
                                        left join tipos_pgto pgt on pgt.id = vend.id_tipo_pgto 
                                        where cli.nome like ?nome_cliente 
-                                       order by vend.data_hora", Conexao);
+                                       order by vend.data_hora desc", Conexao);
 
             // definindo parâmetro da intrução
             Comando.Parameters.AddWithValue("?nome_cliente", "%" + nomeCliente + "%");
