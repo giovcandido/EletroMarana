@@ -80,6 +80,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir a cidade, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -140,6 +143,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar a cidade, pois ela seria idêntica a outra.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

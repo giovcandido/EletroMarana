@@ -63,6 +63,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir a categoria, pois ela já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -95,6 +98,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Selecione a categoria que deseja atualizar.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

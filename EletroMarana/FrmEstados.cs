@@ -64,6 +64,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o estado, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -114,6 +117,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o estado, pois ele seria idêntico a outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

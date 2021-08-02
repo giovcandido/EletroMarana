@@ -206,6 +206,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o fornecedor, pois o CNPJ já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -256,6 +259,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o fornecedor, pois o CNPJ colide com o de outro fornecedor.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
