@@ -151,7 +151,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (ie.Length != 11)
+            if (ie.Length != 9)
             {
                 MessageBox.Show("Ocorreu um erro! A Inscrição Estadual digitada é inválida!", "Inscrição Estadual Inválida",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);

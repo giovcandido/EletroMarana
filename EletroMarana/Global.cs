@@ -17,7 +17,7 @@ namespace _EletroMarana
 
         public static void CriaBanco() {
             // define string de conexão
-            string stringConexao = "server=localhost; uid=root; pwd=1234; charset=utf8;";
+            string stringConexao = "server=localhost; uid=root; pwd=5971; charset=utf8;";
             Conexao = new MySqlConnection(stringConexao);
 
             // abre a conexão
@@ -40,7 +40,7 @@ namespace _EletroMarana
             Conexao.Close();
 
             // redefine a string de conexão
-            stringConexao = "server=localhost; database=bd_eletromarana; uid=root; pwd=1234; charset=utf8;";
+            stringConexao = "server=localhost; database=bd_eletromarana; uid=root; pwd=5971; charset=utf8;";
             Conexao = new MySqlConnection(stringConexao);
         }
 

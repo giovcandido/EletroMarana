@@ -294,7 +294,7 @@ namespace _EletroMarana
 
         private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 46)
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
             {
                 e.Handled = true;
             }
@@ -302,7 +302,7 @@ namespace _EletroMarana
 
         private void txtValorTotal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 46)
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
             {
                 e.Handled = true;
             }

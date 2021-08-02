@@ -111,7 +111,7 @@ namespace _EletroMarana
                 return false;
             }
 
-            if (cod_barra.Length != 15)
+            if (cod_barra.Length != 13)
             {
                 MessageBox.Show("Ocorreu um erro! O código de barras digitado é inválido!", "Código de Barras Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -334,7 +334,7 @@ namespace _EletroMarana
 
         private void txtValorVenda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
             {
                 e.Handled = true;
             }
@@ -342,7 +342,7 @@ namespace _EletroMarana
 
         private void txtValorCusto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char)46)
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != (char) 44)
             {
                 e.Handled = true;
             }
