@@ -103,6 +103,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível inserir o produto, pois o código de barra já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -151,6 +154,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o produto, pois o código de barra colide com o de outro.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

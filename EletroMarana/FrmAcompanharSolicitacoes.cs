@@ -125,6 +125,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -166,6 +169,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Há uma solicitação do produto ainda aberta. Experimente atualizar ela.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

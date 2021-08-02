@@ -68,6 +68,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -106,6 +109,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o usuário, pois o login escolhido já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 

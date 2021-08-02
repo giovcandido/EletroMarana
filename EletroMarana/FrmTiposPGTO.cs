@@ -60,6 +60,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível incluir o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
@@ -104,6 +107,9 @@ namespace _EletroMarana
             {
                 MessageBox.Show("Não é possível atualizar o tipo de pagamento, pois ele já consta no sistema.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
                 return;
             }
 
