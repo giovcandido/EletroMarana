@@ -152,20 +152,18 @@ namespace _EletroMarana
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
-            AtualizaVendaCAB();
+            AtualizaTotal();
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
-        private void AtualizaVendaCAB()
+        private void AtualizaTotal()
         {
             Global.Conexao.Open();
 
-            Global.Comando = new MySqlCommand(@"update venda_cab set id_cliente = ?id_cliente, total = ?total, 
-                                              id_tipo_pgto = ?id_tipo_pgto where id = ?id", Global.Conexao);
+            Global.Comando = new MySqlCommand(@"update venda_cab set total = ?total where id = ?id", Global.Conexao);
 
-            Global.Comando.Parameters.AddWithValue("?id_cliente", cboCliente.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?total", valorTotal);
-            Global.Comando.Parameters.AddWithValue("?id_tipo_pgto", cboTipoPGTO.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?id", idVenda);
 
             Global.Comando.ExecuteNonQuery();
 
@@ -205,7 +203,7 @@ namespace _EletroMarana
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
-            AtualizaVendaCAB();
+            AtualizaTotal();
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
@@ -234,7 +232,7 @@ namespace _EletroMarana
 
             txtValorTotal.Text = valorTotal.ToString("0.00");
 
-            AtualizaVendaCAB();
+            AtualizaTotal();
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
@@ -264,19 +262,19 @@ namespace _EletroMarana
 
         private void BtnFinalizarVenda_Click(object sender, EventArgs e)
         {
-            if (cboCliente.SelectedItem == null) return;
-
-            MessageBox.Show("Venda finalizada com sucesso!",
-                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (txtID.Text == "") return;
 
             AtualizaVendaCAB();
 
             LimpaCampos();
 
+            MessageBox.Show("Venda finalizada com sucesso!",
+                            "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
-        private void BtnAtualizarVenda_Click(object sender, EventArgs e)
+        private void AtualizaVendaCAB()
         {
             if (txtID.Text == "") return;
 
@@ -293,6 +291,13 @@ namespace _EletroMarana
             Global.Comando.ExecuteNonQuery();
 
             Global.Conexao.Close();
+        }
+
+        private void BtnAtualizarVenda_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text == "") return;
+
+            AtualizaVendaCAB();
 
             LimpaCampos();
 
