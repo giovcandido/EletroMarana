@@ -697,6 +697,54 @@ namespace _EletroMarana
             return datTabela;
         }
 
+        public static DataTable ConsultaProdutosDisponiveisDescricao(String produto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select prod.id 'Código', 
+                                       prod.descricao 'Nome', 
+                                       prod.valor_venda 'Valor Venda',
+                                       prod.estoque 'Estoque'
+                                       from produtos prod
+                                       where prod.descricao like ?produto
+                                       and prod.estoque > 0
+                                       order by prod.descricao", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?produto", "%" + produto + "%");
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            return datTabela;
+        }
+
+        public static int ConsultaEstoqueProduto(int idProduto)
+        {
+            // instrução sql
+            Comando = new MySqlCommand(@"select estoque
+                                       from produtos
+                                       where id = ?id_produto", Conexao);
+
+            // definindo parâmetro da instrução
+            Comando.Parameters.AddWithValue("?id_produto", idProduto);
+
+            // adaptador recebe consulta
+            Adaptador = new MySqlDataAdapter(Comando);
+
+            // datTabela recebe dados no adaptador
+            Adaptador.Fill(datTabela = new DataTable());
+
+            if (datTabela.Rows.Count == 1)
+            {
+                return Convert.ToInt16(datTabela.Rows[0].ItemArray[0]);
+            }
+
+            return -1;
+        }
+
         public static DataTable ConsultaProdutoID(int idProduto)
         {
             // instrução sql
