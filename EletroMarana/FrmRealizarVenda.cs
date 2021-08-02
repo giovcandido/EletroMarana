@@ -220,7 +220,10 @@ namespace _EletroMarana
 
         private void BtnAtualizar_Click(object sender, EventArgs e)
         {
-            if (cboProduto.SelectedItem == null) return;
+            if (!validaCampos2())
+            {
+                return;
+            }
 
             double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString());
             int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString());
