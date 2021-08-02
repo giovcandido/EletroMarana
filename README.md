@@ -63,15 +63,15 @@
 
 <p align="center">
     <a href="https://github.com/giovcandido/EletroMarana">
-        <img src="/Images/screenshot1.png" alt="Screenshot1" height="300">
+        <img src="/Images/screenshot01.png" alt="Screenshot1" height="300">
     </a>
     <br/>
     <a href="https://github.com/giovcandido/EletroMarana">
-        <img src="/Images/screenshot2.png" alt="Screenshot2" height="300">
+        <img src="/Images/screenshot02.png" alt="Screenshot2" height="300">
     </a>
     <br/>
     <a href="https://github.com/giovcandido/EletroMarana">
-        <img src="/Images/screenshot3.png" alt="Screenshot3" height="300">
+        <img src="/Images/screenshot03.png" alt="Screenshot3" height="300">
     </a>
     <br/>
 </p>
