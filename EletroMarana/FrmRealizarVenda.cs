@@ -25,7 +25,7 @@ namespace _EletroMarana
             cboCliente.DisplayMember = "Nome";
             cboCliente.ValueMember = "Código";
 
-            datTabelaProduto = Global.ConsultaProdutosDescricao("");
+            datTabelaProduto = Global.ConsultaProdutosDisponiveisDescricao("");
 
             cboProduto.DataSource = datTabelaProduto;
             cboProduto.DisplayMember = "Nome";
@@ -175,16 +175,34 @@ namespace _EletroMarana
                 return;
             }
 
+            if (cboProduto.SelectedItem == null)
+            {
+                return;
+            }
+
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
+
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
+
+            if (qtd > Global.ConsultaEstoqueProduto(idProduto))
+            {
+                MessageBox.Show("Não foi possível adicionar o produto, pois a quantidade supera o estoque disponível.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
+                return;
+            }
+
             Global.Conexao.Open();
 
             Global.Comando = new MySqlCommand(@"insert into venda_det(id_venda, id_produto, qtd, vlr_unitario) 
                                               value(?id_venda, ?id_produto, ?qtd, ?vlr_unitario)", Global.Conexao);
 
             double valor_unit = Convert.ToDouble(txtValorUnitario.Text);
-            int qtd = Convert.ToInt16(txtQuantidade.Text);
-
+       
             Global.Comando.Parameters.AddWithValue("?id_venda", idVenda);
-            Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
+            Global.Comando.Parameters.AddWithValue("?id_produto", idProduto);
             Global.Comando.Parameters.AddWithValue("?vlr_unitario", valor_unit);
             Global.Comando.Parameters.AddWithValue("?qtd", qtd);
 
@@ -225,8 +243,27 @@ namespace _EletroMarana
                 return;
             }
 
+            if (cboProduto.SelectedItem == null)
+            {
+                return;
+            }
+
+            int idProduto = Convert.ToInt16(cboProduto.SelectedValue);
+
+            int qtd = Convert.ToInt16(txtQuantidade.Text);
+
+            if (qtd > Global.ConsultaEstoqueProduto(idProduto))
+            {
+                MessageBox.Show("Não foi possível adicionar o produto, pois a quantidade supera o estoque disponível.",
+                                "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LimpaCampos();
+
+                return;
+            }
+
             double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value);
-            int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value);
+            qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value);
 
             double valorQueSai = valor_unit * qtd;
 
@@ -357,31 +394,22 @@ namespace _EletroMarana
             dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
-        private void BtnCancelarVenda_Click(object sender, EventArgs e)
+        private void btnLimpar_Click(object sender, EventArgs e)
         {
             LimpaCampos();
-
-            dgvVendas.DataSource = Global.ConsultaVendaCAB("");
         }
 
-        private void BtnExcluirVenda_Click(object sender, EventArgs e)
+        private void BtnCancelarVenda_Click(object sender, EventArgs e)
         {
-            if (txtID.Text == "") return;
-
-            if (MessageBox.Show("Deseja realmente excluir a venda feita ao cliente " + cboCliente.Text + " em " +
-                                mtbDataHora.Text + "?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, 
-                                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (txtID.Text == "")
             {
+                return;
+            }
 
-                Global.Conexao.Open();
-
-                Global.Comando = new MySqlCommand("delete from venda_cab where id = ?id", Global.Conexao);
-
-                Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
-
-                Global.Comando.ExecuteNonQuery();
-
-                Global.Conexao.Close();
+            if (MessageBox.Show("Deseja realmente cancelar a venda?", "Cancelamento", MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                ExcluiVenda();
 
                 LimpaCampos();
 
@@ -389,9 +417,17 @@ namespace _EletroMarana
             }
         }
 
-        private void BtnFechar_Click(object sender, EventArgs e)
+        private void ExcluiVenda()
         {
-            Close();
+            Global.Conexao.Open();
+
+            Global.Comando = new MySqlCommand("delete from venda_cab where id = ?id", Global.Conexao);
+
+            Global.Comando.Parameters.AddWithValue("?id", Convert.ToInt16(txtID.Text));
+
+            Global.Comando.ExecuteNonQuery();
+
+            Global.Conexao.Close();
         }
 
         private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
@@ -399,6 +435,21 @@ namespace _EletroMarana
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void FrmRealizarVenda_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult resp = MessageBox.Show("Deseja mesmo continuar?", "Fechar", MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (resp == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else if(txtID.Text != "")
+            {
+                ExcluiVenda();
             }
         }
     }

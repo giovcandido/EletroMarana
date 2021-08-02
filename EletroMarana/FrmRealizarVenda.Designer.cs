@@ -51,16 +51,15 @@ namespace _EletroMarana
             this.label13 = new System.Windows.Forms.Label();
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnCancelarVenda = new System.Windows.Forms.Button();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvVendas = new System.Windows.Forms.DataGridView();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnExcluir = new System.Windows.Forms.Button();
             this.cboTipoPGTO = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnIniciar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -268,7 +267,7 @@ namespace _EletroMarana
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(199, 489);
+            this.btnFinalizar.Location = new System.Drawing.Point(275, 489);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(86, 23);
             this.btnFinalizar.TabIndex = 139;
@@ -278,23 +277,13 @@ namespace _EletroMarana
             // 
             // btnCancelarVenda
             // 
-            this.btnCancelarVenda.Location = new System.Drawing.Point(378, 489);
+            this.btnCancelarVenda.Location = new System.Drawing.Point(459, 489);
             this.btnCancelarVenda.Name = "btnCancelarVenda";
             this.btnCancelarVenda.Size = new System.Drawing.Size(75, 23);
             this.btnCancelarVenda.TabIndex = 140;
             this.btnCancelarVenda.Text = "Cancelar";
             this.btnCancelarVenda.UseVisualStyleBackColor = true;
             this.btnCancelarVenda.Click += new System.EventHandler(this.BtnCancelarVenda_Click);
-            // 
-            // btnFechar
-            // 
-            this.btnFechar.Location = new System.Drawing.Point(459, 489);
-            this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 141;
-            this.btnFechar.Text = "Fechar";
-            this.btnFechar.UseVisualStyleBackColor = true;
-            this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
             // 
             // groupBox2
             // 
@@ -346,16 +335,6 @@ namespace _EletroMarana
             this.label8.TabIndex = 0;
             this.label8.Text = "Pesquisar";
             // 
-            // btnExcluir
-            // 
-            this.btnExcluir.Location = new System.Drawing.Point(291, 489);
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(81, 23);
-            this.btnExcluir.TabIndex = 144;
-            this.btnExcluir.Text = "Excluir";
-            this.btnExcluir.UseVisualStyleBackColor = true;
-            this.btnExcluir.Click += new System.EventHandler(this.BtnExcluirVenda_Click);
-            // 
             // cboTipoPGTO
             // 
             this.cboTipoPGTO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -385,18 +364,27 @@ namespace _EletroMarana
             this.btnIniciar.UseVisualStyleBackColor = true;
             this.btnIniciar.Click += new System.EventHandler(this.BtnIniciar_Click);
             // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Location = new System.Drawing.Point(367, 489);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(86, 23);
+            this.btnLimpar.TabIndex = 148;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
             // FrmRealizarVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(593, 467);
+            this.ClientSize = new System.Drawing.Size(573, 467);
+            this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.cboTipoPGTO);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.btnCancelarVenda);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.groupBox1);
@@ -413,6 +401,7 @@ namespace _EletroMarana
             this.Name = "FrmRealizarVenda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Realizar Venda";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmRealizarVenda_FormClosing);
             this.Load += new System.EventHandler(this.FrmRealizarVenda_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -448,16 +437,15 @@ namespace _EletroMarana
         private System.Windows.Forms.Button btnAdicionarItem;
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Button btnCancelarVenda;
-        private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvVendas;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.TextBox txtPesquisa;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAtualizarItem;
-        private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.ComboBox cboTipoPGTO;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.Button btnLimpar;
     }
 }
