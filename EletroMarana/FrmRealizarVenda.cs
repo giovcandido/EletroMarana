@@ -225,8 +225,8 @@ namespace _EletroMarana
                 return;
             }
 
-            double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value.ToString());
-            int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value.ToString());
+            double valor_unit = Convert.ToDouble(dgvProdutos.Rows[linhaAtualProdutos].Cells[3].Value);
+            int qtd = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[4].Value);
 
             valorTotal -= valor_unit * qtd;
 
@@ -238,9 +238,12 @@ namespace _EletroMarana
             valor_unit = Convert.ToDouble(txtValorUnitario.Text);
             qtd = Convert.ToInt16(txtQuantidade.Text);
 
+            int id = Convert.ToInt16(dgvProdutos.Rows[linhaAtualProdutos].Cells[0].Value);
+
             Global.Comando.Parameters.AddWithValue("?id_produto", cboProduto.SelectedValue);
             Global.Comando.Parameters.AddWithValue("?qtd", qtd);
             Global.Comando.Parameters.AddWithValue("?valor_unitario", valor_unit);
+            Global.Comando.Parameters.AddWithValue("?id", id);
 
             Global.Comando.ExecuteNonQuery();
 
