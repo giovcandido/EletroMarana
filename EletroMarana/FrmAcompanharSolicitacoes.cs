@@ -127,14 +127,14 @@ namespace _EletroMarana
                 cboProduto.Focus();
                 return false;
             }
-            else if(valor_custo == "" || Int32.Parse(valor_custo) < 0)
+            else if(valor_custo == "" || Double.Parse(valor_custo) < 0)
             {
                 MessageBox.Show("Ocorreu um erro! O valor de custo inserido é inválido!", "Valor de Custo Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtValorCusto.Focus();
                 return false;
             }
-            else if(valor_total == "" || Int32.Parse(valor_total) < 0)
+            else if(valor_total == "" || Double.Parse(valor_total) < 0)
             {
                 MessageBox.Show("Ocorreu um erro! O valor de total inserido é inválido!", "Valor de Total Inválido",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);

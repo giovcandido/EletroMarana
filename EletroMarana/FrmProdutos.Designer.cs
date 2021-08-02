@@ -96,7 +96,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(577, 17);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btnPesquisar.TabIndex = 18;
+            this.btnPesquisar.TabIndex = 16;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             this.btnPesquisar.Click += new System.EventHandler(this.BtnPesquisar_Click);
@@ -106,7 +106,7 @@
             this.txtPesquisa.Location = new System.Drawing.Point(68, 19);
             this.txtPesquisa.Name = "txtPesquisa";
             this.txtPesquisa.Size = new System.Drawing.Size(441, 20);
-            this.txtPesquisa.TabIndex = 17;
+            this.txtPesquisa.TabIndex = 15;
             // 
             // label13
             // 
@@ -122,7 +122,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(455, 218);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 14;
+            this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
@@ -132,7 +132,7 @@
             this.btnAtualizar.Location = new System.Drawing.Point(374, 218);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnAtualizar.TabIndex = 13;
+            this.btnAtualizar.TabIndex = 11;
             this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.BtnAtualizar_Click);
@@ -142,7 +142,7 @@
             this.btnExcluir.Location = new System.Drawing.Point(536, 218);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 15;
+            this.btnExcluir.TabIndex = 13;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
@@ -152,7 +152,7 @@
             this.btnIncluir.Location = new System.Drawing.Point(293, 218);
             this.btnIncluir.Name = "btnIncluir";
             this.btnIncluir.Size = new System.Drawing.Size(75, 23);
-            this.btnIncluir.TabIndex = 12;
+            this.btnIncluir.TabIndex = 10;
             this.btnIncluir.Text = "Inserir";
             this.btnIncluir.UseVisualStyleBackColor = true;
             this.btnIncluir.Click += new System.EventHandler(this.BtnIncluir_Click);
@@ -162,7 +162,7 @@
             this.btnFechar.Location = new System.Drawing.Point(617, 218);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 16;
+            this.btnFechar.TabIndex = 14;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
@@ -172,7 +172,7 @@
             this.txtNome.Location = new System.Drawing.Point(109, 32);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(432, 20);
-            this.txtNome.TabIndex = 3;
+            this.txtNome.TabIndex = 1;
             // 
             // label1
             // 
@@ -249,7 +249,7 @@
             this.cboCategoria.Location = new System.Drawing.Point(109, 110);
             this.cboCategoria.Name = "cboCategoria";
             this.cboCategoria.Size = new System.Drawing.Size(200, 21);
-            this.cboCategoria.TabIndex = 6;
+            this.cboCategoria.TabIndex = 4;
             // 
             // cboFornecedor
             // 
@@ -259,7 +259,7 @@
             this.cboFornecedor.Location = new System.Drawing.Point(109, 137);
             this.cboFornecedor.Name = "cboFornecedor";
             this.cboFornecedor.Size = new System.Drawing.Size(200, 21);
-            this.cboFornecedor.TabIndex = 8;
+            this.cboFornecedor.TabIndex = 6;
             // 
             // label5
             // 
@@ -284,7 +284,7 @@
             this.txtEstoque.Location = new System.Drawing.Point(109, 163);
             this.txtEstoque.Name = "txtEstoque";
             this.txtEstoque.Size = new System.Drawing.Size(130, 20);
-            this.txtEstoque.TabIndex = 10;
+            this.txtEstoque.TabIndex = 8;
             this.txtEstoque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstoque_KeyPress);
             // 
             // txtEstoqueMinimo
@@ -292,7 +292,7 @@
             this.txtEstoqueMinimo.Location = new System.Drawing.Point(411, 163);
             this.txtEstoqueMinimo.Name = "txtEstoqueMinimo";
             this.txtEstoqueMinimo.Size = new System.Drawing.Size(130, 20);
-            this.txtEstoqueMinimo.TabIndex = 11;
+            this.txtEstoqueMinimo.TabIndex = 9;
             this.txtEstoqueMinimo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEstoqueMinimo_KeyPress);
             // 
             // txtValorVenda
@@ -300,7 +300,7 @@
             this.txtValorVenda.Location = new System.Drawing.Point(411, 111);
             this.txtValorVenda.Name = "txtValorVenda";
             this.txtValorVenda.Size = new System.Drawing.Size(130, 20);
-            this.txtValorVenda.TabIndex = 7;
+            this.txtValorVenda.TabIndex = 5;
             this.txtValorVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorVenda_KeyPress);
             // 
             // txtValorCusto
@@ -308,7 +308,7 @@
             this.txtValorCusto.Location = new System.Drawing.Point(411, 137);
             this.txtValorCusto.Name = "txtValorCusto";
             this.txtValorCusto.Size = new System.Drawing.Size(130, 20);
-            this.txtValorCusto.TabIndex = 9;
+            this.txtValorCusto.TabIndex = 7;
             this.txtValorCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorCusto_KeyPress);
             // 
             // label7
@@ -343,7 +343,7 @@
             this.txtPrazoGarantia.Location = new System.Drawing.Point(109, 84);
             this.txtPrazoGarantia.Name = "txtPrazoGarantia";
             this.txtPrazoGarantia.Size = new System.Drawing.Size(109, 20);
-            this.txtPrazoGarantia.TabIndex = 5;
+            this.txtPrazoGarantia.TabIndex = 3;
             this.txtPrazoGarantia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrazoGarantia_KeyPress);
             // 
             // label10
@@ -370,7 +370,7 @@
             this.mtbCodigoBarra.Mask = "0.000000.000000";
             this.mtbCodigoBarra.Name = "mtbCodigoBarra";
             this.mtbCodigoBarra.Size = new System.Drawing.Size(432, 20);
-            this.mtbCodigoBarra.TabIndex = 154;
+            this.mtbCodigoBarra.TabIndex = 2;
             this.mtbCodigoBarra.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // FrmProdutos
