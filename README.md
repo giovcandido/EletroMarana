@@ -111,9 +111,7 @@ In order to correctly use the EletroMarana Store application, it is necessary to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the <a href="/Docs/documentation.pdf">Documentation</strong></a>._
+For usage, please refer to the _<a href="/Docs/documentation.pdf">Documentation</strong></a>_.
 
 
 <!-- ROADMAP -->
